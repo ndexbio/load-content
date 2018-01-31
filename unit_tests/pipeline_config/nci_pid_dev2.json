@@ -1,0 +1,38 @@
+{
+  "project_name": "ncipid",
+  "ndex_search_name": "nci-pid",
+  "server_prefix": "dev2",
+  "map_name": "!!! NEW !!! PID MAP !!! NEW !!!",
+  "ndex_server": "http://dev2.ndexbio.org",
+  "upload_to_username": "nci-pid",
+  "upload_to_password": "nci-pid",
+  "upload_to_server": "http://dev2.ndexbio.org",
+  "ext_link_map": {
+    "BiopaxFile": "NCI_PID_BIOPAX_2016-06-08-PC2v8-API",
+    "GSEAFile": "NCI_PID_GSEA_2017-04-06",
+    "serverSubDomain": "public"
+  },
+  "network_style": {
+    "uuid": "fe990fdb-5dbf-11e7-a54f-06832d634f41",
+    "server": "http://dev.ndexbio.org",
+    "user": "scratch",
+    "pass": "scratch"
+  },
+  "sim_map_style": {
+    "uuid": "bf1e5496-4d39-11e7-a8b5-06832d634f41",
+    "server": "http://dev2.ndexbio.org",
+    "user": "scratch",
+    "pass": "scratch"
+  },
+  "network_namespaces": {
+    "KEGG Pathway": "http://identifiers.org/kegg.pathway/",
+    "Mouse Genome Database": "http://www.informatics.jax.org/accession/",
+    "KEGG Compound": "http://identifiers.org/kegg.compound/",
+    "pmid" : "https://www.ncbi.nlm.nih.gov/pubmed/",
+    "cas": "http://identifiers.org/cas/",
+    "HPRD": "http://identifiers.org/hprd/"
+  }
+}  
+  
+
+

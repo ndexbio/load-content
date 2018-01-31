@@ -1,0 +1,39 @@
+{
+  "project_name": "lipidomics",
+  "ndex_search_name": "lipidmaps",
+  "server_prefix": "dev2",
+  "map_name": "!!! NEW !!! LIPID MAPS Similarity Map !!! NEW !!!",
+  "ndex_server": "http://dev2.ndexbio.org",
+  "upload_to_username": "lipidmaps",
+  "upload_to_password": "lipidmaps2015",
+  "upload_to_server": "http://dev2.ndexbio.org",
+  "ext_link_map": {
+    "BiopaxFile": "Lipidomics_BIOPAX",
+    "GSEAFile": "Lipidomics_GSEA",
+    "serverSubDomain": "dev2"
+  },
+  "network_style": {
+    "uuid": "23aa48fe-4fb0-11e7-a8b5-06832d634f41",
+    "server": "http://dev.ndexbio.org",
+    "user": "scratch",
+    "pass": "scratch"
+  },
+  "sim_map_style": {
+    "uuid": "9eae5085-47c6-11e7-96f7-06832d634f41",
+    "server": "http://dev.ndexbio.org",
+    "user": "scratch",
+    "pass": "scratch"
+  },
+  "network_namespaces": {
+    "KEGG Pathway": "http://identifiers.org/kegg.pathway/",
+    "Mouse Genome Database": "http://www.informatics.jax.org/accession/",
+    "KEGG Compound": "http://identifiers.org/kegg.compound/",
+    "LIPID MAPS": "http://www.lipidmaps.org/data/LMSDRecord.php?LMID=",
+    "cas": "http://identifiers.org/cas/",
+    "HPRD": "http://identifiers.org/hprd/",
+    "pmid": "https://www.ncbi.nlm.nih.gov/pubmed/"
+  }
+}  
+  
+
+

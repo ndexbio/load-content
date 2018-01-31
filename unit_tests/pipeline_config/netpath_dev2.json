@@ -1,0 +1,37 @@
+{
+  "project_name": "netpath",
+  "ndex_search_name": "netpath",
+  "server_prefix": "dev2",
+  "map_name": "Similarity Map",
+  "ndex_server": "http://dev2.ndexbio.org",
+  "upload_to_username": "netpath",
+  "upload_to_password": "netpath2015",
+  "upload_to_server": "http://dev2.ndexbio.org",
+  "ext_link_map": {
+    "BiopaxFile": "NetPath_BIOPAX_2017-05-24",
+    "GSEAFile": "NetPath_GSEA_2017-05-24",
+    "serverSubDomain": "dev2"
+  },
+  "network_style": {
+    "uuid": "71f237da-4704-11e7-a6ff-0660b7976219",
+    "server": "http://dev2.ndexbio.org",
+    "user": "netpath",
+    "pass": "netpath2015"
+  },
+  "sim_map_style": {
+    "uuid": "961563b7-4633-11e7-a6ff-0660b7976219",
+    "server": "http://dev2.ndexbio.org",
+    "user": "netpath",
+    "pass": "netpath2015"
+  },
+  "network_namespaces": {
+    "KEGG Pathway": "http://identifiers.org/kegg.pathway/",
+    "KEGG Compound": "http://identifiers.org/kegg.compound/",
+    "cas": "http://identifiers.org/cas/",
+    "HPRD": "http://identifiers.org/hprd/",
+    "pmid": "https://www.ncbi.nlm.nih.gov/pubmed/"
+  }
+}  
+  
+
+

@@ -1,0 +1,4760 @@
+[
+    {
+        "numberVerification": [
+            {
+                "longNumber": 281474976710655
+            }
+        ]
+    }, 
+    {
+        "metaData": [
+            {
+                "idCounter": 25, 
+                "name": "nodes", 
+                "consistencyGroup": 1, 
+                "elementCount": 25, 
+                "version": "1.0", 
+                "properties": []
+            }, 
+            {
+                "idCounter": 49, 
+                "name": "edges", 
+                "consistencyGroup": 1, 
+                "elementCount": 49, 
+                "version": "1.0", 
+                "properties": []
+            }, 
+            {
+                "elementCount": 1, 
+                "properties": [], 
+                "version": "1.0", 
+                "consistencyGroup": 1, 
+                "name": "networkAttributes"
+            }, 
+            {
+                "elementCount": 125, 
+                "properties": [], 
+                "version": "1.0", 
+                "consistencyGroup": 1, 
+                "name": "nodeAttributes"
+            }, 
+            {
+                "elementCount": 294, 
+                "properties": [], 
+                "version": "1.0", 
+                "consistencyGroup": 1, 
+                "name": "edgeAttributes"
+            }, 
+            {
+                "elementCount": 1, 
+                "properties": [], 
+                "version": "1.0", 
+                "consistencyGroup": 1, 
+                "name": "ndexStatus"
+            }, 
+            {
+                "elementCount": 25, 
+                "properties": [], 
+                "version": "1.0", 
+                "consistencyGroup": 1, 
+                "name": "cartesianLayout"
+            }, 
+            {
+                "elementCount": 3, 
+                "properties": [], 
+                "consistencyGroup": 1, 
+                "name": "cyVisualProperties"
+            }
+        ]
+    }, 
+    {
+        "networkAttributes": [
+            {
+                "v": "net path", 
+                "n": "name"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 1, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 32_0)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 2, 
+                "n": "Sphingolipid pathway (C18_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 3, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 34_1)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 4, 
+                "n": "Arachidonic acid pathway"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 5, 
+                "n": "Biosynthesis of sterols"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 6, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 38_4)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 7, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 36_1)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 8, 
+                "n": "Expanded sterol pathway"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 9, 
+                "n": "Sphingolipid pathway (C26_1 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 10, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 34_0)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 11, 
+                "n": "Sphingolipid pathway (C16_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 12, 
+                "n": "Sphingolipid pathway (C24_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 13, 
+                "n": "Sphingolipid pathway (C24_1 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 14, 
+                "n": "Sphingolipid pathway (multiple N-acyl chain lengths)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 15, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 38_0)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 16, 
+                "n": "Omega-9 and other fatty acids [media]"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 17, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 32_1)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 18, 
+                "n": "Omega-3 and omega-6 fatty acids [media]"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 19, 
+                "n": "Omega-3 and omega-6 fatty acids [cells]"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 20, 
+                "n": "Sphingolipid pathway (C26_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 21, 
+                "n": "Omega-9 and other fatty acids [cells]"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 22, 
+                "n": "Sphingolipid pathway (C22_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 23, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 36_0)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 24, 
+                "n": "Glycerolipid-phospholipid pathway (acyl chain 38_1)"
+            }
+        ]
+    }, 
+    {
+        "nodes": [
+            {
+                "@id": 25, 
+                "n": "Sphingolipid pathway (C20_0 N-acyl substitutent)"
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 1, 
+                "@id": 2, 
+                "t": 6
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 1, 
+                "@id": 3, 
+                "t": 7
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 5, 
+                "t": 9
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 4, 
+                "t": 11
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 6, 
+                "t": 12
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 20, 
+                "t": 13
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 35, 
+                "t": 20
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 39, 
+                "t": 22
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 2, 
+                "@id": 48, 
+                "t": 25
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 5, 
+                "@id": 12, 
+                "t": 8
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 6, 
+                "@id": 44, 
+                "t": 23
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 6, 
+                "@id": 14, 
+                "t": 10
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 6, 
+                "@id": 8, 
+                "t": 3
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 6, 
+                "@id": 13, 
+                "t": 7
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 7, 
+                "@id": 15, 
+                "t": 10
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 7, 
+                "@id": 9, 
+                "t": 3
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 9, 
+                "@id": 16, 
+                "t": 20
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 9, 
+                "@id": 22, 
+                "t": 14
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 17, 
+                "t": 9
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 18, 
+                "t": 12
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 21, 
+                "t": 13
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 36, 
+                "t": 20
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 40, 
+                "t": 22
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 11, 
+                "@id": 49, 
+                "t": 25
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 12, 
+                "@id": 19, 
+                "t": 13
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 12, 
+                "@id": 23, 
+                "t": 14
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 13, 
+                "@id": 24, 
+                "t": 14
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 15, 
+                "@id": 26, 
+                "t": 6
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 15, 
+                "@id": 27, 
+                "t": 7
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 16, 
+                "@id": 29, 
+                "t": 18
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 16, 
+                "@id": 30, 
+                "t": 19
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 16, 
+                "@id": 28, 
+                "t": 21
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 17, 
+                "@id": 32, 
+                "t": 6
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 17, 
+                "@id": 33, 
+                "t": 7
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 18, 
+                "@id": 34, 
+                "t": 19
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 18, 
+                "@id": 10, 
+                "t": 4
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 19, 
+                "@id": 11, 
+                "t": 4
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 21, 
+                "@id": 37, 
+                "t": 18
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 21, 
+                "@id": 38, 
+                "t": 19
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 22, 
+                "@id": 41, 
+                "t": 25
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 23, 
+                "@id": 43, 
+                "t": 3
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 1, 
+                "t": 1
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 7, 
+                "t": 3
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 45, 
+                "t": 6
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 46, 
+                "t": 7
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 47, 
+                "t": 10
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 25, 
+                "t": 15
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 31, 
+                "t": 17
+            }
+        ]
+    }, 
+    {
+        "edges": [
+            {
+                "i": "shares genes with", 
+                "s": 24, 
+                "@id": 42, 
+                "t": 23
+            }
+        ]
+    }, 
+    {
+        "nodeAttributes": [
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 1, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](12cac9be-47b2-11e7-96f7-06832d634f41)", 
+                "po": 1, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 1, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2032_0).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2032_0).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/12cac9be-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 1, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 1, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 6.0, 
+                "po": 2, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](1793004a-47b2-11e7-96f7-06832d634f41)", 
+                "po": 2, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 2, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C18_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C18_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/1793004a-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 2, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.449489742783178, 
+                "po": 2, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 28.0, 
+                "po": 3, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](13d81b14-47b2-11e7-96f7-06832d634f41)", 
+                "po": 3, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "GPAT4", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 3, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2034_1).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2034_1).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/13d81b14-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 3, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.291502622129181, 
+                "po": 3, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 4, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](11acaf88-47b2-11e7-96f7-06832d634f41)", 
+                "po": 4, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "ALOX5", 
+                    "HPGDS", 
+                    "CHI3L1", 
+                    "PTGDS", 
+                    "PTGES", 
+                    "PTGER3", 
+                    "TEAD1"
+                ], 
+                "po": 4, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Arachidonic%20acid%20pathway.owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Arachidonic%20acid%20pathway.grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/11acaf88-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 4, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 4, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 14.0, 
+                "po": 5, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](12052fca-47b2-11e7-96f7-06832d634f41)", 
+                "po": 5, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "NKX2-1", 
+                    "HMGCS1", 
+                    "MVK", 
+                    "DHCR24", 
+                    "IDI1", 
+                    "PMVK", 
+                    "DHCR7", 
+                    "SC5D", 
+                    "MVD", 
+                    "HMGCR", 
+                    "CH25H", 
+                    "FDFT1", 
+                    "SQLE", 
+                    "LMBR1"
+                ], 
+                "po": 5, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Biosynthesis%20of%20sterols.owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Biosynthesis%20of%20sterols.grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/12052fca-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 5, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 3.7416573867739413, 
+                "po": 5, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 6, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](159d71ce-47b2-11e7-96f7-06832d634f41)", 
+                "po": 6, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 6, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_4).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_4).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/159d71ce-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 6, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 6, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 7, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](148e24a8-47b2-11e7-96f7-06832d634f41)", 
+                "po": 7, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 7, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2036_1).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2036_1).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/148e24a8-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 7, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 7, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 31.0, 
+                "po": 8, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](12752fac-47b2-11e7-96f7-06832d634f41)", 
+                "po": 8, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SOAT2", 
+                    "MSMO1", 
+                    "SOAT1", 
+                    "TM7SF2", 
+                    "NSDHL", 
+                    "IDI1", 
+                    "DHCR7", 
+                    "SC5D", 
+                    "GGPS1", 
+                    "NKX2-1", 
+                    "SQLE", 
+                    "LMBR1", 
+                    "CYP27A1", 
+                    "CYP46A1", 
+                    "IDI2-AS1", 
+                    "CYP51A1", 
+                    "DHCR24", 
+                    "FDFT1", 
+                    "HMGCS1", 
+                    "HMGCS2", 
+                    "HSD17B7P2", 
+                    "MVD", 
+                    "HMGCR", 
+                    "MVK", 
+                    "ACOT2", 
+                    "ACOT1", 
+                    "FDPS", 
+                    "PMVK", 
+                    "SREBF2", 
+                    "SREBF1", 
+                    "CH25H"
+                ], 
+                "po": 8, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Expanded%20sterol%20pathway.owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Expanded%20sterol%20pathway.grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/12752fac-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 8, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.5677643628300215, 
+                "po": 8, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 9, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](19ae6646-47b2-11e7-96f7-06832d634f41)", 
+                "po": 9, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS3", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1", 
+                    "ASAH1"
+                ], 
+                "po": 9, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C26_1%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C26_1%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/19ae6646-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 9, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 9, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 10, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](137ded22-47b2-11e7-96f7-06832d634f41)", 
+                "po": 10, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 10, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2034_0).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2034_0).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/137ded22-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 10, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 10, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 6.0, 
+                "po": 11, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](17388438-47b2-11e7-96f7-06832d634f41)", 
+                "po": 11, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 11, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C16_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C16_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/17388438-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 11, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.449489742783178, 
+                "po": 11, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 12, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](189f1920-47b2-11e7-96f7-06832d634f41)", 
+                "po": 12, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "CERS2", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 12, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C24_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C24_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/189f1920-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 12, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 12, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 13, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](18f687f2-47b2-11e7-96f7-06832d634f41)", 
+                "po": 13, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "CERS2", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 13, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C24_1%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C24_1%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/18f687f2-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 13, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 13, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 8.0, 
+                "po": 14, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](1a1cb878-47b2-11e7-96f7-06832d634f41)", 
+                "po": 14, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "CERS2", 
+                    "CERS3", 
+                    "UGCG", 
+                    "CERS4", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 14, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(multiple%20N-acyl%20chain%20lengths).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(multiple%20N-acyl%20chain%20lengths).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/1a1cb878-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 14, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.8284271247461903, 
+                "po": 14, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 15, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](14eb5fda-47b2-11e7-96f7-06832d634f41)", 
+                "po": 15, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 15, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_0).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_0).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/14eb5fda-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 15, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 15, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.0, 
+                "po": 16, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](16e0ee56-47b2-11e7-96f7-06832d634f41)", 
+                "po": 16, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 16, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Omega-9%20and%20other%20fatty%20acids%20[media].owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Omega-9%20and%20other%20fatty%20acids%20[media].grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/16e0ee56-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 16, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.4142135623730951, 
+                "po": 16, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 27.0, 
+                "po": 17, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](13296480-47b2-11e7-96f7-06832d634f41)", 
+                "po": 17, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 17, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2032_1).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2032_1).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/13296480-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 17, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.196152422706632, 
+                "po": 17, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 4.0, 
+                "po": 18, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](163ff362-47b2-11e7-96f7-06832d634f41)", 
+                "po": 18, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "TEAD1", 
+                    "FADS2", 
+                    "CHI3L1"
+                ], 
+                "po": 18, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Omega-3%20and%20omega-6%20fatty%20acids%20[media].owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Omega-3%20and%20omega-6%20fatty%20acids%20[media].grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/163ff362-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 18, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.0, 
+                "po": 18, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 4.0, 
+                "po": 19, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](15ee7800-47b2-11e7-96f7-06832d634f41)", 
+                "po": 19, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "TEAD1", 
+                    "FADS2", 
+                    "CHI3L1"
+                ], 
+                "po": 19, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Omega-3%20and%20omega-6%20fatty%20acids%20[cells].owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Omega-3%20and%20omega-6%20fatty%20acids%20[cells].grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/15ee7800-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 19, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.0, 
+                "po": 19, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 20, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](195326e4-47b2-11e7-96f7-06832d634f41)", 
+                "po": 20, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS3", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1", 
+                    "ASAH1"
+                ], 
+                "po": 20, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C26_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C26_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/195326e4-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 20, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 20, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.0, 
+                "po": 21, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](16905d54-47b2-11e7-96f7-06832d634f41)", 
+                "po": 21, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 21, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Omega-9%20and%20other%20fatty%20acids%20[cells].owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Omega-9%20and%20other%20fatty%20acids%20[cells].grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/16905d54-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 21, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.4142135623730951, 
+                "po": 21, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 22, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](1842a13e-47b2-11e7-96f7-06832d634f41)", 
+                "po": 22, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "SGPL1", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERS4", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 22, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C22_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C22_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/1842a13e-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 22, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 22, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 28.0, 
+                "po": 23, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](14357d56-47b2-11e7-96f7-06832d634f41)", 
+                "po": 23, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "GPAT4", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 23, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2036_0).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2036_0).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/14357d56-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 23, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.291502622129181, 
+                "po": 23, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 26.0, 
+                "po": 24, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](1544f18c-47b2-11e7-96f7-06832d634f41)", 
+                "po": 24, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 24, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_1).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Glycerolipid-phospholipid%20pathway%20(acyl%20chain%2038_1).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/1544f18c-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 24, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 5.0990195135927845, 
+                "po": 24, 
+                "n": "width"
+            }, 
+            {
+                "d": "double", 
+                "v": 7.0, 
+                "po": 25, 
+                "n": "gene count"
+            }, 
+            {
+                "v": "[<i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;View network<br />](17ec1ccc-47b2-11e7-96f7-06832d634f41)", 
+                "po": 25, 
+                "n": "ndex:internalLink"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "SGPL1", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERS4", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 25, 
+                "n": "genes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;BioPAX3 file (.owl)<br />](ftp://ftp.ndexbio.org/NetPath_BIOPAX_2017-05-24/Sphingolipid%20pathway%20(C20_0%20N-acyl%20substitutent).owl.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;GSEA gene set (.grp)<br />](ftp://ftp.ndexbio.org/NetPath_GSEA_2017-05-24/Sphingolipid%20pathway%20(C20_0%20N-acyl%20substitutent).grp.gz)", 
+                    "[<i class='fa fa-download' aria-hidden='true'></i>&nbsp;&nbsp;&nbsp;CX file (.cx)](http://dev2.ndexbio.org/v2/network/17ec1ccc-47b2-11e7-96f7-06832d634f41?download=true)"
+                ], 
+                "po": 25, 
+                "n": "ndex:externalLink"
+            }, 
+            {
+                "d": "double", 
+                "v": 2.6457513110645907, 
+                "po": 25, 
+                "n": "width"
+            }
+        ]
+    }, 
+    {
+        "edgeAttributes": [
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 2, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 2, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 2, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 2, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 2, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 2, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 3, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 3, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 3, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 3, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 3, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 3, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 5, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 5, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 5, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 5, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 5, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 5, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 4, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 4, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 4, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 4, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 4, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 4, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 6, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 6, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 6, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 6, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 6, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 6, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 20, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 20, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 20, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 20, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 20, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 20, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 35, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 35, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 35, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 35, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 35, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 35, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 39, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 39, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 39, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 39, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 39, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 39, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 48, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 48, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 48, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 48, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 48, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 48, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.45161290322580644, 
+                "po": 12, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "LMBR1", 
+                    "HMGCS1", 
+                    "NKX2-1", 
+                    "IDI1", 
+                    "CH25H", 
+                    "PMVK", 
+                    "DHCR7", 
+                    "SC5D", 
+                    "MVD", 
+                    "HMGCR", 
+                    "MVK", 
+                    "FDFT1", 
+                    "SQLE", 
+                    "DHCR24"
+                ], 
+                "po": 12, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.45161290322580644, 
+                "po": 12, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.45161290322580644, 
+                "po": 12, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 14, 
+                "po": 12, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 12, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 44, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 44, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9642857142857143, 
+                "po": 44, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 44, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 44, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 44, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 14, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 14, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 14, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 14, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 14, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 14, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 8, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 8, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9642857142857143, 
+                "po": 8, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 8, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 8, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 8, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 13, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 13, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 13, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 13, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 13, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 13, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 15, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 15, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 15, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 15, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 15, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 15, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 9, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 9, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9642857142857143, 
+                "po": 9, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 9, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 9, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 9, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 16, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS3", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1", 
+                    "ASAH1"
+                ], 
+                "po": 16, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 16, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 16, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 7, 
+                "po": 16, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 16, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 22, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS3", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 22, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.6666666666666666, 
+                "po": 22, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 22, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 22, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 22, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 17, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 17, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 17, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 17, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 17, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 17, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 18, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 18, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 18, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 18, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 18, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 18, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 21, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 21, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 21, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 21, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 21, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 21, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 36, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 36, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 36, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 36, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 36, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 36, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 40, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 40, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 40, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 40, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 40, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 40, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 49, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 49, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 49, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 49, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 49, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 49, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 19, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "SGPL1", 
+                    "CERS2", 
+                    "ASAH1", 
+                    "UGCG", 
+                    "CERK", 
+                    "SMPD1", 
+                    "KDSR"
+                ], 
+                "po": 19, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 19, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 19, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 7, 
+                "po": 19, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 19, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 23, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS2", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 23, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.6666666666666666, 
+                "po": 23, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 23, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 23, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 23, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 24, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS2", 
+                    "UGCG", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1"
+                ], 
+                "po": 24, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.6666666666666666, 
+                "po": 24, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.8571428571428571, 
+                "po": 24, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 6, 
+                "po": 24, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 24, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 26, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 26, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 26, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 26, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 26, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 26, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 27, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 27, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 27, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 27, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 27, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 27, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 29, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 29, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 29, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 29, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 29, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 29, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 30, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 30, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 30, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 30, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 30, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 30, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 28, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 28, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 28, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 28, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 28, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 28, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 32, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 32, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 32, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 32, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 32, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 32, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 33, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 33, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 33, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 33, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 27, 
+                "po": 33, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 33, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 34, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "TEAD1", 
+                    "FADS2", 
+                    "CHI3L1"
+                ], 
+                "po": 34, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 34, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 34, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 4, 
+                "po": 34, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 34, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 10, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "TEAD1", 
+                    "CHI3L1"
+                ], 
+                "po": 10, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.2222222222222222, 
+                "po": 10, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 10, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 10, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 10, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 11, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "TEAD1", 
+                    "CHI3L1"
+                ], 
+                "po": 11, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.2222222222222222, 
+                "po": 11, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 11, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 11, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 11, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 37, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 37, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 37, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 37, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 37, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 37, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 38, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "FADS1", 
+                    "FADS2"
+                ], 
+                "po": 38, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 38, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.5, 
+                "po": 38, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 2, 
+                "po": 38, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 38, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 41, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "KDSR", 
+                    "CERS4", 
+                    "ASAH1", 
+                    "SGPL1", 
+                    "CERK", 
+                    "SMPD1", 
+                    "UGCG"
+                ], 
+                "po": 41, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 41, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 41, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 7, 
+                "po": 41, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 41, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 43, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "GPAT4", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1", 
+                    "CDC45"
+                ], 
+                "po": 43, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 43, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 43, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 28, 
+                "po": 43, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 43, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 1, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 1, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 1, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 1, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 1, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 1, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 7, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 7, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9285714285714286, 
+                "po": 7, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 7, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 7, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 7, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 45, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 45, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 45, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 45, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 45, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 45, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 46, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 46, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 46, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 46, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 46, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 46, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 47, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 47, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 47, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 47, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 47, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 47, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 25, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 25, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 25, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 25, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 25, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 25, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 31, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 31, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9629629629629629, 
+                "po": 31, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 31, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 31, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 31, 
+                "n": "strength"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 42, 
+                "n": "subsumes"
+            }, 
+            {
+                "d": "list_of_string", 
+                "v": [
+                    "PTDSS1", 
+                    "PTDSS2", 
+                    "BGN", 
+                    "PRKCSH", 
+                    "PLA2G1B", 
+                    "ARMCX7P", 
+                    "CHKB", 
+                    "CDIPT", 
+                    "DGKZ", 
+                    "GPAM", 
+                    "PNPLA3", 
+                    "CHPT1", 
+                    "ETNK1", 
+                    "CHEK2", 
+                    "PRH1", 
+                    "PLPP1", 
+                    "MUC1", 
+                    "PCYT2", 
+                    "ENPP1", 
+                    "DAG1", 
+                    "MEX3D", 
+                    "UCHL1", 
+                    "PCYT1A", 
+                    "ETV3", 
+                    "RPS6KA3", 
+                    "SFI1"
+                ], 
+                "po": 42, 
+                "n": "overlap"
+            }, 
+            {
+                "d": "double", 
+                "v": 0.9285714285714286, 
+                "po": 42, 
+                "n": "edge function"
+            }, 
+            {
+                "d": "double", 
+                "v": 1.0, 
+                "po": 42, 
+                "n": "overlap metric"
+            }, 
+            {
+                "d": "integer", 
+                "v": 26, 
+                "po": 42, 
+                "n": "overlap_size"
+            }, 
+            {
+                "v": "high", 
+                "po": 42, 
+                "n": "strength"
+            }
+        ]
+    }, 
+    {
+        "cartesianLayout": [
+            {
+                "node": 1, 
+                "x": 1003.295650218042, 
+                "y": 206.31597208136841
+            }, 
+            {
+                "node": 2, 
+                "x": 50.17565230244767, 
+                "y": 990.8761127553364
+            }, 
+            {
+                "node": 3, 
+                "x": 1432.4871059236236, 
+                "y": -70.76084107143733
+            }, 
+            {
+                "node": 4, 
+                "x": -64.40028816204479, 
+                "y": 117.87878753193411
+            }, 
+            {
+                "node": 5, 
+                "x": 367.7868843376517, 
+                "y": 112.99323009394023
+            }, 
+            {
+                "node": 6, 
+                "x": 1419.2462881548058, 
+                "y": 114.71138266275233
+            }, 
+            {
+                "node": 7, 
+                "x": 1350.7493441474362, 
+                "y": 181.28244878990094
+            }, 
+            {
+                "node": 8, 
+                "x": 374.6498994192605, 
+                "y": -33.55431712981265
+            }, 
+            {
+                "node": 9, 
+                "x": -132.068841532016, 
+                "y": 1310.6041838774572
+            }, 
+            {
+                "node": 10, 
+                "x": 1549.7057604982099, 
+                "y": 200.56323013617433
+            }, 
+            {
+                "node": 11, 
+                "x": -39.909740556927346, 
+                "y": 1212.8416132643943
+            }, 
+            {
+                "node": 12, 
+                "x": -211.15645848195464, 
+                "y": 1202.8213907159202
+            }, 
+            {
+                "node": 13, 
+                "x": -238.67484616417144, 
+                "y": 1118.7172626430415
+            }, 
+            {
+                "node": 14, 
+                "x": -340.81437301952, 
+                "y": 1309.9775205373599
+            }, 
+            {
+                "node": 15, 
+                "x": 1452.0635152735865, 
+                "y": 277.7462460097662
+            }, 
+            {
+                "node": 16, 
+                "x": -451.1273423037891, 
+                "y": -221.41399853365644
+            }, 
+            {
+                "node": 17, 
+                "x": 1560.1476532690378, 
+                "y": 84.31003696655932
+            }, 
+            {
+                "node": 18, 
+                "x": -355.91881370859693, 
+                "y": -28.071238132551734
+            }, 
+            {
+                "node": 19, 
+                "x": -300.5507131027183, 
+                "y": -100.44606223046097
+            }, 
+            {
+                "node": 20, 
+                "x": 23.110904265412255, 
+                "y": 1295.9778372220708
+            }, 
+            {
+                "node": 21, 
+                "x": -514.6247399582581, 
+                "y": -128.95636809322306
+            }, 
+            {
+                "node": 22, 
+                "x": 128.3713759135076, 
+                "y": 1133.5987799227341
+            }, 
+            {
+                "node": 23, 
+                "x": 1547.9331973635756, 
+                "y": -71.40099156850908
+            }, 
+            {
+                "node": 24, 
+                "x": 1369.0833911005654, 
+                "y": 74.84822970018777
+            }, 
+            {
+                "node": 25, 
+                "x": 152.32163742917172, 
+                "y": 1226.321263596081
+            }
+        ]
+    }, 
+    {
+        "cyVisualProperties": [
+            {
+                "properties_of": "network", 
+                "properties": {
+                    "NETWORK_DEPTH": "0.0", 
+                    "NETWORK_HEIGHT": "400.0", 
+                    "NETWORK_EDGE_SELECTION": "true", 
+                    "NETWORK_BACKGROUND_PAINT": "#EDEDF5", 
+                    "NETWORK_CENTER_X_LOCATION": "0.0", 
+                    "NETWORK_WIDTH": "550.0", 
+                    "NETWORK_SIZE": "550.0", 
+                    "NETWORK_CENTER_Z_LOCATION": "0.0", 
+                    "NETWORK_SCALE_FACTOR": "1.0", 
+                    "NETWORK_CENTER_Y_LOCATION": "0.0", 
+                    "NETWORK_NODE_SELECTION": "true"
+                }
+            }, 
+            {
+                "properties_of": "nodes:default", 
+                "dependencies": {
+                    "nodeCustomGraphicsSizeSync": "true", 
+                    "nodeSizeLocked": "false"
+                }, 
+                "properties": {
+                    "NODE_FILL_COLOR": "#FFFFFF", 
+                    "NODE_NESTED_NETWORK_IMAGE_VISIBLE": "true", 
+                    "NODE_LABEL_TRANSPARENCY": "255", 
+                    "NODE_LABEL_FONT_SIZE": "12", 
+                    "NODE_CUSTOMPAINT_1": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_1, name=Node Custom Paint 1)", 
+                    "NODE_BORDER_WIDTH": "3.0", 
+                    "NODE_CUSTOMPAINT_3": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_3, name=Node Custom Paint 3)", 
+                    "NODE_CUSTOMPAINT_2": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_2, name=Node Custom Paint 2)", 
+                    "NODE_CUSTOMPAINT_5": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_5, name=Node Custom Paint 5)", 
+                    "NODE_CUSTOMPAINT_4": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_4, name=Node Custom Paint 4)", 
+                    "NODE_CUSTOMPAINT_7": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_7, name=Node Custom Paint 7)", 
+                    "NODE_CUSTOMPAINT_6": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_6, name=Node Custom Paint 6)", 
+                    "NODE_CUSTOMPAINT_9": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_9, name=Node Custom Paint 9)", 
+                    "NODE_CUSTOMPAINT_8": "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_8, name=Node Custom Paint 8)", 
+                    "NODE_LABEL_COLOR": "#003366", 
+                    "NODE_SELECTED": "false", 
+                    "NODE_WIDTH": "60.0", 
+                    "NODE_SHAPE": "ELLIPSE", 
+                    "NODE_SIZE": "35.0", 
+                    "NODE_BORDER_TRANSPARENCY": "255", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_8": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_9": "0.0", 
+                    "NODE_SELECTED_PAINT": "#FFFF00", 
+                    "NODE_LABEL_POSITION": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_1": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_2": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_3": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_4": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_5": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_6": "0.0", 
+                    "NODE_CUSTOMGRAPHICS_SIZE_7": "0.0", 
+                    "NODE_BORDER_PAINT": "#003399", 
+                    "NODE_LABEL_FONT_FACE": "SansSerif.plain,plain,12", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_2": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_3": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_1": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_6": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_7": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_4": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_5": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_8": "C,C,c,0.00,0.00", 
+                    "NODE_CUSTOMGRAPHICS_POSITION_9": "C,C,c,0.00,0.00", 
+                    "NODE_X_LOCATION": "0.0", 
+                    "NODE_Y_LOCATION": "0.0", 
+                    "NODE_DEPTH": "0.0", 
+                    "NODE_LABEL_WIDTH": "20.0", 
+                    "COMPOUND_NODE_SHAPE": "ROUND_RECTANGLE", 
+                    "NODE_CUSTOMGRAPHICS_9": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_8": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_5": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_4": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_BORDER_STROKE": "SOLID", 
+                    "NODE_CUSTOMGRAPHICS_6": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_1": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_3": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_CUSTOMGRAPHICS_2": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_HEIGHT": "40.0", 
+                    "NODE_Z_LOCATION": "0.0", 
+                    "NODE_PAINT": "#1E90FF", 
+                    "NODE_TRANSPARENCY": "255", 
+                    "COMPOUND_NODE_PADDING": "10.0", 
+                    "NODE_CUSTOMGRAPHICS_7": "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],", 
+                    "NODE_VISIBLE": "true"
+                }, 
+                "mappings": {
+                    "NODE_HEIGHT": {
+                        "definition": "COL=gene count,T=double,L=0=1.0,E=0=30.256679441870713,G=0=30.256679441870713,OV=0=7.0,L=1=100.58301786097084,E=1=100.58301786097084,G=1=1.0,OV=1=228.0", 
+                        "type": "CONTINUOUS"
+                    }, 
+                    "NODE_WIDTH": {
+                        "definition": "COL=width,T=double,L=0=1.0,E=0=59.873086634690196,G=0=59.873086634690196,OV=0=2.6457513110645907,L=1=120.7277005823647,E=1=120.7277005823647,G=1=1.0,OV=1=15.0996688705415", 
+                        "type": "CONTINUOUS"
+                    }, 
+                    "NODE_LABEL": {
+                        "definition": "COL=name,T=string", 
+                        "type": "PASSTHROUGH"
+                    }
+                }
+            }, 
+            {
+                "properties_of": "edges:default", 
+                "dependencies": {
+                    "arrowColorMatchesEdge": "true"
+                }, 
+                "properties": {
+                    "EDGE_PAINT": "#323232", 
+                    "EDGE_TARGET_ARROW_UNSELECTED_PAINT": "#000000", 
+                    "EDGE_CURVED": "true", 
+                    "EDGE_TARGET_ARROW_SELECTED_PAINT": "#FFFF00", 
+                    "EDGE_STROKE_SELECTED_PAINT": "#FF0000", 
+                    "EDGE_LABEL_FONT_FACE": "SansSerif.plain,plain,10", 
+                    "EDGE_LINE_TYPE": "SOLID", 
+                    "EDGE_TARGET_ARROW_SHAPE": "NONE", 
+                    "EDGE_LABEL_COLOR": "#000000", 
+                    "EDGE_SELECTED": "false", 
+                    "EDGE_SELECTED_PAINT": "#FF0000", 
+                    "EDGE_VISIBLE": "true", 
+                    "EDGE_LABEL_FONT_SIZE": "10", 
+                    "EDGE_STROKE_UNSELECTED_PAINT": "#000000", 
+                    "EDGE_WIDTH": "4.0", 
+                    "EDGE_SOURCE_ARROW_SHAPE": "NONE", 
+                    "EDGE_LABEL_TRANSPARENCY": "255", 
+                    "EDGE_LABEL_WIDTH": "200.0", 
+                    "EDGE_UNSELECTED_PAINT": "#003399", 
+                    "EDGE_SOURCE_ARROW_UNSELECTED_PAINT": "#000000", 
+                    "EDGE_TRANSPARENCY": "255", 
+                    "EDGE_SOURCE_ARROW_SELECTED_PAINT": "#FFFF00"
+                }, 
+                "mappings": {
+                    "EDGE_WIDTH": {
+                        "definition": "COL=edge function,T=double,L=0=1.0,E=0=0.975609756097561,G=0=0.975609756097561,OV=0=0.01694915254237288,L=1=30.489787590212938,E=1=30.489787590212938,G=1=1.0,OV=1=1.0", 
+                        "type": "CONTINUOUS"
+                    }, 
+                    "EDGE_LINE_TYPE": {
+                        "definition": "COL=strength,T=string,K=0=high,V=0=SOLID,K=1=low,V=1=LONG_DASH", 
+                        "type": "DISCRETE"
+                    }, 
+                    "EDGE_STROKE_UNSELECTED_PAINT": {
+                        "definition": "COL=interaction,T=string,K=0=interacts-with,V=0=#005500,K=1=chemical-affects,V=1=#F09000,K=2=controls-state-change-of,V=2=#0000C0,K=3=controls-transport-of,V=3=#700000,K=4=consumption-controled-by,V=4=#FF3300,K=5=reacts-with,V=5=#00FF00,K=6=neighbor-of,V=6=#00AA00,K=7=controls-expression-of,V=7=#00A0A0,K=8=controls-phosphorylation-of,V=8=#0000FF,K=9=controls-transport-of-chemical,V=9=#A00000,K=10=used-to-produce,V=10=#F75500,K=11=in-complex-with,V=11=#F000A0,K=12=controls-production-of,V=12=#00CCF0,K=13=catalysis-precedes,V=13=#7000A0", 
+                        "type": "DISCRETE"
+                    }, 
+                    "EDGE_TRANSPARENCY": {
+                        "definition": "COL=edge function,T=double,L=0=1,E=0=254,G=0=254,OV=0=0.01694915254237288,L=1=2,E=1=2,G=1=1,OV=1=1.0", 
+                        "type": "CONTINUOUS"
+                    }
+                }
+            }
+        ]
+    }, 
+    {
+        "status": [
+            {
+                "success": true, 
+                "error": ""
+            }
+        ]
+    }
+]
