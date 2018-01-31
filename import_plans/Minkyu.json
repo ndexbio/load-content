@@ -1,0 +1,33 @@
+{
+  "target_plan": {
+    "property_columns": [
+      "Prey",
+      "PREY_Property"
+    ],
+    "id_column": "Prey Gene Name",
+    "node_name_column": "Prey Gene Name"
+  },
+
+  "source_plan": {
+      "property_columns": [
+        "Bait Mutation Status and_or Drug Condition",
+        "Bait",
+        "BAIT_Property"
+      ],
+      "id_column": "BAIT_combined",
+      "node_name_column": "BAIT_combined"
+    },
+    "context": {
+
+    },
+    "edge_plan": {
+      "default_predicate": "binds",
+      "property_columns": [
+        "AvePSM",
+        "Z",
+        "WD",
+        "Entropy"
+      ]
+    }
+  }
+

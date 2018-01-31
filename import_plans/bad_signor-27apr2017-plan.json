@@ -1,0 +1,42 @@
+{
+    "context":
+        {
+            "uniprot": "http://identifiers.org/uniprot/",
+            "SID": "http://identifiers.org/pubchem.substance/",
+            "CID": "http://identifiers.org/pubchem.compound/",
+            "signor": "http://signor.uniroma2.it/relation_result.php?id="
+        },
+
+    "source_plan": 
+    {
+        "id_column": "IDA",
+        "node_name_column": "ENTITYA",
+        "property_columns": ["TYPEA",
+                            "DATABASEA"]
+    },
+    
+    "target_plan": 
+    {
+        "id_column": "IDB",
+        "node_name_column": "ENTITYB",
+        "property_columns": ["TYPEB",
+                            "DATABASEB"]
+    },
+    
+    "edge_plan": 
+    {
+        "predicate_id_column": "EFFECT",
+        "default_predicate": "",
+        "property_columns": ["MECHANISM",
+                            "RESIDUE",
+                            "SEQUENCE",
+                            "CELL_DATA",
+                            "TISSUE_DATA",
+                            "DIRECT",
+                            "ANNOTATOR",
+                            "SENTENCE",
+                            "NOTES"],
+        "citation_id_prefix": "",
+        "citation_id_column": "PMID"
+    }
+}

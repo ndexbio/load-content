@@ -1,0 +1,25 @@
+{
+    "context":
+    {
+        "DrugBank": "http://identifiers.org/drugbank/",
+        "UniProt": "http://identifiers.org/uniprot/"
+    },
+    "source_plan":
+    {
+        "id_column": "DrugBank ID",
+        "node_name_column": "Name",
+        "property_columns": ["Type",
+                            "DrugBank ID"]
+    },
+    "target_plan": 
+    {
+        "id_column": "UniProt ID",
+        "node_name_column": "UniProt Name",
+        "property_columns": ["UniProt ID"]
+    },
+    "edge_plan": 
+    {
+        "default_predicate": "affects",
+        "property_columns": ["UniProt ID"]
+    }
+}

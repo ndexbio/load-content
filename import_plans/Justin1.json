@@ -1,0 +1,16 @@
+{
+  "context":
+  {
+    "HGNC": "http://identifiers.org/hgnc/"
+  },
+  "source_plan": {
+    "node_name_column": "KDM5A"
+  },
+  "target_plan": {
+    "node_name_column": "RB1"
+  },
+  "edge_plan": {
+    "default_predicate": "interacts"
+  }
+}
+
