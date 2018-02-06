@@ -1,0 +1,75 @@
+pathway_id	pathway_name
+SIGNOR-AC	Adipogenesis
+SIGNOR-Adipogenesis: BMP	Adipogenesis: BMP
+SIGNOR-AMPK	AMPK Signaling
+SIGNOR-Autophagy	Autophagy
+SIGNOR-DR	Death Receptor Signaling
+SIGNOR-EcmSynthesis	ECM: synthesis
+SIGNOR-EGF	EGFR
+SIGNOR-EosCCL11	Eosinophil: CCL11
+SIGNOR-EosCCR1	Eosinophil: CCR1
+SIGNOR-EosIL5	Eosinophil: IL5
+SIGNOR-FapATC	FAP: adipogenic transcriptional cascade
+SIGNOR-FapGCC	FAP: glucocorticoids
+SIGNOR-FapIBMXR	FAP: IBMX/rosiglitazone
+SIGNOR-FapIL4	FAP: IL4
+SIGNOR-FapINS	FAP: insulin-mediated adipogenesis
+SIGNOR-FapNOTCH	FAP: Notch
+SIGNOR-FapPDGFRA	FAP: PDGFR alpha
+SIGNOR-FapSHH	FAP: SHH
+SIGNOR-FapSIR	FAP: SIRT1
+SIGNOR-FapTGFB	FAP: TGF beta
+SIGNOR-FapWNT	FAP: Wnt
+SIGNOR-FibroFN1TR	Fibroblast: FN1 transcriptional regulation
+SIGNOR-FSGS	FSGS
+SIGNOR-G1-S_trans	Cell cycle: G1/S phase transition
+SIGNOR-G2-M_trans	Cell cycle: G2/M phase transition
+SIGNOR-Hedgehog	Hedgehog
+SIGNOR-HPP	Hippo Signaling
+SIGNOR-IL1R	IL1 Receptor
+SIGNOR-IL6	IL6 
+SIGNOR-INSR	Insulin Receptor
+SIGNOR-IOA	Inhibition of Apoptosis
+SIGNOR-MacroCCL2TR	Macrophage: CCL2 transcriptional regulation
+SIGNOR-MacroIL1	Macrophage: IL1 beta
+SIGNOR-MacroIL10	Macrophage: IL10
+SIGNOR-MacroIL10TR	Macrophage: IL10 transcriptional regulation
+SIGNOR-MacroIL1BTR	Macrophage: IL1 beta transcriptional regulation
+SIGNOR-MacroIL4	Macrophage: IL4
+SIGNOR-MacroIL6	Macrophage: IL6
+SIGNOR-MacroIL6TR	Macrophage: IL6 transcriptional regulation
+SIGNOR-MacroTGFBTR	Macrophage: TGF beta transcriptional regulation
+SIGNOR-MacroTNFA	Macrophage: TNF alpha
+SIGNOR-MacroTNFATR	Macrophage: TNF alpha transcriptional regulation
+SIGNOR-MastSCF	Mast cell: SCF
+SIGNOR-MCAPO	Mitochondrial Control of Apoptosis
+SIGNOR-MMDD	Myogenesis modulation: DNA damage
+SIGNOR-MonoIL10TR	Monocyte: IL10 transcriptional regulation
+SIGNOR-MS	MTOR Signaling
+SIGNOR-MT	Macrophage: TGF beta
+SIGNOR-Myostatin	Myostatin
+SIGNOR-NFKBC	NF-KB Canonical
+SIGNOR-PI3K/AKT	PI3K/AKT
+SIGNOR-ScFSTTR	Satellite: FST transcriptional regulation
+SIGNOR-ScIGF1	Satellite: IGF1
+SIGNOR-ScIL6	Satellite: IL6
+SIGNOR-ScNOTCH	Satellite: NOTCH
+SIGNOR-ScWNT	Satellite: WNT
+SIGNOR-TA	TNF alpha
+SIGNOR-TC	Thyroid cancer
+SIGNOR-TCA	T cell activation
+SIGNOR-TGFb	TGFbeta Signaling
+SIGNOR-TLITR	T-lymphocytes: IL10 transcriptional regulation
+SIGNOR-TLR	Tol like receptors
+SIGNOR-TLymphIFNG	T-Lymphocyte: IFN gamma
+SIGNOR-TLymphIFNGTR	T-Lymphocyte: IFN gamma transcriptional regulation
+SIGNOR-TLymphIL10	T-Lymphocyte: IL10
+SIGNOR-TLymphIL10TR	T-Lymphocyte:IL10 transcriptional regulation
+SIGNOR-TLymphIL4	T-Lymphocyte: IL4
+SIGNOR-TLymphIL4TC	T-Lymphocyte: IL4 transcriptional regulation
+SIGNOR-TLymphIL6	T-Lymphocyte: IL6
+SIGNOR-TLymphTGFB	T-Lymphocyte: TGF beta
+SIGNOR-TLymphTGFBTR	T-lymphocyte: TGF beta transcriptional regulation
+SIGNOR-Tnfa_Notch_crosstalk	Tnfa_Notch_crosstalk
+SIGNOR-WNT	WNT Signaling
+SIGNOR-WNT_Myogenesis	WNT Signaling and Myogenesis
