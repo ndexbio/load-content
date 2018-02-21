@@ -1,0 +1,54 @@
+{
+    "context":
+    {
+        "DrugBank": "http://identifiers.org/drugbank/",
+        "ncbigene": "http://identifiers.org/ncbigene/",
+        "pubmed":  "http://identifiers.org/pubmed/"
+    },
+    "source_plan":
+    {
+        "rep_column": "Chemical Source ID",
+        "rep_prefix": "DrugBank",
+        "node_name_column": "Chemical Name",
+        "property_columns":
+           [
+
+               {
+                    "column_name": "Chemical Type",
+                    "attribute_name": "Chemical Type"
+                },
+             {  "column_name": "Chemical Synonyms",
+                "attribute_name": "alias",
+                "delimiter" : "|" }
+           ]
+    },
+    "target_plan":
+    {
+        "rep_column": "Entrez Gene ID",
+        "node_name_column": "Official Symbol",
+        "rep_prefix": "ncbigene",
+        "property_columns":
+           [
+               {
+                    "column_name": "TYPEB",
+                    "attribute_name": "TYPE"
+                }
+           ]
+    },
+    "edge_plan":
+    {
+        "default_predicate": "target",
+        "property_columns": [
+               {
+                    "column_name": "Action"
+                },
+                {
+                    "column_name": "Pubmed ID",
+                    "attribute_name": "citations",
+                    "value_prefix": "pubmed",
+                    "delimiter": "|"
+                }
+
+        ]
+    }
+}
