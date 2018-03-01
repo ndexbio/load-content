@@ -24,7 +24,7 @@ class ScratchTests(unittest.TestCase):
     #==============================
     # CLUSTER SEARCH TEST
     #==============================
-    #@unittest.skip("not working using this method")
+    @unittest.skip("not working using this method")
     def test_signor2(self):
         with open('getDataAll.txt', 'r') as tsvfile:
             header = [h.strip() for h in tsvfile.readline().split('\t')]
@@ -114,6 +114,35 @@ class ScratchTests(unittest.TestCase):
         print('Adding networks to network set')
         my_ndex.add_networks_to_networkset(net_set_uuid, signor_uuids)
         print('Done')
+
+
+    #@unittest.skip("not working using this method")
+    def test_signor3(self):
+        path_this = os.path.dirname(os.path.abspath(__file__))
+        path_to_network = os.path.join(path_this, 'SIGNOR-MonoIL10TR.txt')
+
+        with open(path_to_network, 'rU') as tsvfile:
+            # header = [h.strip() for h in tsvfile.readline().split('\t')]
+            header = ["entitya", "typea", "ida", "entityb", "typeb", "idb", "effect", "mechanism", "residue",
+                      "sequence", "tax_id", "cell_data", "tissue_data", "pmid", "direct", "notes", "annotator",
+                      "sentence"]
+
+            lp = json.load(open('signor_load_plan.json'))
+            # df = pd.read_csv(tsvfile,delimiter='\t',engine='python',names=header)
+
+            df = pd.read_csv(tsvfile, dtype=str, na_filter=False, delimiter='\t', engine='python')
+
+            rename = {}
+            for column_name in df.columns:
+                rename[column_name] = column_name.upper()
+
+            df = df.rename(columns=rename)
+
+            network = t2n.convert_pandas_to_nice_cx_with_load_plan(df, lp)
+            network.upload_to('http://dev.ndexbio.org', 'scratch', 'scratch')
+
+            print(network)
+
 
 def get_signor_network_ids():
     path = "signor-path_mapping_file.txt"
