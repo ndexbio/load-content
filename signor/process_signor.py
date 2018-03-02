@@ -378,27 +378,33 @@ def process_full_signor(cytoscape_visual_properties_template_id,
                         server,
                         username,
                         password):
-    network = get_full_signor_network(load_plan)
-    network.set_name('FULL-Human (' + f"{datetime.now():%d-%b-%Y}" + ')')
-    # add_pathway_info(network, signor_id)
-    # print(network.to_cx())
-    network.apply_template(
-        username=username,
-        password=password,
-        server=server,
-        uuid=cytoscape_visual_properties_template_id)
-    apply_spring_layout(network)
+    species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
+    species = ['9606', '10090', '10116']
+    for species_id in species:
+        network = get_full_signor_network(load_plan, species_id)
 
-    network_update_key = update_signor_mapping.get(network.get_name().upper())
-    if network_update_key is not None:
-        print("updating")
-        return upload_signor_network(network, server, username, password, update_uuid=network_update_key)
-    else:
-        print("new network")
-        return upload_signor_network(network, server, username, password)
+        network.set_name('FULL-' + species_mapping.get(species_id) + ' (' + f"{datetime.now():%d-%b-%Y}" + ')')
+        # add_pathway_info(network, signor_id)
+        # print(network.to_cx())
+        network.apply_template(
+            username=username,
+            password=password,
+            server=server,
+            uuid=cytoscape_visual_properties_template_id)
+        apply_spring_layout(network)
 
+        network_update_key = update_signor_mapping.get(network.get_name().upper())
+        if network_update_key is not None:
+            print("updating")
+            #return \
+            upload_signor_network(network, server, username, password, update_uuid=network_update_key)
+        else:
+            print("new network")
+            upload_signor_network(network, server, username, password)
 
-def get_full_signor_network(load_plan):
+    return ''
+
+def get_full_signor_network(load_plan, species):
     # TODO - add context (normalize?)
     signor_context = [{
         'ncbigene': 'http://identifiers.org/ncbigene/',
@@ -406,7 +412,7 @@ def get_full_signor_network(load_plan):
         'uniprot': 'http://identifiers.org/uniprot/',
         'cas': 'http://identifiers.org/cas/'}]
 
-    url = "http://signor.uniroma2.it/getData.php?organism=9606"
+    url = "http://signor.uniroma2.it/getData.php?organism=" # Human 9606 # mouse 10090 - Rat 10116
 
     # response = requests.get(url)
     # pathway_data = response.text
