@@ -39,7 +39,11 @@ print(vars(args))
 signor_list_url = 'https://signor.uniroma2.it/getPathwayData.php?list'
 #response_list = requests.get(signor_list_url)
 #signor_mapping_list = response_list.text
+species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
+species = ['9606', '10090', '10116']
+
 cols = ['pathway_id', 'pathway_name']
+
 signor_mapping_list_df = pd.read_csv(signor_list_url, sep="\t", names = cols)
 #print(signor_mapping_list_df)
 
@@ -63,7 +67,7 @@ else:
 # my_username = None
 # my_password = None
 
-my_ndex=ndex2.client.Ndex2(my_server, my_username, my_password)
+my_ndex=nc.Ndex2(my_server, my_username, my_password)
 
 
 def get_signor_update_mapping(server, username, password):
@@ -81,17 +85,22 @@ def get_signor_update_mapping(server, username, password):
         signor_mapping_set[v] = k
         id_to_name[pathway_id.get(k)] = v
 
-    my_ndex = nc.Ndex2(server, username, password)
+    #my_ndex = nc.Ndex2(server, username, password)
     networks = my_ndex.get_network_summaries_for_user(username)
     update_mapping = {}
     for nk in networks:
         if nk.get('name') is not None:
-            if signor_mapping_set.get(nk.get('name')) is not None or 'FULL-HUMAN' in nk.get('name').upper():
+            if signor_mapping_set.get(nk.get('name')) is not None or 'FULL-' in nk.get('name').upper():
                 if 'FULL-HUMAN' in nk.get('name').upper():
                     update_mapping['FULL-Human (' + f"{datetime.now():%d-%b-%Y}" + ')'] = nk.get('externalId')
+                elif 'FULL-MOUSE' in nk.get('name').upper():
+                    update_mapping['FULL-Mouse (' + f"{datetime.now():%d-%b-%Y}" + ')'] = nk.get('externalId')
+                elif 'FULL-RAT' in nk.get('name').upper():
+                    update_mapping['FULL-Rat (' + f"{datetime.now():%d-%b-%Y}" + ')'] = nk.get('externalId')
                 else:
                     update_mapping[nk.get('name').upper()] = nk.get('externalId')
 
+    print(update_mapping)
     return (update_mapping, id_to_name)
 
 
@@ -128,14 +137,9 @@ except jsonschema.ValidationError as e1:
 
 def get_signor_network(pathway_id, load_plan):
     # TODO - add context (normalize?)
-    signor_context = [{
-        'ncbigene': 'http://identifiers.org/ncbigene/',
-        'hgnc.symbol': 'http://identifiers.org/hgnc.symbol/',
-        'uniprot': 'http://identifiers.org/uniprot/',
-        'cas': 'http://identifiers.org/cas/',
-        'chebi': 'http://identifiers.org/chebi/'}]
+    # @CONTEXT is set from the load plan
 
-    url = "http://signor.uniroma2.it/getPathwayData.php?pathway=" + pathway_id + "&relations=only"
+    url = "http://signor.uniroma2.it/getPathwayData.php?pathway=" + pathway_id + "&relations=only" #SIGNOR-TCA
     # print(url)
     response = requests.get(url)
     pathway_data = response.text
@@ -301,7 +305,7 @@ def add_pathway_info(network, network_id):
 if args.template_id is not None:
     cytoscape_visual_properties_template_id = args.template_id
 else:
-    cytoscape_visual_properties_template_id = '13c2e3f1-11cc-11e8-b939-0ac135e8bacf' # PUBLIC
+    cytoscape_visual_properties_template_id = 'ece36fa0-1e5d-11e8-b939-0ac135e8bacf' # PUBLIC
     # cytoscape_visual_properties_template_id = 'cded1818-1c0d-11e8-801d-06832d634f41' # DEV
 
 def cartesian(G):
@@ -354,6 +358,9 @@ signor_uuids = []
 #print(network_id_dataframe)
 total_pathways = len(network_id_dataframe['pathway_id'])
 for pathway_id in network_id_dataframe['pathway_id']:
+    if count >= limit:
+        break
+
     #print(pathway_id)
     print('Processing ' + str(count + 1) + '/' + str(total_pathways))
     upload_message = process_signor_id(
@@ -363,23 +370,25 @@ for pathway_id in network_id_dataframe['pathway_id']:
         my_server,
         my_username,
         my_password)
-    #print(upload_message)
-    network_uuid = upload_message.split('/')[-1]
-    signor_uuids.append(network_uuid)
+
+    network_update_key = update_signor_mapping.get(signor_id_name_mapping.get(pathway_id).upper())
+
+    if network_update_key is not None:
+        signor_uuids.append(network_update_key)
+    else:
+        network_uuid = upload_message.split('/')[-1]
+        signor_uuids.append(network_uuid)
+
     if limit:
         count += 1
-        if count >= limit:
-            break
+
+for sig_id in signor_uuids:
+    my_ndex._make_network_public_indexed(sig_id)
 
 print('Done processing indiviual pathways.')
 
-def process_full_signor(cytoscape_visual_properties_template_id,
-                        load_plan,
-                        server,
-                        username,
-                        password):
-    species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
-    species = ['9606', '10090', '10116']
+def process_full_signor(cytoscape_visual_properties_template_id, load_plan, server, username, password):
+    processed_uuids = []
     for species_id in species:
         network = get_full_signor_network(load_plan, species_id)
 
@@ -393,48 +402,66 @@ def process_full_signor(cytoscape_visual_properties_template_id,
             uuid=cytoscape_visual_properties_template_id)
         apply_spring_layout(network)
 
-        network_update_key = update_signor_mapping.get(network.get_name().upper())
+        network_update_key = update_signor_mapping.get(network.get_name())
         if network_update_key is not None:
             print("updating")
             #return \
             upload_signor_network(network, server, username, password, update_uuid=network_update_key)
+            processed_uuids.append(network_update_key)
         else:
             print("new network")
-            upload_signor_network(network, server, username, password)
+            upload_message = upload_signor_network(network, server, username, password)
+            network_uuid = upload_message.split('/')[-1]
+            processed_uuids.append(network_uuid)
+
+    for sig_id in processed_uuids:
+        my_ndex._make_network_public_indexed(sig_id)
 
     return ''
 
 def get_full_signor_network(load_plan, species):
-    # TODO - add context (normalize?)
-    signor_context = [{
-        'ncbigene': 'http://identifiers.org/ncbigene/',
-        'hgnc.symbol': 'http://identifiers.org/hgnc.symbol/',
-        'uniprot': 'http://identifiers.org/uniprot/',
-        'cas': 'http://identifiers.org/cas/'}]
+    url = "http://signor.uniroma2.it/getData.php?organism=" + species # Human 9606 # mouse 10090 - Rat 10116
 
-    url = "http://signor.uniroma2.it/getData.php?organism=" # Human 9606 # mouse 10090 - Rat 10116
+    debug_signor = False
+    if debug_signor:
+        with open('getDataAll.txt', 'r') as tsvfile:
+            usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
+                       'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
+                       'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
+                       'direct', 'notes', 'annotator', 'sentence', 'signor_id']
+            # usecols = ["entitya", "typea", "ida", "entityb", "typeb", "idb", "effect", "mechanism", "residue", "sequence", "tax_id", "cell_data", "tissue_data", "pmid", "direct", "notes", "annotator", "sentence"]
+            df = pd.read_csv(tsvfile,
+                             dtype=str,
+                             na_filter=False,
+                             delimiter='\t',
+                             engine='python',
+                             names=usecols, index_col=False)
+            # df = pd.read_csv(tsvfile,delimiter='\t',engine='python',names=header)
 
-    # response = requests.get(url)
-    # pathway_data = response.text
+            human_dataframe = df[(df["entitya"] != "") & (df["entityb"] != "") & (df["ida"] != "") & (df["idb"] != "")]
 
-    with open('getDataAll.txt', 'r') as tsvfile:
-        header = [h.strip() for h in tsvfile.readline().split('\t')]
+            # print(human_dataframe)
+    else:
+        response = requests.get(url)
+        pathway_data = response.text
+
         usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
                    'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
                    'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
                    'direct', 'notes', 'annotator', 'sentence', 'signor_id']
-        # usecols = ["entitya", "typea", "ida", "entityb", "typeb", "idb", "effect", "mechanism", "residue", "sequence", "tax_id", "cell_data", "tissue_data", "pmid", "direct", "notes", "annotator", "sentence"]
-        df = pd.read_csv(tsvfile,
-                         dtype=str,
-                         na_filter=False,
-                         delimiter='\t',
-                         engine='python',
-                         names=usecols, index_col=False)
-        # df = pd.read_csv(tsvfile,delimiter='\t',engine='python',names=header)
 
+        df = pd.read_csv(io.StringIO(pathway_data),
+                                dtype=str,
+                                na_filter=False,
+                                delimiter='\t',
+                                names=usecols,
+                                engine='python', index_col=False)
+        # names=usecols)
+
+        # print(dataframe)
+        # print(dataframe)
+        # filter dataframe to remove rows that are not human
         human_dataframe = df[(df["entitya"] != "") & (df["entityb"] != "") & (df["ida"] != "") & (df["idb"] != "")]
-
-        # print(human_dataframe)
 
     # human_dataframe = pd.read_csv(io.StringIO(pathway_data),
     #            dtype=str,
@@ -514,7 +541,7 @@ def get_full_signor_network(load_plan, species):
     network.set_network_attribute("labels", template_network.get_network_attribute('labels'))
     network.set_network_attribute("author", template_network.get_network_attribute('author'))
     append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
-    network.set_network_attribute('description', 'FULL-Human SIGNOR pathway ' + append_desc)
+    network.set_network_attribute('description', 'FULL-' + species_mapping.get(species) + ' SIGNOR pathway ' + append_desc)
     # network.set_network_attribute("rightsHolder", template_network.get_network_attribute('rightsHolder'))
     # network.set_network_attribute("rights", template_network.get_network_attribute('rights'))
     # network.set_network_attribute("reference", template_network.get_network_attribute('reference'))
