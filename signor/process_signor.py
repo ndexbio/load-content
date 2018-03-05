@@ -1,7 +1,5 @@
 import ndex2 # The ndex2 Python client
-from ndex2.cx.aspects import ATTRIBUTE_DATA_TYPE
 import ndex2.client as nc
-import itertools # convenient iteration utilities
 import requests
 import json
 import pandas as pd
@@ -9,11 +7,7 @@ import io
 
 import sys
 import jsonschema
-import os
-import nicecxModel
-#from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
-#import datetime
 import networkx as nx
 sys.path.append('../../resources')
 from tutorial_utils import load_tutorial_config
