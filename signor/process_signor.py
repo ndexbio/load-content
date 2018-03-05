@@ -357,13 +357,8 @@ for pathway_id in network_id_dataframe['pathway_id']:
 
     #print(pathway_id)
     print('Processing ' + str(count + 1) + '/' + str(total_pathways))
-    upload_message = process_signor_id(
-        pathway_id,
-        cytoscape_visual_properties_template_id,
-        load_plan,
-        my_server,
-        my_username,
-        my_password)
+    upload_message = process_signor_id(pathway_id, cytoscape_visual_properties_template_id,
+        load_plan, my_server, my_username, my_password)
 
     network_update_key = update_signor_mapping.get(signor_id_name_mapping.get(pathway_id).upper())
 
