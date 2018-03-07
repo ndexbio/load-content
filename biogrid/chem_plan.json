@@ -3,7 +3,8 @@
     {
         "DrugBank": "http://identifiers.org/drugbank/",
         "ncbigene": "http://identifiers.org/ncbigene/",
-        "pubmed":  "http://identifiers.org/pubmed/"
+        "pubmed":  "http://identifiers.org/pubmed/",
+        "cas":  "http://identifiers.org/cas/"
     },
     "source_plan":
     {
@@ -17,6 +18,7 @@
                     "column_name": "Chemical Type",
                     "attribute_name": "Chemical Type"
                 },
+
              {  "column_name": "Chemical Synonyms",
                 "attribute_name": "alias",
                 "delimiter" : "|" }
@@ -32,12 +34,16 @@
                {
                     "column_name": "TYPEB",
                     "attribute_name": "TYPE"
-                }
+                },
+             {  "column_name": "Synonyms",
+                "attribute_name": "alias",
+                "delimiter" : "|"
+             }
            ]
     },
     "edge_plan":
     {
-        "default_predicate": "target",
+        "default_predicate": "acts on",
         "property_columns": [
                {
                     "column_name": "Action"

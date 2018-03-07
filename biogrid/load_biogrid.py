@@ -24,6 +24,10 @@ def upload_signor_network(network, server, username, password, update_uuid=False
 
 def main():
 
+    version = sys.argv[1]
+    if not version:
+        print ( "version is missing in command line");
+
     gene_ids = set()
 
     # filter: only keep records for human
@@ -38,7 +42,7 @@ def main():
                 #             0             1                   2       3       4                   5
                 fho.write("Entrez Gene ID\tOfficial Symbol\tSynonyms\tAction\tInteraction Type\tPubmed ID\t"
                         #       6           7                   8                   9               10
-                          +"Chemical Name\tChemical Synonyms\tChemical Source ID\tChemical Type\tCAS Number\n")
+                          +"Chemical Name\tChemical Synonyms\tChemical Source ID\tChemical Type\n")
             else :
                 r = line.split("\t");
                 if ( r[6] == '9606'):
@@ -50,8 +54,18 @@ def main():
                     if entry:
                         entry[5].append(r[11])
                     else:
-                        entry = [r[2],r[4], "" if r[5] == '-' else r[5],r[8],r[9], [r[11]], r[14],
-                                 "" if r[15] == '-' else r[15], r[18], r[20], "" if r[22] == '-' else r[22]]
+
+                        chem_synon = "" if r[15] == '-' else r[15]
+                        cas = "" if r[22] == '-' else "cas:" + r[22]
+                        chem_alias = cas
+                        if chem_alias :
+                            if chem_synon:
+                                chem_alias += "|" + chem_synon
+                        else :
+                            chem_alias = chem_synon
+
+                        entry = [r[2],r[4], "" if r[5] == '-' else r[5],r[8],r[9], [r[11]],
+                                 r[14],chem_alias, r[18], r[20]]
                         result[key] = entry
 
             line_cnt += 1
@@ -76,7 +90,22 @@ def main():
 
     network = t2n.convert_pandas_to_nice_cx_with_load_plan(dataframe, load_plan)
 
+    # post processing.
+
+    network.set_name( "BioGRID: Protein-Chemical Interactions (Human)")
+    network.set_network_attribute("description", "This network contains protein-chemical interactions for the human BioGRID dataset. "+
+            "Proteins are normalized to official gene symbols and NCBI gene identifiers while " +
+            "alternative entity names and identifiers are provided in the alias field. The original network can be found at <a href=\"https://thebiogrid.org/\">the BioGRID website</a>.")
+    network.set_network_attribute("reference", "Chatr-Aryamontri A et al. The BioGRID interaction database: 2017 update. " +
+            "Nucleic Acids Res. 2016 Dec 14;2017(1) doi:10.1093/nar/gkw1102" )
+
+    network.set_network_attribute("version", "3.4.157" )
+    network.set_network_attribute("organism", "Human, 9606, Homo sapiens" )
+    network.set_network_attribute("networkType", "Protein-Chemical Interaction")
+
     network.upload_to("dev.ndexbio.org", "cj", "aaa")
+
+    os.remove(outFile)
 
 
 if __name__ == "__main__":
