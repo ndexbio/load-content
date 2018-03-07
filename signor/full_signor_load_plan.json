@@ -5,7 +5,8 @@
         "uniprot": "http://identifiers.org/uniprot/",
         "pubmed": "http://identifiers.org/pubmed/",
         "CID": "http://identifiers.org/pubchem.compound/",
-        "SID": "http://identifiers.org/pubchem.substance/"
+        "SID": "http://identifiers.org/pubchem.substance/",
+        "chebi": "http://identifiers.org/chebi/CHEBI:"
     },
     "source_plan":
     {
@@ -57,11 +58,6 @@
                {
                     "column_name": "SEQUENCE",
                     "attribute_name": "SEQUENCE"
-                },
-               {
-                    "column_name": "TAX_ID",
-                    "attribute_name": "TAX_ID",
-                    "data_type": "string"
                 },
                {
                     "column_name": "CELL_DATA",

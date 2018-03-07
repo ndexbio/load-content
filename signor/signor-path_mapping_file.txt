@@ -1,2 +1,5 @@
 pathway_id	pathway_name
-SIGNOR-MacroCCL2TR	Macrophage: CCL2 transcriptional regulation
+SIGNOR-IL6	IL6 
+SIGNOR-G2-M_trans	Cell cycle: G2/M phase transition
+
+
