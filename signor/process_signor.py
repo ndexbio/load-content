@@ -275,6 +275,8 @@ def add_pathway_info(network, network_id):
                        'LUMINAL BREAST CANCER', 'MALIGNANT MELANOMA', 'PROSTATE CANCER',
                        'RHABDOMYOSARCOMA', 'THYROID CANCER']
 
+    network.set_network_attribute("organism", "Human, 9606, Homo sapien")
+
     if signor_id_name_mapping.get(network_id).upper() in disease_pathways:
         network.set_network_attribute("networkType", "Disease Pathway")
     elif signor_id_name_mapping.get(network_id).upper() in cancer_pathways:
@@ -382,6 +384,16 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         network = get_full_signor_network(load_plan, species_id)
 
         network.set_name('FULL-' + species_mapping.get(species_id) + ' (' + f"{datetime.now():%d-%b-%Y}" + ')')
+
+        species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
+
+        if species_id == '9606':
+            network.set_network_attribute("organism", "Human, 9606, Homo sapien")
+        elif species_id == '10090':
+            network.set_network_attribute("organism", "Mouse, 10090, Mus musculus")
+        elif species_id == '10116':
+            network.set_network_attribute("organism", "Rat, 10116, Rattus norvegicus")
+
         # add_pathway_info(network, signor_id)
         # print(network.to_cx())
         network.apply_template(
