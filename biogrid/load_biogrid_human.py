@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import os
 import argparse
-
+import sys
 import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
@@ -92,7 +92,7 @@ def main():
         fho.close()
 
     print (str(datetime.now()) +  " - preprocess finished. newfile has " + str(len(result)) + " lines.\n")
-
+    sys.stdout.flush()
     result = None
     path_to_load_plan = 'human_plan.json'
     load_plan = None
@@ -108,10 +108,24 @@ def main():
     network = t2n.convert_pandas_to_nice_cx_with_load_plan(dataframe, load_plan)
 
     print (str(datetime.now()) + " - network created in memory.\n")
+    sys.stdout.flush()
+
     # post processing.
 
     network.set_name( "BioGRID: Protein-Protein Interactions (Human)")
-    network.set_network_attribute("description", "This network contains human protein-protein interactions. Proteins are normalized to official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in the alias field. All interactions where one of the 2 nodes is not human are filtered out. Edges with identical properties (except citations) are collapsed to simplify visualization and citations displayed as a list of PMIDs. This network is updated periodically with the latest data available on the <a href=\"https://thebiogrid.org/\">BioGRID</a>.")
+    network.set_network_attribute("description",
+                                  """
+                                   This network contains human protein-protein interactions. Proteins are normalized to official gene 
+                                   symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in 
+                                   the alias field. All interactions where one of the 2 nodes is not human are filtered out. Edges with 
+                                   identical properties (except citations) are collapsed to simplify visualization and citations displayed as a 
+                                   list of PMIDs. This network is updated periodically with the latest data available on the  <a href=\"https://thebiogrid.org/\">BioGRID</a>.<p><p>
+ 
+                                   <b>Edge legend</b><br>
+                                Solid line: High Throughput experiment<br>
+                                Dashed line: Low Throughput experiment<br>
+                                Blue line: physical interaction<br>
+                                Green line: genetic interaction""")
     network.set_network_attribute("reference", "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +
             'Nucleic Acids Res. 2016 Dec 14;2017(1)<br><a href="http://doi.org/10.1093/nar/gkw1102">doi:10.1093/nar/gkw1102</a>' )
 
@@ -124,9 +138,11 @@ def main():
 
     if args.target_network_id:
         print (str(datetime.now()) + " - Updating network " + args.target_network_id + "...\n")
+        sys.stdout.flush()
         network.update_to(args.target_network_id, server, username, password)
     else:
         print (str(datetime.now()) + " - Creating new network in NDEx\n")
+        sys.stdout.flush()
         network.upload_to(server, username, password)
 
     print (str(datetime.now()) + " - Cleaning up working files...\n")

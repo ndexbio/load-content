@@ -118,7 +118,19 @@ def main():
     # post processing.
 
     network.set_name( "BioGRID: Protein-Chemical Interactions (Human)")
-    network.set_network_attribute("description", "This network contains human protein-chemical interactions. Proteins are normalized to official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in the alias field. Edges with identical properties (except citations) are collapsed to simplify visualization and citations displayed as a list of PMIDs. This network is updated periodically with the latest data available on the <a href=\"https://thebiogrid.org/\">BioGRID</a>.")
+    network.set_network_attribute("description",
+                                  """
+                                  This network contains human protein-chemical interactions. Proteins are normalized to 
+                                  official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are 
+                                  provided in the alias field. Edges with identical properties (except citations) are collapsed 
+                                  to simplify visualization and citations displayed as a list of PMIDs. This network is updated 
+                                  periodically with the latest data available on the <a href=\"https://thebiogrid.org/\">BioGRID</a>.<p><p>
+                                  <b>Node legend</b><br>
+                                  White oval: protein<br>
+                                  Yellow diamond: biologic<br>
+                                  Orange rectangles: small molecule
+                                  """)
+
     network.set_network_attribute("reference", "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +
             'Nucleic Acids Res. 2016 Dec 14;2017(1)<br><a href="http://doi.org/10.1093/nar/gkw1102">doi:10.1093/nar/gkw1102</a>' )
 
