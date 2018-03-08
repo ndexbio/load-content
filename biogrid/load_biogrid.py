@@ -5,8 +5,8 @@ import json
 import pandas as pd
 import io
 import sys
-import jsonschema
 import os
+import argparse
 
 import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
@@ -24,14 +24,39 @@ def upload_signor_network(network, server, username, password, update_uuid=False
 
 def main():
 
-    version = sys.argv[1]
-    if not version:
-        print ( "version is missing in command line");
+    parser = argparse.ArgumentParser(description='Biogrid network loader')
+
+    parser.add_argument('version', action='store', nargs='?')
+    parser.add_argument('username', action='store', nargs='?')
+    parser.add_argument('password', action='store', nargs='?')
+
+    parser.add_argument('-s', dest='server', action='store', help='NDEx server for the target NDEx account')
+
+    parser.add_argument('-t', dest='template_id', action='store',
+                        help='ID for the network to use as a graphic template')
+
+    parser.add_argument('-target', dest='target_network_id', action='store',
+                        help='ID for the network to be updated')
+
+    args = parser.parse_args()
+
+    print(vars(args))
+
+    version = args.version
+    username = args.username
+    password = args.password
+    if args.server:
+            server = args.server
+    else:
+            server = 'public.ndexbio.org'
+
+ #       print ("Usage load_biogrid.py version user_name password [server]\nFor example: 3.4.158 biogrid mypassword test.ndexbio.org\n")
+ #       print ("server name is optional, default is public.ndexbio.org\n")
 
     gene_ids = set()
 
     # filter: only keep records for human
-    with open('BIOGRID-CHEMICALS-3.4.157.chemtab.txt') as fh:
+    with open('BIOGRID-CHEMICALS-' + version + '.chemtab.txt') as fh:
 
         outFile = "chem-" + str(os.getpid()) + ".txt"
         result = {}
@@ -93,17 +118,20 @@ def main():
     # post processing.
 
     network.set_name( "BioGRID: Protein-Chemical Interactions (Human)")
-    network.set_network_attribute("description", "This network contains protein-chemical interactions for the human BioGRID dataset. "+
-            "Proteins are normalized to official gene symbols and NCBI gene identifiers while " +
-            "alternative entity names and identifiers are provided in the alias field. The original network can be found at <a href=\"https://thebiogrid.org/\">the BioGRID website</a>.")
-    network.set_network_attribute("reference", "Chatr-Aryamontri A et al. The BioGRID interaction database: 2017 update. " +
-            "Nucleic Acids Res. 2016 Dec 14;2017(1) doi:10.1093/nar/gkw1102" )
+    network.set_network_attribute("description", "TThis network contains human protein-chemical interactions. "
+            +  "Proteins are normalized to official gene symbols and NCBI gene identifiers while alternative entity names "
+            + "and identifiers are provided in the alias field. This network is updated periodically with the latest data available on the <a href=\"https://thebiogrid.org/\">the BioGRID</a>.")
+    network.set_network_attribute("reference", "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +
+            'Nucleic Acids Res. 2016 Dec 14;2017(1)<br><a href="http://doi.org/10.1093/nar/gkw1102">doi:10.1093/nar/gkw1102</a>' )
 
-    network.set_network_attribute("version", "3.4.157" )
+    network.set_network_attribute("version", version )
     network.set_network_attribute("organism", "Human, 9606, Homo sapiens" )
     network.set_network_attribute("networkType", "Protein-Chemical Interaction")
 
-    network.upload_to("dev.ndexbio.org", "cj", "aaa")
+    if args.target_network_id:
+        network.update_to(args.target_network_id, server, username, password)
+    else:
+        network.upload_to(server, username, password)
 
     os.remove(outFile)
 
