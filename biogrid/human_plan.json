@@ -1,0 +1,68 @@
+{
+    "context":
+    {
+        "ncbigene": "http://identifiers.org/ncbigene/",
+        "pubmed":  "http://identifiers.org/pubmed/"
+    },
+    "source_plan":
+    {
+        "rep_column": "Entrez Gene Interactor A",
+        "rep_prefix": "ncbigene",
+        "node_name_column": "Official Symbol Interactor A",
+        "property_columns":
+           [
+             {  "column_name": "Synonyms Interactor A",
+                "attribute_name": "alias",
+                "delimiter" : "|" }
+           ]
+    },
+    "target_plan":
+    {
+        "rep_column": "Entrez Gene Interactor B",
+        "node_name_column": "Official Symbol Interactor B",
+        "rep_prefix": "ncbigene",
+        "property_columns":
+           [
+
+             {  "column_name": "Synonyms Interactor B",
+                "attribute_name": "alias",
+                "delimiter" : "|"
+             }
+           ]
+    },
+    "edge_plan":
+    {
+        "default_predicate": "Interacts with",
+        "property_columns": [
+               {
+                    "column_name": "Experimental System"
+                },
+               {
+                    "column_name": "Experimental System Type"
+                },
+                {
+                    "column_name": "Pubmed ID",
+                    "attribute_name": "citation",
+                    "value_prefix": "pubmed",
+                    "delimiter": "|"
+                },
+               {
+                    "column_name": "Throughput"
+                },
+               {
+                    "column_name": "Score",
+                    "data_type":  "float"
+                },
+               {
+                    "column_name": "Modification"
+                },
+               {
+                    "column_name": "Phenotypes"
+                },
+               {
+                    "column_name": "Qualifications"
+                }
+
+        ]
+    }
+}

@@ -50,7 +50,7 @@
                 },
                 {
                     "column_name": "Pubmed ID",
-                    "attribute_name": "citations",
+                    "attribute_name": "citation",
                     "value_prefix": "pubmed",
                     "delimiter": "|"
                 }
