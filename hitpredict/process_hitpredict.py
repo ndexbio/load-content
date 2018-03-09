@@ -1,15 +1,8 @@
-import ndex2 # The ndex2 Python client
 import ndex2.client as nc
-import requests
 import json
 import pandas as pd
-import io
-
 import sys
 import jsonschema
-from datetime import datetime
-import networkx as nx
-sys.path.append('../../resources')
 from tutorial_utils import load_tutorial_config
 import ndexutil.tsv.tsv2nicecx as t2n
 import argparse
@@ -56,6 +49,12 @@ if args.username and args.password:
 else:
     my_server, my_username, my_password = load_tutorial_config("main")
 
+if args.template_id is not None:
+    cytoscape_visual_properties_template_id = args.template_id
+else:
+    #cytoscape_visual_properties_template_id = 'ece36fa0-1e5d-11e8-b939-0ac135e8bacf' # PUBLIC
+    cytoscape_visual_properties_template_id = 'c7075eb1-231e-11e8-894b-525400c25d22' # DEV
+
 # alternatively, edit and uncomment these lines to set the connection parameters manually
 # my_server = "public.ndexbio.org"
 # my_username = None
@@ -98,16 +97,21 @@ def get_hitpredict_network(pathway_id, load_plan):
     df['NAME1'].replace('', df['UNIPROT1'], inplace=True) #'unknown', inplace=True)
     df['NAME2'].replace('', df['UNIPROT2'], inplace=True) #'unknown', inplace=True)
 
-    df.loc[:, 'DEFAULT INTERACTION'] = pd.Series('interacts-with', index=df.index)
+    df.loc[:, 'DEFAULT INTERACTION'] = pd.Series('interacts with', index=df.index)
 
     network = t2n.convert_pandas_to_nice_cx_with_load_plan(df, load_plan)
 
     for node_id, node in network.nodes.items():
-        if node.get_id() == 'unknown':
-            node.set_id(node.get_node_represents())
+        if ';' in node.get_name():
+            node_name_temp = node.get_name().split(';')
+            node.set_node_name(node_name_temp[0])
+
         values = network.get_node_attribute(node, 'alias2')
-        if not isinstance(values, list):
-            values = [values]
+        if values is not None:
+            if not isinstance(values, list):
+                values = [values]
+        else:
+            values = []
 
         replacement_values = []
         for val in values:
@@ -122,9 +126,20 @@ def get_hitpredict_network(pathway_id, load_plan):
             network_att = network.get_node_attribute_objects(node_id, 'alias2')
             network_att.set_values(replacement_values)
 
-    network.set_network_attribute("organism", "Human, 9606, Homo sapien")
+    #for edge_id, edge in network.edges.items():
+    #    ext_links = []
+    #    edge_attr_value = network.get_edge_attribute(edge, 'PATHWAY')
+    #    if edge_attr_value is not None:
+    #        pathway_name = 'Place holder'
+    #        ext_links.append("[" + pathway_name + "<br />](http://identifiers.org/kegg.pathway/" + edge_attr_value + ")")
+    #        network.set_edge_attribute(edge_id, 'ndex:externalLink', ext_links, type='list_of_string')#["[Oocyte meiosis - Homo sapiens (human)<br />](http://identifiers.org/kegg.pathway/hsa04114)"], type='list_of_string')
+
+    network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
     network.union_node_attributes('alias', 'alias2', 'alias')
     network.set_name('Hit Predict draft 2.0')
+
+    network.apply_template(username=my_username, password=my_password, server=my_server,
+                           uuid=cytoscape_visual_properties_template_id)
     message = network.upload_to(my_server, my_username, my_password)
 
 print('starting...')
