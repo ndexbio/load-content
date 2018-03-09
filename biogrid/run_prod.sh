@@ -14,6 +14,33 @@ PROT_TEMPLATE=8086b6b1-2309-11e8-b939-0ac135e8bacf
 
 CHEM_TARGET_NETWORK=b192ccaa-2261-11e8-b939-0ac135e8bacf
 
+echo "Updating protein-protein networks."
+
+PROTFILE_NAME=BIOGRID-ORGANISM-$VERSION.tab2
+
+curl https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-$VERSION/$PROTFILE_NAME.zip -o $PROTFILE_NAME.zip
+
+if [ $? -gt 0 ]
+then
+   echo "failed to download protein-protein zip file."
+   exit 2
+fi
+
+
+
+python3 load_biogrid_organism.py $VERSION $USER $PASSWD -s $SERVER -t $PROT_TEMPLATE
+
+if [ $? -gt 0 ]
+then
+   echo "failed to update protein-protien network"
+   exit 2
+fi
+
+rm BIOGRID-ORGANISM-Homo_sapiens-$VERSION.tab2.txt
+rm $PROTFILE_NAME.zip
+
+
+echo "Updating protein-chemical networks"
 
 CHEMFILE_NAME=BIOGRID-CHEMICALS-$VERSION.chemtab
 
@@ -44,25 +71,3 @@ fi
 rm $CHEMFILE_NAME.zip
 rm $CHEMFILE_NAME.txt
 
-PROTFILE_NAME=BIOGRID-ORGANISM-$VERSION.tab2
-
-curl https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-$VERSION/$PROTFILE_NAME.zip -o $PROTFILE_NAME.zip
-
-if [ $? -gt 0 ]
-then
-   echo "failed to download protein-protein zip file."
-   exit 2
-fi
-
-
-
-python3 load_biogrid_organism.py $VERSION $USER $PASSWD -s $SERVER -t $PROT_TEMPLATE
-
-if [ $? -gt 0 ]
-then
-   echo "failed to update protein-protien network"
-   exit 2
-fi
-
-rm BIOGRID-ORGANISM-Homo_sapiens-$VERSION.tab2.txt
-rm $PROTFILE_NAME.zip
