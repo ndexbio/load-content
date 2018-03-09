@@ -6,7 +6,7 @@ import sys
 import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
-
+import re
 import ndexutil.tsv.tsv2nicecx as t2n
 
 
@@ -45,6 +45,7 @@ def main():
  #       print ("server name is optional, default is public.ndexbio.org\n")
 
     PROTFILE_NAME = "BIOGRID-ORGANISM-" + version + ".tab2"
+    prog = re.compile("http:\/\/.*/\#\/network\/(.*)")
 
     with open('organism_list.txt') as orgsh:
         for org_line in orgsh:
@@ -52,7 +53,8 @@ def main():
             organism = ro[0]
             org_str = ro[1].replace('"','')
             common_name = ro[2]
-            target_uuid = ro[3] if len(ro)>3 else None
+            target_uuid = ro[3].strip() if len(ro)>3 else None
+            target_uuid = prog.match(target_uuid).group(1) if prog.match(target_uuid) else target_uuid
 
             print ("Processing " + organism)
             #unpack the zip file for this organims
@@ -127,10 +129,8 @@ def main():
             network.set_name("BioGRID: Protein-Protein Interactions ("+common_name+")")
             network.set_network_attribute("description",
                                   """
-                                   This network contains human protein-protein interactions. Proteins are normalized to official gene 
-                                   symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in 
-                                   the alias field. Edges with 
-                                   identical properties (except citations) are collapsed to simplify visualization and citations displayed as a 
+                                   Proteins are normalized to official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in 
+                                   the alias field. Edges with identical properties (except citations) are collapsed to simplify visualization and citations displayed as a 
                                    list of PMIDs. This network is updated periodically with the latest data available on the  <a href=\"https://thebiogrid.org/\">BioGRID</a>.<p><p>
  
                                    <b>Edge legend</b><br>
