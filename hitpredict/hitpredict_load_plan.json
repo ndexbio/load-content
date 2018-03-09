@@ -64,19 +64,18 @@
               },
              {
                   "column_name": "METHOD SCORE",
-                  "attribute_name": "METHOD SCORE"
+                  "attribute_name": "METHOD SCORE",
+                  "data_type": "float"
               },
              {
                   "column_name": "ANNOTATION SCORE",
-                  "attribute_name": "ANNOTATION SCORE"
-              },
-             {
-                  "column_name": "DEFAULT INTERACTION",
-                  "attribute_name": "DEFAULT INTERACTION"
+                  "attribute_name": "ANNOTATION SCORE",
+                  "data_type": "float"
               },
              {
                   "column_name": "TOTAL SCORE",
-                  "attribute_name": "TOTAL SCORE"
+                  "attribute_name": "TOTAL SCORE",
+                  "data_type": "float"
               },
              {
                   "column_name": "CONFIDENCE",
