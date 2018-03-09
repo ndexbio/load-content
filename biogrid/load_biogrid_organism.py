@@ -26,8 +26,8 @@ def main():
     parser.add_argument('-t', dest='template_id', action='store',
                         help='ID for the network to use as a graphic template')
 
-    parser.add_argument('-target', dest='target_network_id', action='store',
-                        help='ID for the network to be updated')
+    #parser.add_argument('-target', dest='target_network_id', action='store',
+    #                    help='ID for the network to be updated')
 
     args = parser.parse_args()
 
@@ -48,10 +48,11 @@ def main():
 
     with open('organism_list.txt') as orgsh:
         for org_line in orgsh:
-            ro = org_line.split("\t")
+            ro = org_line.strip().split("\t")
             organism = ro[0]
-            org_str = ro [1]
-            common_name =( org_str.split(','))[0]
+            org_str = ro[1].replace('"','')
+            common_name = ro[2]
+            target_uuid = ro[3] if len(ro)>3 else None
 
             print ("Processing " + organism)
             #unpack the zip file for this organims
@@ -149,10 +150,10 @@ def main():
                 network.apply_template(username=username, password=password, server=server,
                                uuid=args.template_id)
 
-            if args.target_network_id:
-                print(str(datetime.now()) + " - Updating network " + args.target_network_id + "...\n")
+            if target_uuid:
+                print(str(datetime.now()) + " - Updating network " + target_uuid + "...\n")
                 sys.stdout.flush()
-                network.update_to(args.target_network_id, server, username, password)
+                network.update_to(target_uuid, server, username, password)
             else:
                 print(str(datetime.now()) + " - Creating new network in NDEx\n")
                 sys.stdout.flush()

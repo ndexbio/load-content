@@ -117,7 +117,7 @@ def main():
 
     # post processing.
 
-    network.set_name( "BioGRID: Protein-Chemical Interactions (Human)")
+    network.set_name( "BioGRID: Protein-Chemical Interactions (H. sapiens)")
     network.set_network_attribute("description",
                                   """
                                   This network contains human protein-chemical interactions. Proteins are normalized to 
