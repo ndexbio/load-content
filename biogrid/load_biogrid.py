@@ -128,7 +128,7 @@ def main():
                                   <b>Node legend</b><br>
                                   White oval: protein<br>
                                   Yellow diamond: biologic<br>
-                                  Orange rectangles: small molecule
+                                  Orange rectangle: small molecule
                                   """)
 
     network.set_network_attribute("reference", "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +

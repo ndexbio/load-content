@@ -11,6 +11,8 @@
         "node_name_column": "Official Symbol Interactor A",
         "property_columns":
            [
+             {"column_name": "Organism Interactor A",
+                "attribute_name": "Organism Taxon Id"},
              {  "column_name": "Synonyms Interactor A",
                 "attribute_name": "alias",
                 "delimiter" : "|" }
@@ -23,7 +25,8 @@
         "rep_prefix": "ncbigene",
         "property_columns":
            [
-
+              {"column_name": "Organism Interactor B",
+                "attribute_name": "Organism Taxon Id"},
              {  "column_name": "Synonyms Interactor B",
                 "attribute_name": "alias",
                 "delimiter" : "|"

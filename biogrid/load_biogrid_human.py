@@ -66,8 +66,8 @@ def main():
                 fho.write("Entrez Gene Interactor A\tEntrez Gene Interactor B\tOfficial Symbol Interactor A\tOfficial Symbol Interactor B\t"+
                 #                   4                    5                      6                    7                    8
                           "Synonyms Interactor A\tSynonyms Interactor B\tExperimental System\tExperimental System Type\tPubmed ID\t"
-                        #       9         10     11              12          13
-                          +"Throughput\tScore\tModification\tPhenotypes\tQualifications\n")
+                        #       9         10     11              12          13               14                       15
+                          +"Throughput\tScore\tModification\tPhenotypes\tQualifications\tOrganism Interactor A\tOrganism Interactor B\n")
             else :
                 r = line.split("\t");
                 if ( r[15] == '9606' and r[16] == '9606'):  #filter on human
@@ -79,7 +79,7 @@ def main():
                     else:
                         entry = [r[1],r[2], r[7],r[8], cvtfield(r[9]),cvtfield(r[10]),cvtfield(r[11]),cvtfield(r[12]),
                                  [r[14]],  #pubmed_ids
-                                 cvtfield(r[17]),cvtfield(r[18]),cvtfield(r[19]),cvtfield(r[20]),cvtfield(r[21])]
+                                 cvtfield(r[17]),cvtfield(r[18]),cvtfield(r[19]),cvtfield(r[20]),cvtfield(r[21]),r[15],r[16]]
                         result[key] = entry
 
             line_cnt += 1
