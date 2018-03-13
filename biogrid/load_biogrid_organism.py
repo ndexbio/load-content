@@ -54,7 +54,8 @@ def main():
             org_str = ro[1].replace('"','')
             common_name = ro[2]
             target_uuid = ro[3].strip() if len(ro)>3 else None
-            target_uuid = prog.match(target_uuid).group(1) if prog.match(target_uuid) else target_uuid
+            if target_uuid:
+                target_uuid = prog.match(target_uuid).group(1) if prog.match(target_uuid) else target_uuid
 
             print ("Processing " + organism)
             #unpack the zip file for this organims

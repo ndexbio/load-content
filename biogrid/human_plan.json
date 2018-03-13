@@ -54,7 +54,7 @@
                 },
                {
                     "column_name": "Score",
-                    "data_type":  "float"
+                    "data_type":  "double"
                 },
                {
                     "column_name": "Modification"
