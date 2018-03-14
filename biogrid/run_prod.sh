@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# You need to run this script in the current directory.
+
+
+if [ "$#" -ne 3 ]; then
+    echo "This program needs 3 pramameters <biogrid_version> <ndex_username> <ndex_password>"
+    echo "For example:"
+    echo "./run_prod.sh 3.4.158 ndexuser1 ndexuser1password"
+    exit 1
+fi
+
 #the version you want to update
 VERSION=$1
 
