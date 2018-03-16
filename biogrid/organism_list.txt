@@ -1,14 +1,14 @@
-Zea_mays	"Maize, 4577, Zea mays"	Z. mays
-Xenopus_laevis	"African clawed frog, 8355, Xenopus laevis"	X. laevis
-Saccharomyces_cerevisiae_S288c	"Baker's yeast, 559292"	S. cerevisiae
-Rattus_norvegicus	"Norway rat, 10116, Rattus norvegicus"	R. norvegicus
-Mus_musculus	"House mouse, 10090, Mus musculus"	M. musculus
-Human_papillomavirus_16	"HPV, 10566, Human papillomavirus"	HPV
-Human_Immunodeficiency_Virus_2	"HIV-2, 11709, Human immunodeficiency virus 2"	HIV-2
-Human_Immunodeficiency_Virus_1	"HIV-1, 11676, Human immunodeficiency virus 1"	HIV-1
-Drosophila_melanogaster	"Fruit fly, 7227, Drosophila melanogaster"	D. melanogaster
-Danio_rerio	"Zebrafish, 7955, Danio rerio"	D. rerio
-Caenorhabditis_elegans	"Roundworm, 6239, Cenorhabditis elegans"	C. elegans
-Arabidopsis_thaliana_Columbia	"Thale cress, 3702, Arabidopsis thaliana"	A. thaliana
-Anopheles_gambiae_PEST	"African mosquito, 180454, Anopheles gambiae"	A. gambiae
-Homo_sapiens	"Human, 9606, Homo sapiens"	H. sapiens
+Zea_mays	"Maize, 4577, Zea mays"	Z. mays	http://www.ndexbio.org/#/network/81994440-23dd-11e8-b939-0ac135e8bacf
+Xenopus_laevis	"African clawed frog, 8355, Xenopus laevis"	X. laevis	http://www.ndexbio.org/#/network/8150c98e-23dd-11e8-b939-0ac135e8bacf
+Saccharomyces_cerevisiae_S288c	"Baker's yeast, 559292"	S. cerevisiae	http://www.ndexbio.org/#/network/7f1901fc-23dd-11e8-b939-0ac135e8bacf
+Rattus_norvegicus	"Norway rat, 10116, Rattus norvegicus"	R. norvegicus	http://www.ndexbio.org/#/network/5549622c-23dc-11e8-b939-0ac135e8bacf
+Mus_musculus	"House mouse, 10090, Mus musculus"	M. musculus	http://www.ndexbio.org/#/network/52d57bf9-23dc-11e8-b939-0ac135e8bacf
+Human_papillomavirus_16	"HPV, 10566, Human papillomavirus"	HPV	http://www.ndexbio.org/#/network/39494313-23dc-11e8-b939-0ac135e8bacf
+Human_Immunodeficiency_Virus_2	"HIV-2, 11709, Human immunodeficiency virus 2"	HIV-2	http://www.ndexbio.org/#/network/38ef3c31-23dc-11e8-b939-0ac135e8bacf
+Human_Immunodeficiency_Virus_1	"HIV-1, 11676, Human immunodeficiency virus 1"	HIV-1	http://www.ndexbio.org/#/network/38a9cebf-23dc-11e8-b939-0ac135e8bacf
+Drosophila_melanogaster	"Fruit fly, 7227, Drosophila melanogaster"	D. melanogaster	http://www.ndexbio.org/#/network/0bb966f8-23db-11e8-b939-0ac135e8bacf
+Danio_rerio	"Zebrafish, 7955, Danio rerio"	D. rerio	http://www.ndexbio.org/#/network/ef119635-23da-11e8-b939-0ac135e8bacf
+Caenorhabditis_elegans	"Roundworm, 6239, Cenorhabditis elegans"	C. elegans	http://www.ndexbio.org/#/network/eead7d32-23da-11e8-b939-0ac135e8bacf
+Arabidopsis_thaliana_Columbia	"Thale cress, 3702, Arabidopsis thaliana"	A. thaliana	http://www.ndexbio.org/#/network/eb4d151f-23da-11e8-b939-0ac135e8bacf
+Anopheles_gambiae_PEST	"African mosquito, 180454, Anopheles gambiae"	A. gambiae	http://www.ndexbio.org/#/network/d72a5bbc-23da-11e8-b939-0ac135e8bacf
+Homo_sapiens	"Human, 9606, Homo sapiens"	H. sapiens	http://www.ndexbio.org/#/network/36f7d8fd-23dc-11e8-b939-0ac135e8bacf
