@@ -99,7 +99,7 @@ def get_signor_update_mapping(server, username, password):
 
 
 update_signor_mapping, signor_id_name_mapping = get_signor_update_mapping(my_server, my_username, my_password)
-#print(update_signor_mapping)
+print(update_signor_mapping)
 
 def get_signor_network_ids():
     #path = "signor-path_mapping_file.txt"
@@ -133,7 +133,7 @@ def get_signor_network(pathway_id, load_plan):
     # TODO - add context (normalize?)
     # @CONTEXT is set from the load plan
 
-    url = "http://signor.uniroma2.it/getPathwayData.php?pathway=" + pathway_id + "&relations=only" #SIGNOR-TCA
+    url = "https://signor.uniroma2.it/getPathwayData.php?pathway=" + pathway_id + "&relations=only" #SIGNOR-TCA
     # print(url)
     response = requests.get(url)
     pathway_data = response.text
@@ -216,20 +216,21 @@ def get_signor_network(pathway_id, load_plan):
             network.remove_edge_attribute(edge_id, "citation_ids")
 
         cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
-        if cd is not None:
-            cd_value = cd.get_values()
-            cd_split = cd_value.split(';')
-            cd.set_values(cd_split)
+        print(cd)
+        #if cd is not None:
+        #    cd_value = cd.get_values()
+        #    cd_split = cd_value.split(';')
+        #    cd.set_values(cd_split)
 
-            cd.set_data_type('list_of_string')
+        #    cd.set_data_type('list_of_string')
 
-        td = network.get_edge_attribute_objects(edge_id, "TISSUE_DATA")
-        if td is not None:
-            td_value = td.get_values()
-            td_split = td_value.split(';')
-            td.set_values(td_split)
+        #td = network.get_edge_attribute_objects(edge_id, "TISSUE_DATA")
+        #if td is not None:
+        #    td_value = td.get_values()
+        #    td_split = td_value.split(';')
+        #    td.set_values(td_split)
 
-            td.set_data_type('list_of_string')
+        #    td.set_data_type('list_of_string')
 
     #print(network.get_summary())
     return network
@@ -241,7 +242,7 @@ def get_signor_network(pathway_id, load_plan):
 # TODO - end section
 
 def add_pathway_info(network, network_id):
-    url = "http://signor.uniroma2.it/getPathwayData.php?pathway=" + str(
+    url = "https://signor.uniroma2.it/getPathwayData.php?pathway=" + str(
         network_id)  # network.get_network_attribute("SIGNOR_ID"))
     #print(url)
     response = requests.get(url)
@@ -275,7 +276,7 @@ def add_pathway_info(network, network_id):
                        'LUMINAL BREAST CANCER', 'MALIGNANT MELANOMA', 'PROSTATE CANCER',
                        'RHABDOMYOSARCOMA', 'THYROID CANCER']
 
-    network.set_network_attribute("organism", "Human, 9606, Homo sapien")
+    network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
 
     if signor_id_name_mapping.get(network_id).upper() in disease_pathways:
         network.set_network_attribute("networkType", "Disease Pathway")
@@ -388,7 +389,7 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
 
         if species_id == '9606':
-            network.set_network_attribute("organism", "Human, 9606, Homo sapien")
+            network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
         elif species_id == '10090':
             network.set_network_attribute("organism", "Mouse, 10090, Mus musculus")
         elif species_id == '10116':
@@ -421,7 +422,7 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
     return ''
 
 def get_full_signor_network(load_plan, species):
-    url = "http://signor.uniroma2.it/getData.php?organism=" + species # Human 9606 # mouse 10090 - Rat 10116
+    url = "https://signor.uniroma2.it/getData.php?organism=" + species # Human 9606 # mouse 10090 - Rat 10116
 
     debug_signor = False
     if debug_signor:

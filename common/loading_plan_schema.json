@@ -149,6 +149,10 @@
                       "enum": ["string","double","float", "boolean", "char","integer","long","short","list_of_string",
                           "list_of_double", "list_of_float","list_of_boolean", "list_of_integer", "list_of_long"]
                   },
+                  "delimiter": {
+                      "description": "delimiter character for array data types",
+                      "type": "string"
+                  },
                   "default_value": {
                     "description": "default value of this property when column_name is missing or the value in that column is missing",
                     "type": "string"
