@@ -136,7 +136,21 @@ def get_hitpredict_network(pathway_id, load_plan):
 
     network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
     network.union_node_attributes('alias', 'alias2', 'alias')
-    network.set_name('Hit Predict draft 2.0')
+    network.set_name('HitPredict - Human')
+
+    description = '<a href="http://hintdb.hgc.jp/htp/" target="_blank">HitPredict</a> is a resource of experimentally determined protein-protein interactions with reliability scores. Protein-protein interactions from IntAct, BioGRID, HPRD, MINT and DIP are combined, annotated and scored. The reliability score is calculated based on the experimental details of each interaction and the sequence, structure and functional annotations of the interacting proteins. This network contains all human interactions that map to known Kegg pathways; edge colors from light blue to dark blue are mapped to the "Total score" value.'
+    network.set_network_attribute('description', description)
+
+    network.set_network_attribute('version', 'v.4 (JUL-2017)')
+
+    references = 'Yosvany Lopez, Kenta Nakai and Ashwini Patil. <b>HitPredict version 4 - comprehensive reliability scoring of ' \
+                 'physical protein-protein interactions from more than 100 species.</b><br />' \
+                 'Database (Oxford) 2015; 2015: bav117.<br />' \
+                 '<a href="https://dx.doi.org/10.1093%2Fdatabase%2Fbav117" target="_blank">doi:10.1093/database/bav117</a>'
+
+    network.set_network_attribute("reference", references)
+
+    network.set_network_attribute("networkType", 'Protein-Protein Interaction')
 
     network.apply_template(username=my_username, password=my_password, server=my_server,
                            uuid=cytoscape_visual_properties_template_id)

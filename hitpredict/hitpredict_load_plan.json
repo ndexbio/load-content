@@ -60,40 +60,40 @@
               },
              {
                   "column_name": "SOURCE",
-                  "attribute_name": "Source"
+                  "attribute_name": "Data source"
               },
              {
                   "column_name": "METHOD SCORE",
-                  "attribute_name": "METHOD SCORE",
+                  "attribute_name": "Method score",
                   "data_type": "float"
               },
              {
                   "column_name": "ANNOTATION SCORE",
-                  "attribute_name": "ANNOTATION SCORE",
+                  "attribute_name": "Annotation score",
                   "data_type": "float"
               },
              {
                   "column_name": "TOTAL SCORE",
-                  "attribute_name": "TOTAL SCORE",
+                  "attribute_name": "Total score",
                   "data_type": "float"
               },
              {
                   "column_name": "CONFIDENCE",
-                  "attribute_name": "CONFIDENCE"
+                  "attribute_name": "Confidence"
               },
              {
                   "column_name": "TYPE",
-                  "attribute_name": "TYPE"
+                  "attribute_name": "Type"
               },
              {
                   "column_name": "PUBMED ID",
-                  "attribute_name": "citation",
+                  "attribute_name": "Pubmed ID",
                   "value_prefix": "pubmed",
                   "delimiter": ";"
               },
              {
                   "column_name": "PATHWAY",
-                  "attribute_name": "PATHWAY",
+                  "attribute_name": "Pathway",
                   "delimiter": ";",
                     "value_prefix": "kegg.pathway"
               }
