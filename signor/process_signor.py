@@ -14,7 +14,7 @@ from tutorial_utils import load_tutorial_config
 import ndexutil.tsv.tsv2nicecx as t2n
 import argparse
 import time
-from os import listdir, path
+from os import listdir, path, makedirs
 import urllib
 
 parser = argparse.ArgumentParser(description='Signor network loader')
@@ -67,6 +67,11 @@ current_directory = path.dirname(path.abspath(__file__))
 today = time.strftime('%Y%m%d')
 
 def load_data_files():
+    if not path.exists(path.join(current_directory, 'local')):
+        makedirs(path.join(current_directory, 'local'))
+    if not path.exists(path.join(current_directory, 'local', today)):
+        makedirs(path.join(current_directory, 'local', today))
+
     pathway_list_path = path.join(current_directory, 'local', today, 'pathway_list.txt')
     if not path.isfile(pathway_list_path):
         # ====================
