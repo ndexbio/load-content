@@ -25,12 +25,16 @@ def load_tutorial_config(connection_name):
     if isfile(config_file):
         file = open(config_file, "r")
         config = json.load(file)
+
         file.close()
         connections = config.get("connections")
+
         if connections:
             if connection_name:
+
                 connection = connections.get(connection_name)
-                if connection and connection.get("password") and config.get("username"):
+                if connection:
+                    print(connection)
                     if connection.get("server"):
                         server = connection.get("server")
                     username = connection.get("username")
