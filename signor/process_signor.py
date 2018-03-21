@@ -487,17 +487,17 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
             print("updating")
             #return \
             upload_signor_network(network, server, username, password, update_uuid=network_update_key)
-            processed_uuids.append(network_update_key)
+            #processed_uuids.append(network_update_key)
         else:
             print("new network")
             upload_message = upload_signor_network(network, server, username, password)
             network_uuid = upload_message.split('/')[-1]
             processed_uuids.append(network_uuid)
 
-    #for sig_id in processed_uuids:
-    #    my_ndex = nc.Ndex2(my_server, my_username, my_password)
+    for sig_id in processed_uuids:
+        my_ndex = nc.Ndex2(my_server, my_username, my_password)
 
-    #    my_ndex._make_network_public_indexed(sig_id)
+        my_ndex._make_network_public_indexed(sig_id)
 
     return ''
 
