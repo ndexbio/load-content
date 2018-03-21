@@ -580,7 +580,9 @@ def get_full_signor_network(load_plan, species):
     network.set_network_attribute("labels", template_network.get_network_attribute('labels'))
     network.set_network_attribute("author", template_network.get_network_attribute('author'))
     append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
-    network.set_network_attribute('description', 'FULL-' + species_mapping.get(species) + ' SIGNOR pathway ' + append_desc)
+
+    full_desc = 'This network contains all the ' + species_mapping.get(species) + ' interactions currently available in SIGNOR'
+    network.set_network_attribute('description', full_desc)
 
     network.set_network_attribute("version", f"{datetime.now():%d-%b-%Y}")  # "0.0.1")
 
@@ -593,9 +595,9 @@ def get_full_signor_network(load_plan, species):
     return network
 
 
-print('Starting full SIGNOR pathway.')
+print('Starting full SIGNOR.')
 process_full_signor(cytoscape_visual_properties_template_id, load_plan, my_server, my_username, my_password)
-print('Done processing full SIGNOR pathway.')
+print('Done processing full SIGNOR.')
 
 
 
