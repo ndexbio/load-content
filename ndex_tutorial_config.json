@@ -1,0 +1,9 @@
+{
+  "connections": { 
+    "main": {
+      "server": "http://public.ndexbio.org",
+      "username": “account username“,
+      "password": “account password”
+    }
+  }
+}
