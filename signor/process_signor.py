@@ -441,9 +441,7 @@ for pathway_id in network_id_dataframe['pathway_id']:
 
     network_update_key = update_signor_mapping.get(signor_id_name_mapping.get(pathway_id).upper())
 
-    if network_update_key is not None:
-        signor_uuids.append(network_update_key)
-    else:
+    if network_update_key is None:
         network_uuid = upload_message.split('/')[-1]
         signor_uuids.append(network_uuid)
 
@@ -495,9 +493,15 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
             processed_uuids.append(network_uuid)
 
     for sig_id in processed_uuids:
-        my_ndex = nc.Ndex2(my_server, my_username, my_password)
+        while True:
+            try:
+                my_ndex = nc.Ndex2(my_server, my_username, my_password)
 
-        my_ndex._make_network_public_indexed(sig_id)
+                my_ndex._make_network_public_indexed(sig_id)
+                break
+            except Exception as excp:
+                print('Network not ready to be made PUBLIC.  Sleeping...')
+                time.sleep(2)
 
     return ''
 
