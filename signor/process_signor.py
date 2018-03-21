@@ -30,12 +30,6 @@ args = parser.parse_args()
 
 print(vars(args))
 
-if args.template_id is not None:
-    cytoscape_visual_properties_template_id = args.template_id
-else:
-    cytoscape_visual_properties_template_id = 'ece36fa0-1e5d-11e8-b939-0ac135e8bacf' # PUBLIC
-    # cytoscape_visual_properties_template_id = 'cded1818-1c0d-11e8-801d-06832d634f41' # DEV
-
 # get the connection parameters from the ndex_tutorial_config.json file in your home directory.
 # edit the line below to specify a different connection in the config file
 if args.username and args.password:
@@ -56,6 +50,13 @@ else:
 # my_username = None
 # my_password = None
 
+if args.template_id is not None:
+    cytoscape_visual_properties_template_id = args.template_id
+else:
+    if 'dev.ndexbio.org' in my_server:
+        cytoscape_visual_properties_template_id = 'cded1818-1c0d-11e8-801d-06832d634f41' # DEV
+    else:
+        cytoscape_visual_properties_template_id = 'ece36fa0-1e5d-11e8-b939-0ac135e8bacf' # PUBLIC
 
 
 signor_list_url = 'https://signor.uniroma2.it/getPathwayData.php?list'
@@ -130,6 +131,23 @@ def load_data_files():
             else:
                 print('Skipping download... ' + pathway_id + '_desc already exists.')
 
+    for k, v in species_mapping.items():
+        print('getting full_' + v + '.txt from URL')
+        full_signor_url = "https://signor.uniroma2.it/getData.php?organism=" + k  # Human 9606 # mouse 10090 - Rat 10116
+        full_content_path = path.join(current_directory, 'local', today, 'full_' + v + '.txt')
+
+        if not path.isfile(full_content_path):
+            time_start = time.time()
+            full_content = urllib.request.urlopen(full_signor_url)
+            f = open(full_content_path, "w")
+            full_content = full_content.read().decode('utf-8')
+            f.write(full_content)
+            f.close()
+            print(time.time() - time_start)
+        else:
+            print('Skipping download... full_' + v + '.txt already exists.')
+
+
 load_data_files()
 
 def get_signor_mapping_list_df():
@@ -169,9 +187,32 @@ def get_signor_pathway_description_df(pathway_id):
     else:
         raise Exception('Pathway relations file ' + pathway_id_clean + ' was not downloaded today.  Please run the download processor first')
 
+def get_full_signor_pathway_relations_df(species):
+    if species == '9606':
+        file_name = 'full_Human.txt'
+    elif species == '10090':
+        file_name = 'full_Mouse.txt'
+    elif species == '10116':
+        file_name = 'full_Rat.txt'
+
+    pathway_file_path = path.join(current_directory, 'local', today, file_name)
+    if path.isfile(pathway_file_path):
+        with open(pathway_file_path, 'r') as pfp:
+            usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
+                       'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
+                       'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
+                       'direct', 'notes', 'annotator', 'sentence', 'signor_id']
+
+            signor_pathway_relations_df = pd.read_csv(pfp, dtype=str, na_filter=False, delimiter='\t', names=usecols,
+               engine='python', index_col=False)
+
+            return signor_pathway_relations_df
+    else:
+        raise Exception('Pathway relations file ' + file_name + ' was not downloaded today.  Please run the download processor first')
+
 
 signor_mapping_list_df = get_signor_mapping_list_df()  #pd.read_csv(signor_list_url, sep="\t", names = cols)
-#print(signor_mapping_list_df)
+#print(signor_mapping_list_df.head(n=250))
 
 
 def get_signor_update_mapping(server, username, password):
@@ -282,7 +323,7 @@ def get_signor_network(pathway_id, load_plan):
             network.remove_edge_attribute(edge_id, "citation_ids")
 
         cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
-        print(cd)
+        #print(cd)
 
     return network
 
@@ -453,53 +494,20 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
             network_uuid = upload_message.split('/')[-1]
             processed_uuids.append(network_uuid)
 
-    for sig_id in processed_uuids:
-        my_ndex = nc.Ndex2(my_server, my_username, my_password)
+    #for sig_id in processed_uuids:
+    #    my_ndex = nc.Ndex2(my_server, my_username, my_password)
 
-        my_ndex._make_network_public_indexed(sig_id)
+    #    my_ndex._make_network_public_indexed(sig_id)
 
     return ''
 
 def get_full_signor_network(load_plan, species):
     url = "https://signor.uniroma2.it/getData.php?organism=" + species # Human 9606 # mouse 10090 - Rat 10116
 
-    debug_signor = False
-    if debug_signor:
-        with open('getDataAll.txt', 'r') as tsvfile:
-            usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
-                       'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
-                       'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
-                       'direct', 'notes', 'annotator', 'sentence', 'signor_id']
-            # usecols = ["entitya", "typea", "ida", "entityb", "typeb", "idb", "effect", "mechanism", "residue", "sequence", "tax_id", "cell_data", "tissue_data", "pmid", "direct", "notes", "annotator", "sentence"]
-            df = pd.read_csv(tsvfile,
-                             dtype=str,
-                             na_filter=False,
-                             delimiter='\t',
-                             engine='python',
-                             names=usecols, index_col=False)
-            # df = pd.read_csv(tsvfile,delimiter='\t',engine='python',names=header)
+    df = get_full_signor_pathway_relations_df(species)
 
-            human_dataframe = df[(df["entitya"] != "") & (df["entityb"] != "") & (df["ida"] != "") & (df["idb"] != "")]
-
-            # print(human_dataframe)
-    else:
-        response = requests.get(url)
-        pathway_data = response.text
-
-        usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
-                   'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
-                   'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
-                   'direct', 'notes', 'annotator', 'sentence', 'signor_id']
-
-        df = pd.read_csv(io.StringIO(pathway_data),
-                                dtype=str,
-                                na_filter=False,
-                                delimiter='\t',
-                                names=usecols,
-                                engine='python', index_col=False)
-
-        # filter dataframe to remove rows that are not human
-        human_dataframe = df[(df["entitya"] != "") & (df["entityb"] != "") & (df["ida"] != "") & (df["idb"] != "")]
+    # filter dataframe to remove rows that are not human
+    human_dataframe = df[(df["entitya"] != "") & (df["entityb"] != "") & (df["ida"] != "") & (df["idb"] != "")]
 
     # upcase column names
     rename = {}
@@ -549,21 +557,21 @@ def get_full_signor_network(load_plan, species):
                                        values=cit1.get_values(), type=cit1.get_data_type())
             network.remove_edge_attribute(edge_id, "citation_ids")
 
-        cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
-        if cd is not None:
-            cd_value = cd.get_values()
-            cd_split = cd_value.split(';')
-            cd.set_values(cd_split)
+        #cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
+        #if cd is not None:
+        #    cd_value = cd.get_values()
+        #    cd_split = cd_value.split(';')
+        #    cd.set_values(cd_split)
 
-            cd.set_data_type('list_of_string')
+        #    cd.set_data_type('list_of_string')
 
-        td = network.get_edge_attribute_objects(edge_id, "TISSUE_DATA")
-        if td is not None:
-            td_value = td.get_values()
-            td_split = td_value.split(';')
-            td.set_values(td_split)
+        #td = network.get_edge_attribute_objects(edge_id, "TISSUE_DATA")
+        #if td is not None:
+        #    td_value = td.get_values()
+        #    td_split = td_value.split(';')
+        #    td.set_values(td_split)
 
-            td.set_data_type('list_of_string')
+        #    td.set_data_type('list_of_string')
 
     template_network = ndex2.create_nice_cx_from_server(server=my_server,
                                                         uuid=cytoscape_visual_properties_template_id,
@@ -581,7 +589,7 @@ def get_full_signor_network(load_plan, species):
     network.set_network_attribute("reference",
                                   "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
 
-    print(network.get_summary())
+    #print(network.get_summary())
     return network
 
 
