@@ -1,0 +1,62 @@
+{
+    "context": {
+        "BTO": "http://identifiers.org/bto/BTO:",
+        "uniprot": "http://identifiers.org/uniprot/",
+        "pubmed": "http://identifiers.org/pubmed/",
+        "CID": "http://identifiers.org/pubchem.compound/",
+        "SID": "http://identifiers.org/pubchem.substance/",
+        "chebi": "http://identifiers.org/chebi/CHEBI:",
+        "uniprot knowledgebase": "http://identifiers.org/uniprot/",
+        "cas": "http://identifiers.org/cas/",
+        "KEGG Pathway": "http://identifiers.org/kegg.pathway/",
+        "Mouse Genome Database": "http://www.informatics.jax.org/accession/",
+        "KEGG Compound": "http://identifiers.org/kegg.compound/",
+        "pmid" : "https://www.ncbi.nlm.nih.gov/pubmed/",
+        "HPRD": "http://identifiers.org/hprd/"
+    },
+    "source_plan":
+    {
+        "rep_column": "PARTICIPANT_A",
+        "node_name_column": "PARTICIPANT_A",
+        "property_columns": [
+             {
+                  "column_name": "UNIFICATION_XREF_A",
+                  "attribute_name": "alias_a",
+                  "delimiter": ";"
+              },
+             {
+                  "column_name": "PARTICIPANT_TYPE_A",
+                  "attribute_name": "PARTICIPANT_TYPE_A"
+              }
+        ]
+    },
+    "target_plan":
+    {
+        "rep_column": "PARTICIPANT_B",
+        "node_name_column": "PARTICIPANT_B",
+        "property_columns": [
+             {
+                  "column_name": "UNIFICATION_XREF_B",
+                  "attribute_name": "alias_b",
+                  "delimiter": ";"
+              },
+             {
+                  "column_name": "PARTICIPANT_TYPE_B",
+                  "attribute_name": "PARTICIPANT_TYPE_B"
+              }
+        ]
+    },
+    "edge_plan":
+    {
+        "default_predicate": "correlation",
+        "predicate_id_column": "INTERACTION_TYPE",
+        "property_columns": [
+          {
+              "column_name": "INTERACTION_PUBMED_ID",
+              "attribute_name": "citation",
+              "value_prefix": "pubmed",
+              "delimiter": ";"
+          }
+        ]
+    }
+}
