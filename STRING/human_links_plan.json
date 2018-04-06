@@ -1,0 +1,30 @@
+{
+    "context":
+    {
+        "string": "https://string-db.org/network/"
+    },
+    "source_plan":
+    {
+        "rep_column": "protein1",
+        "rep_prefix": "string",
+        "node_name_column": "name1"
+    },
+    "target_plan":
+    {
+        "rep_column": "protein2",
+        "node_name_column": "name2",
+        "rep_prefix": "string"
+    },
+    "edge_plan":
+    {
+        "default_predicate": "interacts with",
+        "property_columns": [
+
+                {
+                    "column_name": "score",
+                    "data_type":  "long"
+                }
+
+        ]
+    }
+}
