@@ -1,18 +1,11 @@
 {
     "context": {
-        "BTO": "http://identifiers.org/bto/BTO:",
-        "uniprot": "http://identifiers.org/uniprot/",
         "pubmed": "http://identifiers.org/pubmed/",
-        "CID": "http://identifiers.org/pubchem.compound/",
-        "SID": "http://identifiers.org/pubchem.substance/",
         "chebi": "http://identifiers.org/chebi/CHEBI:",
         "uniprot knowledgebase": "http://identifiers.org/uniprot/",
         "cas": "http://identifiers.org/cas/",
-        "KEGG Pathway": "http://identifiers.org/kegg.pathway/",
-        "Mouse Genome Database": "http://www.informatics.jax.org/accession/",
         "KEGG Compound": "http://identifiers.org/kegg.compound/",
-        "pmid" : "https://www.ncbi.nlm.nih.gov/pubmed/",
-        "HPRD": "http://identifiers.org/hprd/"
+        "hprd": "http://identifiers.org/hprd/"
     },
     "source_plan":
     {

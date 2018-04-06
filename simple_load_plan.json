@@ -1,0 +1,47 @@
+{
+    "context": {
+        "signor": "http://signor.uniroma2.it/relation_result.php?id=",
+        "BTO": "http://identifiers.org/bto/BTO:",
+        "uniprot": "http://identifiers.org/uniprot/",
+        "pubmed": "http://identifiers.org/pubmed/",
+        "cid": "http://identifiers.org/pubchem.compound/",
+        "sid": "http://identifiers.org/pubchem.substance/"
+    },
+    "source_plan":
+    {
+        "rep_prefix": "uniprot",
+        "rep_column": "PARTA",
+        "node_name_column": "PARTA",
+        "property_columns":
+           [
+               {
+                    "column_name": "EDGEPROP",
+                    "attribute_name": "TYPE"
+                }
+           ]
+    },
+    "target_plan":
+    {
+        "rep_prefix": "uniprot",
+        "rep_column": "PARTB",
+        "node_name_column": "PARTB",
+        "property_columns":
+           [
+               {
+                    "column_name": "EDGEPROP",
+                    "attribute_name": "TYPE"
+                }
+           ]
+    },
+    "edge_plan":
+    {
+        "default_predicate": "correlation",
+        "predicate_id_column": "INTERACTION",
+        "property_columns": [
+               {
+                    "column_name": "EDGEPROP",
+                    "attribute_name": "EDGEPROP"
+                }
+        ]
+    }
+}
