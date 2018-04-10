@@ -43,6 +43,9 @@ def main():
     parser.add_argument('-t', dest='template_id', action='store',
                         help='ID for the network to use as a graphic template')
 
+    parser.add_argument('-t2', dest='template_id2', action='store',
+                        help='ID for the network to use as a graphic template for the high confidence network')
+
     parser.add_argument('-target', dest='target_network_id', action='store',
                         help='ID for the network to be updated')
 
@@ -162,15 +165,21 @@ def main():
 
     # post processing.
 
-    network.set_name( "STRING: Protein Network (Human)")
+    network.set_name( "STRING-Human Protein Links")
     network.set_network_attribute("description",
-    """foo....
+    """This network contains human protein links with combined scores. All duplicate 
+interactions were removed thus reducing the total number of interactions by 50%. 
+Edge color was mapped to the Score value using a gradient from light grey (low Score) to black (high Score).
     """)
 
 
     network.set_network_attribute("version", version )
     network.set_network_attribute("organism", "Human, 9606, Homo sapiens" )
     network.set_network_attribute("networkType", "Protein-Protein Interaction")
+    network.set_network_attribute("reference",
+                                  "Szklarczyk D, Morris JH, Cook H, Kuhn M, Wyder S, Simonovic M, Santos A, Doncheva NT, Roth A, Bork P, Jensen LJ, von Mering C." +
+                                  '<b>The STRING database in 2017: quality-controlled protein-protein association networks, made broadly accessible.</b>' +
+                                  'Nucleic Acids Res. 2017 Jan; 45:D362-68. <a href="https://doi.org/10.1093/nar/gkw937">DOI:10.1093/nar/gkw937</a>')
     if args.template_id :
         network.apply_template(username=username, password=password, server=server,
                            uuid=args.template_id)
@@ -198,14 +207,20 @@ def main():
 
     # post processing.
 
-    network.set_name("STRING: Protein Network High Confident(>0.7) (Human)")
+    network.set_name("STRING-Human Protein Links-High Confidence (Score>0.7)")
     network.set_network_attribute("description",
-                                  """High confident. Filtered by score>0.7
+                                  """This network contains high confidence human protein links. All interactions with Score lower 
+than 0.7 were filtered out. All duplicate interactions were also removed. Edge color was mapped to the Score value using 
+a gradient from dark grey (lower Score) to black (higher Score).
                                   """)
 
     network.set_network_attribute("version", version)
     network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
     network.set_network_attribute("networkType", "Protein-Protein Interaction")
+    network.set_network_attribute("reference", "Szklarczyk D, Morris JH, Cook H, Kuhn M, Wyder S, Simonovic M, Santos A, Doncheva NT, Roth A, Bork P, Jensen LJ, von Mering C." +
+            '<b>The STRING database in 2017: quality-controlled protein-protein association networks, made broadly accessible.</b>' +
+             'Nucleic Acids Res. 2017 Jan; 45:D362-68. <a href="https://doi.org/10.1093/nar/gkw937">DOI:10.1093/nar/gkw937</a>')
+
     if args.template_id:
         network.apply_template(username=username, password=password, server=server,
                                uuid=args.template_id)
