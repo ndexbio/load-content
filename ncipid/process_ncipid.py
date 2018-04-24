@@ -28,6 +28,7 @@ if 'dev.ndexbio' in my_server:
     cytoscape_visual_properties_template_id = '61ebccf5-312e-11e8-a456-525400c25d22' # DEV
 else:
     cytoscape_visual_properties_template_id = '04a4c898-30b2-11e8-b939-0ac135e8bacf' # PROD
+    #cytoscape_visual_properties_template_id = 'db1c607e-3c45-11e8-9da1-0660b7976219' # TEST
 
 mg = mygene.MyGeneInfo()
 node_mapping = {}
@@ -200,6 +201,8 @@ def ebs_to_df(file_name):
 
         df_with_a_b = df_with_a.join(df_nodes.set_index('PARTICIPANT'), on='PARTICIPANT_B', lsuffix='_A', rsuffix='_B')
         df_with_a_b = df_with_a_b.replace('\n', '', regex=True)
+        df_with_a_b['PARTICIPANT_A'] = df_with_a_b['PARTICIPANT_A'].map(lambda x: x.lstrip('[').rstrip(']'))
+        df_with_a_b['PARTICIPANT_B'] = df_with_a_b['PARTICIPANT_B'].map(lambda x: x.lstrip('[').rstrip(']'))
 
         network = t2n.convert_pandas_to_nice_cx_with_load_plan(df_with_a_b, load_plan)
 
@@ -228,6 +231,8 @@ def ebs_to_df(file_name):
             participant_name = v.get_name()
             if '_HUMAN' in participant_name and node_mapping.get(participant_name) is not None:
                 v.set_node_name(node_mapping.get(participant_name))
+            elif len(participant_name) > 25:
+                v.set_node_name(participant_name.split('/')[0])
 
             # =============================
             # SET REPRESENTS
@@ -337,9 +342,11 @@ def ebs_to_df(file_name):
         # PROCESS NODES
         #=======================
         for node_info in node_table:
-            node_to_update = network.get_node(node_info.get('PARTICIPANT'))
+            node_to_update = network.get_node(node_info.get('PARTICIPANT').lstrip('[').rstrip(']'))
 
             participant_name = node_info.get('PARTICIPANT_NAME')
+            if participant_name is not None:
+                participant_name = participant_name.lstrip('[').rstrip(']')
 
             if node_to_update.get_name().startswith("CHEBI") and participant_name:
                 if participant_name is not None:
@@ -361,15 +368,20 @@ def ebs_to_df(file_name):
                 if len(unification_xref_array) < 1:
                     if len(unification_xref_array_tmp) > 1:
                         unification_xref_array_tmp = unification_xref_array_tmp[1:]
-                    network.set_node_attribute(node_to_update, 'alias', unification_xref_array_tmp, type='list_of_string')
+                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array_tmp, type='list_of_string')
+                    elif len(unification_xref_array_tmp) == 1:
+                        network.remove_node_attribute(v, 'alias')
+                    else:
+                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array_tmp, type='list_of_string')
                 else:
                     if len(unification_xref_array) > 1:
                         unification_xref_array = unification_xref_array[1:]
-
-                    network.set_node_attribute(node_to_update, 'alias', unification_xref_array, type='list_of_string')
+                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array, type='list_of_string')
+                    else:
+                        network.remove_node_attribute(v, 'alias')
 
             else:
-                unification = node_info.get('PARTICIPANT')
+                unification = node_info.get('PARTICIPANT').lstrip('[').rstrip(']')
 
             node_to_update.set_node_represents(unification.replace('chebi:', '', 1))
 
@@ -379,7 +391,13 @@ def ebs_to_df(file_name):
             if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is None:
                 id_list.append(participant_name)
             elif  participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
-                node_to_update.set_node_name(gene_symbol_mapping.get(participant_name))
+                gene_symbol_mapped_name = gene_symbol_mapping.get(participant_name)
+                if len(gene_symbol_mapped_name) > 25:
+                    node_to_update.set_node_name(gene_symbol_mapped_name.split('/')[0])
+                else:
+                    node_to_update.set_node_name(gene_symbol_mapping.get(participant_name))
+
+                #node_to_update.set_node_name(gene_symbol_mapping.get(participant_name))
 
             network.set_node_attribute(node_to_update, 'type', participant_type_map.get(node_info.get('PARTICIPANT_TYPE')),
                                        type='string')
@@ -454,7 +472,9 @@ files = []
 file_network_names = []
 count = 0
 limit = 400
-for file in listdir(path_to_sif_files):
+
+file_reverse = sorted(listdir(path_to_sif_files), key=lambda s: s.lower(), reverse=True)
+for file in file_reverse: #listdir(path_to_sif_files):
     #if 'PathwayCommons.8.NCI_PID.BIOPAX.sif' in file:
     print(file)
     if file.endswith(".sif"):
