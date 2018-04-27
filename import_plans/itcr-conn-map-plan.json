@@ -1,0 +1,44 @@
+{
+    "context": {
+        },
+    "source_plan": 
+    {
+        "rep_column": "From Resource A",
+        "node_name_column": "From Resource A",
+        "property_columns": [
+            {
+                    "column_name": "Website Res. A",
+                    "attribute_name": "Resource Website"
+                }
+        ]
+    },
+    "target_plan": 
+    {
+        "rep_column": "To Resource B",
+        "node_name_column": "To Resource B",
+        "property_columns": [
+             {
+                    "column_name": "Website Res. B",
+                    "attribute_name": "Resource Website"
+                }
+        ]
+    },
+    "edge_plan": 
+    {
+        "default_predicate": "Connected with",
+        "property_columns": [
+                {
+                    "column_name": "Why?",
+                    "attribute_name": "Why?"
+                },
+                {
+                    "column_name": "Suggested By",
+                    "attribute_name": "Suggested By"
+                },
+                {
+                    "column_name": "Status",
+                    "attribute_name": "Status"
+                }
+        ]
+    }
+}
