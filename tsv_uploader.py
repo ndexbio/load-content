@@ -2,7 +2,7 @@ import ndex2.client as nc2
 import pandas as pd
 import ndexutil.tsv.tsv2nicecx as t2n
 import beta.layouts as layouts
-from ndex.networkn import NdexGraph
+#from ndex.networkn import NdexGraph
 import networkx as nx
 import argparse
 import json
@@ -34,9 +34,6 @@ parser.add_argument('-c', dest='use_cartesian', action='store', help='Use cartes
 parser.add_argument('--name', dest='net_name', action='store', help='Delimiter to use to parse the text file')
 parser.add_argument('--description', dest='net_description', action='store', help='Delimiter to use to parse '
                                                                                   'the text file')
-
-
-
 args = parser.parse_args()
 
 print(vars(args))
@@ -93,6 +90,7 @@ if args.tsv_file is not None:
 else:
     raise Exception('Please provide a tsv file name')
 
+
 #=====================
 # LOAD TSV LOAD PLAN
 #=====================
@@ -115,6 +113,7 @@ if args.load_plan is not None:
 else:
     raise Exception('Please provide a load plan')
 
+
 #====================
 # UPPERCASE COLUMNS
 #====================
@@ -124,19 +123,20 @@ for column_name in df.columns:
 
 #df = df.rename(columns=rename)
 
-print(df.head())
+#print(df.head())
 
 network = t2n.convert_pandas_to_nice_cx_with_load_plan(df, load_plan)
 
 if args.template_id is not None:
     network.apply_template(username=my_username, password=my_password, server=my_server, uuid=args.template_id)
 
+
 #==============
 # APPLY LAYOUT
 #==============
 def cartesian(G, node_id_look_up):
-    print('POS')
-    print(G.pos)
+    #print('POS')
+    #print(G.pos)
 
     return [
         {'node': node_id_look_up.get(n), 'x': float(G.pos[n][0]) * 100.0, 'y': float(G.pos[n][1]) * 100.0}
@@ -156,12 +156,13 @@ def apply_layout(layout_type, network):
         my_networkx.pos = nx.drawing.circular_layout(my_networkx)
     elif layout_type == 'spectral':
         my_networkx.pos = nx.drawing.spectral_layout(my_networkx)
-    elif layout_type == 'directed_flow':
-        g = NdexGraph(cx=network.to_cx())
+    #elif layout_type == 'directed_flow':
+    #    g = NdexGraph(cx=network.to_cx())
+    #
+    #    my_networkx.pos = layouts.apply_directed_flow_layout(g, node_width=25, use_degree_edge_weights=True,
+    #                                                         iterations=200)
 
-        my_networkx.pos = layouts.apply_directed_flow_layout(g, node_width=25, use_degree_edge_weights=True,
-                                                             iterations=200)
-    print(node_id_look_up_dict)
+    #print(node_id_look_up_dict)
     cartesian_aspect = cartesian(g, node_id_look_up_dict)
     network.set_opaque_aspect("cartesianLayout", cartesian_aspect)
 
@@ -239,3 +240,6 @@ else:
         network.set_network_attribute('description', args.net_description)
 
     message = network.upload_to(my_server, my_username, my_password)
+
+print(network.get_summary())
+print('Done')
