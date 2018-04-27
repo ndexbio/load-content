@@ -9,6 +9,7 @@ import json
 import jsonschema
 from os import path
 from jsonschema import validate
+import random
 
 current_directory = path.dirname(path.abspath(__file__))
 
@@ -28,10 +29,12 @@ parser.add_argument('-d', dest='delimiter', action='store', help='Delimiter to u
 parser.add_argument('-o', dest='output_file', action='store', help='File name to output')
 parser.add_argument('-u', dest='update_uuid', action='store', help='UUID of the network to update')
 parser.add_argument('-l', dest='layout_type', action='store', help='Type of layout to use')
+parser.add_argument('-c', dest='use_cartesian', action='store', help='Use cartesian aspect from template')
 
 parser.add_argument('--name', dest='net_name', action='store', help='Delimiter to use to parse the text file')
 parser.add_argument('--description', dest='net_description', action='store', help='Delimiter to use to parse '
                                                                                   'the text file')
+
 
 
 args = parser.parse_args()
@@ -165,6 +168,33 @@ def apply_layout(layout_type, network):
 if args.layout_type is not None:
     apply_layout(args.layout_type, network)
 
+
+#========================================
+# BORROW CARTESIAN LAYOUT FROM TEMPLATE
+#========================================
+if args.use_cartesian is not None and len(args.use_cartesian) > 35:
+    asp = network.get_aspect(args.use_cartesian, 'cartesianLayout', my_server, my_username,my_password)
+
+    cartesian_nodes_count = len(asp)
+    network_node_count = len(network.get_nodes())
+
+    #==========================================
+    # IF MORE NODES THAN BORROWED LAYOUT THEN
+    # RANDOMIZE THE REMAINING NODE POSITIONS
+    #==========================================
+    for cart_node in range(1, network_node_count):
+        if cart_node > cartesian_nodes_count:
+            x_coordinate = (random.random() * 1200) - 600
+            y_coordinate = (random.random() * 1200) - 600
+            asp.append({'node': cart_node, 'x': x_coordinate, 'y': y_coordinate})
+
+    network.opaqueAspects['cartesianLayout'] = asp
+    network.add_metadata_stub('cartesianLayout')
+
+
+#===============================
+# UPDATE NETWORK OR CREATE NEW
+#===============================
 my_ndex = nc2.Ndex2(my_server, my_username, my_password)
 
 if args.update_uuid is not None and len(args.update_uuid.replace('"', '')) > 32:
