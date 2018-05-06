@@ -1,0 +1,29 @@
+{
+    "context": {
+        "ncbigene": "http://identifiers.org/ncbigene/"
+    },
+    "source_plan":
+    {
+        "rep_column": "Rep1",
+        "node_name_column": "Gene1"
+    },
+    "target_plan":
+    {
+        "rep_column": "Rep2",
+        "node_name_column": "Gene2"
+    },
+    "edge_plan":
+    {
+        "default_predicate": "correlates-with",
+        "property_columns": [
+               {
+                    "column_name": "ppi",
+                    "attribute_name": "ppi"
+                },
+               {
+                    "column_name": "pdi",
+                    "attribute_name": "pdi"
+                }
+        ]
+    }
+}
