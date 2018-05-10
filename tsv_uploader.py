@@ -86,7 +86,7 @@ if args.tsv_file is not None:
     with open(args.tsv_file, 'r') as tsvfile:
         header = [h.strip() for h in tsvfile.readline().split(tsv_delimiter)]
 
-        df = pd.read_csv(tsvfile, delimiter=tsv_delimiter, na_filter=False, engine='python', names=header)
+        df = pd.read_csv(tsvfile, delimiter=tsv_delimiter, na_filter=False, engine='python', names=header, error_bad_lines=False)
 else:
     raise Exception('Please provide a tsv file name')
 
