@@ -87,10 +87,8 @@ def process_tcpa(file_name):
                 # Shell layout setup
                 if len(layout_level1_nlist) < 25:
                     layout_level1_nlist.append(n.get('id'))
-                elif len(layout_level2_nlist) < 45:
+                elif len(layout_level2_nlist) < 50:
                     layout_level2_nlist.append(n.get('id'))
-                elif len(layout_level3_nlist) < 45:
-                    layout_level3_nlist.append(n.get('id'))
                 else:
                     layout_other_nlist.append(n.get('id'))
 
