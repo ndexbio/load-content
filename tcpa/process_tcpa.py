@@ -66,6 +66,11 @@ def process_tcpa(file_name):
             #==============================
             node_type_dict = {}
             node_label_id_map = {}
+            layout_nlist = []
+            layout_level1_nlist = []
+            layout_level2_nlist = []
+            layout_level3_nlist = []
+            layout_other_nlist = []
             for nds in n_data_schema:
                 if nds.get('name') is not None and nds.get('type') is not None:
                     node_type_dict[nds.get('name')] = nds.get('type')
@@ -79,6 +84,19 @@ def process_tcpa(file_name):
                         n_attrs[k] = v
                 G.add_node(n.get('id'), n_attrs)
 
+                # Shell layout setup
+                if len(layout_level1_nlist) < 25:
+                    layout_level1_nlist.append(n.get('id'))
+                elif len(layout_level2_nlist) < 45:
+                    layout_level2_nlist.append(n.get('id'))
+                elif len(layout_level3_nlist) < 45:
+                    layout_level3_nlist.append(n.get('id'))
+                else:
+                    layout_other_nlist.append(n.get('id'))
+
+            layout_nlist.append(layout_level1_nlist)
+            layout_nlist.append(layout_level2_nlist)
+            layout_nlist.append(layout_other_nlist)
             #==============================
             # ADD EDGES TO NETWORKX GRAPH
             #==============================
@@ -98,13 +116,17 @@ def process_tcpa(file_name):
             #======================
             # RUN NETWORKX LAYOUT
             #======================
-            init_pos = nx.drawing.circular_layout(G)
-            G.pos = nx.drawing.spring_layout(G, iterations=4, pos=init_pos, weight='weight')
+            #init_pos = nx.drawing.circular_layout(G)
+            #G.pos = nx.drawing.spring_layout(G, iterations=4, pos=init_pos, weight='weight')
+
+            G.pos = nx.drawing.shell_layout(G, nlist=layout_nlist)
+            #G.pos = nx.drawing.spring_layout(G, iterations=2, pos=init_pos, weight='weight')
 
             #=========================
             # CREATE CX FROM NETWORKX
             #=========================
             niceCx = ndex2.create_nice_cx_from_networkx(G, user_agent='TCPA')
+            niceCx.apply_template('public.ndexbio.org', '84d64a82-23bc-11e8-b939-0ac135e8bacf')
 
             #=========================
             # SET NODE NAME TO LABEL
