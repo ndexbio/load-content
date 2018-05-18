@@ -114,16 +114,18 @@ def process_tcpa(file_name):
             #======================
             # RUN NETWORKX LAYOUT
             #======================
-            #init_pos = nx.drawing.circular_layout(G)
-            #G.pos = nx.drawing.spring_layout(G, iterations=4, pos=init_pos, weight='weight')
+            init_pos = nx.drawing.circular_layout(G)
+
+            G.pos = nx.drawing.spring_layout(G, iterations=20, pos=init_pos, weight='weight')
 
             G.pos = nx.drawing.shell_layout(G, nlist=layout_nlist)
-            #G.pos = nx.drawing.spring_layout(G, iterations=2, pos=init_pos, weight='weight')
+
+            #G.pos = nx.drawing.spring_layout(G, weight='weight')
 
             #=========================
             # CREATE CX FROM NETWORKX
             #=========================
-            niceCx = ndex2.create_nice_cx_from_networkx(G, user_agent='TCPA')
+            niceCx = ndex2.create_nice_cx_from_networkx(G)
             niceCx.apply_template('public.ndexbio.org', '84d64a82-23bc-11e8-b939-0ac135e8bacf')
 
             #=========================

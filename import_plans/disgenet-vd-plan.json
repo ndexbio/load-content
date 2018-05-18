@@ -1,0 +1,34 @@
+{
+    "context": {
+            "SNP": "https://www.ncbi.nlm.nih.gov/snp/",
+            "UMLS": "http://identifiers.org/umls/",
+            "pmid": "http://identifiers.org/pubmed/"
+        },
+    "source_plan": 
+    {
+        "rep_prefix":"SNP",
+        "rep_column": "snpId",
+        "node_name_column": "snpId",
+        "property_columns": ["chromosome::integer",
+                              "position::integer"]
+    },
+    "target_plan": 
+    {
+
+        "rep_prefix":"UMLS",
+        "rep_column": "diseaseId",
+        "node_name_column": "diseaseName",
+        "property_columns": [{"column_name":"diseaseType",
+                              "attribute_name":"Type",
+                              "value_prefix":""}]
+    },
+    "edge_plan": 
+    {
+        "default_predicate": "is associated to",
+        "property_columns": ["score::double",
+                             "originalSource",
+                            "sentence::string"],
+        "citation_id_prefix": "pmid",
+        "citation_id_column": "pmid"
+    }
+}
