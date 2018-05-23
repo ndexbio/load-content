@@ -9,7 +9,7 @@ import sys
 import logs
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
-import ncats.rtx as rtx
+import rtx as rtx
 
 api = Bottle()
 
@@ -52,9 +52,11 @@ def find_directed_path_directed_post():
         return json.dumps({'message': 'No network detected in input'})
 
     message = rtx.process_rtx(result_graph, 'Sample RTX from REST', username, password, server)
+    network_uuid = message.split('/')[-1]
+
     # TODO - integrate here
 
-    return {'uri': message}
+    return {'uri': 'http://dev.ndexbio.org/#/network/' + network_uuid}
 
 
 # run the web server

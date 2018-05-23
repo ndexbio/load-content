@@ -1,4 +1,5 @@
 import ndex2 # The ndex2 Python client
+import ndex2.client as nc
 import json
 import networkx as nx
 
@@ -31,7 +32,7 @@ def process_rtx(rtx_json, network_name, username, password, server):
             node_type_dict[nds.get('id')] = nds.get('type')
 
     for n in n_data:
-        print(n)
+        #print(n)
 
         #                "description": "An eye disease that is characterized by an unstable or a sustained increase in the intraocular pressure which the eye cannot withstand without damage to its structure or impairment of its function.",
         #                "id": "DOID:1686",
@@ -117,6 +118,11 @@ def process_rtx(rtx_json, network_name, username, password, server):
     # =======================
     if username is not None and password is not None and server is not None:
         message = niceCx.upload_to(server, username, password)
+
+        network_uuid = message.split('/')[-1]
+
+        my_ndex = nc.Ndex2(server, username, password)
+        my_ndex._make_network_public_indexed(network_uuid)
 
         return message
 
