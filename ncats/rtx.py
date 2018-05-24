@@ -55,28 +55,33 @@ def process_rtx(rtx_json, network_name, username, password, server):
     # ADD EDGES TO NETWORKX GRAPH
     # ==============================
     edge_type_dict = {}
-    for eds in e_data:
-        if eds.get('name') is not None and eds.get('type') is not None:
-            edge_type_dict[eds.get('name')] = eds.get('type')
+    if e_data is not None:
+        for eds in e_data:
+            if eds.get('name') is not None and eds.get('type') is not None:
+                edge_type_dict[eds.get('name')] = eds.get('type')
 
-    for e in e_data:
-        #print(e)
-        e_attrs = {}
-        for k, v in e.items():
-            if k != 'source_id' and k != 'target_id' and k != 'id':
-                e_attrs[k] = v
-            if k == 'type':
-                if edge_interaction_map.get(e.get('source_id')) is None:
-                    edge_interaction_map[e.get('source_id')] = {e.get('target_id'): e.get('type')}
-                else:
-                    edge_interaction_map[e.get('source_id')][e.get('target_id')] = e.get('type')
+        for e in e_data:
+            #print(e)
+            e_attrs = {}
+            for k, v in e.items():
+                if k != 'source_id' and k != 'target_id' and k != 'id':
+                    e_attrs[k] = v
+                if k == 'type':
+                    if edge_interaction_map.get(e.get('source_id')) is None:
+                        edge_interaction_map[e.get('source_id')] = {e.get('target_id'): e.get('type')}
+                    else:
+                        edge_interaction_map[e.get('source_id')][e.get('target_id')] = e.get('type')
 
-                if edge_interaction_map.get(e.get('target_id')) is None:
-                    edge_interaction_map[e.get('target_id')] = {e.get('source_id'): e.get('type')}
-                else:
-                    edge_interaction_map[e.get('target_id')][e.get('source_id')] = e.get('type')
+                    if edge_interaction_map.get(e.get('target_id')) is None:
+                        edge_interaction_map[e.get('target_id')] = {e.get('source_id'): e.get('type')}
+                    else:
+                        edge_interaction_map[e.get('target_id')][e.get('source_id')] = e.get('type')
 
-        G.add_edge(e.get('source_id'), e.get('target_id'), e_attrs)
+            G.add_edge(e.get('source_id'), e.get('target_id'), e_attrs)
+    else:
+        n1 = G.nodes()[0]
+        G.add_edge(n1, n1, {})
+        edge_interaction_map[n1] = {n1: 'self-ref'}
 
     # ======================
     # RUN NETWORKX LAYOUT
@@ -114,7 +119,8 @@ def process_rtx(rtx_json, network_name, username, password, server):
         network_uuid = message.split('/')[-1]
 
         my_ndex = nc.Ndex2(server, username, password)
-        my_ndex._make_network_public_indexed(network_uuid)
+        if 'error' not in message:
+            my_ndex._make_network_public_indexed(network_uuid)
 
         return message
 
