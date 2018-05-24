@@ -32,14 +32,6 @@ def process_rtx(rtx_json, network_name, username, password, server):
             node_type_dict[nds.get('id')] = nds.get('type')
 
     for n in n_data:
-        #print(n)
-
-        #                "description": "An eye disease that is characterized by an unstable or a sustained increase in the intraocular pressure which the eye cannot withstand without damage to its structure or impairment of its function.",
-        #                "id": "DOID:1686",
-        #                "name": "glaucoma",
-        #                "type": "disease",
-        #                "uri": "http://purl.obolibrary.org/obo/DOID_1686"
-
         n_attrs = {}
 
         node_label_id_map[n.get('id')] = n.get('name')

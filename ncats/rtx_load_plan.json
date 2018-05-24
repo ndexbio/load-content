@@ -1,0 +1,39 @@
+{
+    "context": {
+        },
+    "source_plan": 
+    {
+        "rep_column": "id",
+        "node_name_column": "name",
+        "property_columns": [
+          {
+            "column_name": "place holder",
+            "attribute_name": "place holder"
+          }
+        ]
+    },
+    "target_plan": 
+    {
+        "rep_column": "id",
+        "node_name_column": "name",
+        "property_columns": [
+          {
+            "column_name": "place holder",
+            "attribute_name": "place holder"
+          }
+        ]
+    },
+    "edge_plan": 
+    {
+        "edge_source": "source_id",
+        "edge_target": "target_id",
+        "predicate_id_column": "type",
+        "default_predicate": "neighbor-of",
+        "property_columns": [
+          {
+            "column_name": "place holder",
+            "attribute_name": "place holder"
+          }
+        ]
+    }
+}
