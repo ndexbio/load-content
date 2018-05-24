@@ -171,6 +171,16 @@ return_data = {
     }
 
 if __name__ == '__main__':
+    status = 0
+    parser = argparse.ArgumentParser()
+    parser.add_argument('port', nargs='?', type=int, help='HTTP port', default=5604)
+    args = parser.parse_args()
+    log.info('')
+    log.info('-------------------------------------')
+
+    print('starting web server on port %s' % args.port)
+    print('press control-c to quit')
+
     app.install(EnableCors())
-    app.run(host='0.0.0.0', port=5605)
+    app.run(host='0.0.0.0', port=args.port)
     #sys.exit(main())
