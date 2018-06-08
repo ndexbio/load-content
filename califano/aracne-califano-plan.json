@@ -1,0 +1,36 @@
+{
+    "context": {
+            "Entrez Gene": "https://identifiers.org/ncbigene/"
+            
+        },
+    "source_plan": 
+    {
+        "rep_prefix": "Entrez Gene",
+        "rep_column": "Regulator",
+        "node_name_column": "Regulator::string",
+        "property_columns": [{"attribute_name":"Node Type",
+                              "default_value":"TF"}]
+    },
+    "target_plan": 
+    {
+        "rep_prefix": "Entrez Gene",
+        "rep_column": "Target",
+        "node_name_column": "Target::string",
+        "property_columns": [{"attribute_name":"Node Type",
+                              "default_value":"Target"}]
+    },
+    "edge_plan": 
+    {
+        "default_predicate": "regulates expression of",
+        "property_columns": [{"column_name":"MoA",
+                              "attribute_name":"MoA",
+                              "value_prefix":"",
+                              "data_type": "double",
+                              "delimiter": ""},
+                             {"column_name":"likelihood",
+                              "attribute_name":"Likelihood",
+                              "value_prefix":"",
+                              "data_type": "double",
+                              "delimiter": ""}]
+    }
+}

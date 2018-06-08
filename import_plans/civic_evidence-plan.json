@@ -1,0 +1,77 @@
+{
+  "context": {
+    "civic gene": "https://civic.genome.wustl.edu/links/genes/",
+    "civic variant": "https://civic.genome.wustl.edu/links/variants/",
+    "civic evidence": "https://civic.genome.wustl.edu/links/evidence_items/",
+    "DOID": "https://identifiers.org/doid/DOID:",
+    "pmid": "https://identifiers.org/pubmed/",
+    "Ensembl Transcript": "https://identifiers.org/ensembl/",
+    "ncbigene": "https://identifiers.org/ncbigene/"
+  },
+  "source_plan": {
+    "rep_prefix": "civic gene",
+    "rep_column": "gene_id",
+    "node_name_column": "gene",
+    "property_columns": [
+      {
+        "column_name": "entrez_id",
+        "attribute_name": "Alias",
+        "value_prefix": "ncbigene"
+      }
+    ]
+  },
+  "target_plan": {
+    "rep_prefix": "DOID",
+    "rep_column": "doid",
+    "node_name_column": "disease",
+    "property_columns": [
+      {
+        "column_name": "drugs",
+        "attribute_name": "Drugs",
+        "value_prefix": ""
+      },
+      {
+        "column_name": "phenotypes",
+        "attribute_name": "Phenotypes",
+        "value_prefix": ""
+      }
+    ]
+  },
+  "edge_plan": {
+    "default_predicate": "is related to",
+    "property_columns": [
+      {
+        "column_name": "variant",
+        "attribute_name": "Variant",
+        "value_prefix": ""
+      },
+      {
+        "column_name": "variant_id",
+        "attribute_name": "CIVic variant ID",
+        "value_prefix": "civic variant"
+      },
+      "evidence_type",
+      "evidence_direction",
+      "evidence_level",
+      "clinical_significance",
+      "evidence_statement",
+      "rating",
+      "evidence_status",
+      {
+        "column_name": "evidence_id",
+        "attribute_name": "CIVic evidence ID",
+        "value_prefix": "civic evidence"
+      },
+      {
+        "column_name": "representative_transcript",
+        "attribute_name": "Representative transcript",
+        "value_prefix": "Ensembl Transcript"
+      },
+      {
+        "column_name": "pubmed_id",
+        "attribute_name": "citation",
+        "value_prefix": "pmid"
+      }
+    ]
+  }
+}

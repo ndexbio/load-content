@@ -8,11 +8,11 @@ import sys
 import os
 import argparse
 
-import nicecxModel
+#import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
 
-import ndexutil.tsv.tsv2nicecx as t2n
+import ndexutil.tsv.tsv2nicecx2 as t2n
 
 
 def upload_signor_network(network, server, username, password, update_uuid=False):

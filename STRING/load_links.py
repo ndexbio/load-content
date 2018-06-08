@@ -9,11 +9,11 @@ import os
 import argparse
 import re
 
-import nicecxModel
+#import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
 
-import ndexutil.tsv.tsv2nicecx as t2n
+import ndexutil.tsv.tsv2nicecx2 as t2n
 
 
 def upload_signor_network(network, server, username, password, update_uuid=False):
@@ -94,7 +94,8 @@ def main():
         for line in fh:
             col = line.split('\t')
             cnt+=1
-      #      print('processing line ' + str(cnt))
+            if cnt % 1000 == 0:
+                print('processing line ' + str(cnt))
             process_id(col[0], col[4], protein_table)
             process_id(col[1], col[5], protein_table)
         fh.close()
@@ -105,6 +106,16 @@ def main():
     edge_table = {}
     outFile = "links-" + str(os.getpid()) + ".txt"
     outFile2 = "links2-" + str(os.getpid()) + ".txt"
+
+    #===========================
+    # GET LINE COUNT FROM FILE
+    #===========================
+    with open('9606.protein.links.v' + version + '.txt') as f:
+        for i, l in enumerate(f):
+            pass
+    file_line_count = i + 1
+
+
     with open('9606.protein.links.v' + version + '.txt') as fh:
 
         fho = open(outFile, "w")
@@ -140,6 +151,8 @@ def main():
                     if edge_table[tmp_key] != r[2]:
                         print("duplicate line " + line +' with different score ' + edge_table[tmp_key])
             line_cnt += 1
+            if line_cnt % 100000 == 0:
+                print('processing line %s of %s' % (line_cnt, file_line_count))
         fho.close()
         fh.close()
         fho2.close()

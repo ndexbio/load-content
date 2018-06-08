@@ -3,11 +3,11 @@ import pandas as pd
 import os
 import argparse
 import sys
-import nicecxModel
+#import nicecxModel
 #from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
 from datetime import datetime
 import re
-import ndexutil.tsv.tsv2nicecx as t2n
+import ndexutil.tsv.tsv2nicecx2 as t2n
 
 
 def cvtfield(f):
