@@ -35,6 +35,7 @@ parser.add_argument('-c', dest='use_cartesian', action='store', help='Use cartes
 parser.add_argument('--name', dest='net_name', action='store', help='Delimiter to use to parse the text file')
 parser.add_argument('--description', dest='net_description', action='store', help='Delimiter to use to parse '
                                                                                   'the text file')
+parser.add_argument('--header', dest='header', action='store', help='Header to be used if the file doesnt contain one')
 args = parser.parse_args()
 
 print(vars(args))
@@ -85,10 +86,13 @@ def get_network_properties(server, username, password, network_id):
 #==============================
 if args.tsv_file is not None:
     with open(args.tsv_file, 'r') as tsvfile:
-        header = [h.strip() for h in tsvfile.readline().split(tsv_delimiter)]
+        if args.header:
+            header = args.header.split(',')
+        else:
+            header = [h.strip() for h in tsvfile.readline().split(tsv_delimiter)]
 
         df = pd.read_csv(tsvfile, delimiter=tsv_delimiter, na_filter=False, engine='python', names=header,
-                         dtype = str, error_bad_lines=False)
+                         dtype = str, error_bad_lines=False, comment='#')
 else:
     raise Exception('Please provide a tsv file name')
 
