@@ -11,7 +11,7 @@ from datetime import datetime
 import networkx as nx
 sys.path.append('../../resources')
 from tutorial_utils import load_tutorial_config
-import ndexutil.tsv.tsv2nicecx as t2n
+import ndexutil.tsv.tsv2nicecx2 as t2n
 import argparse
 import time
 from os import listdir, path, makedirs
@@ -289,9 +289,9 @@ def get_signor_network(pathway_id, load_plan):
         # print(direct)
         if direct:
             if direct == "t":
-                network.set_edge_attribute(edge, "DIRECT", "YES")
+                network.set_edge_attribute(edge_id, "DIRECT", "YES")
             else:
-                network.set_edge_attribute(edge, "DIRECT", "NO")
+                network.set_edge_attribute(edge_id, "DIRECT", "NO")
 
     # Set prefixes for represents based on the "DATABASE" attribute
     #
@@ -301,13 +301,13 @@ def get_signor_network(pathway_id, load_plan):
     #
     for node_id, node in network.get_nodes():
         database = network.get_node_attribute(node_id, "DATABASE")
-        represents = node.get_node_represents()
+        represents = node.get('r')
         if database == "UNIPROT":
             represents = "uniprot:" + represents
-            node.set_node_represents(represents)
+            node['r'] = represents
         if database == "SIGNOR":
             represents = "signor:" + represents
-            node.set_node_represents(represents)
+            node['r'] = represents
         # in all other cases, the identifier is already prefixed
         network.remove_node_attribute(node_id, "DATABASE")
 
@@ -410,12 +410,12 @@ def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_p
     network.apply_template(username=username, password=password, server=server,
                            uuid=cytoscape_visual_properties_template_id)
     apply_spring_layout(network)
-    network.generate_metadata_aspect()
+    #network.generate_metadata_aspect()
 
-    if network.node_int_id_generator:
-        network.node_id_lookup = list(network.node_int_id_generator)
-    network.generate_aspect('nodes')
-    network.generate_aspect('edges')
+    #if network.node_int_id_generator:
+    #    network.node_id_lookup = list(network.node_int_id_generator)
+    #network.generate_aspect('nodes')
+    #network.generate_aspect('edges')
     print(network.get_name())
     network_update_key = update_signor_mapping.get(network.get_name().upper())
     if network_update_key is not None:
