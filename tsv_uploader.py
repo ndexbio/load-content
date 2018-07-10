@@ -85,7 +85,7 @@ def get_network_properties(server, username, password, network_id):
 # LOAD TSV FILE INTO DATAFRAME
 #==============================
 if args.tsv_file is not None:
-    with open(args.tsv_file, 'r') as tsvfile:
+    with open(args.tsv_file, 'r', encoding='utf-8', errors='ignore') as tsvfile:
         if args.header:
             header = args.header.split(',')
         else:
