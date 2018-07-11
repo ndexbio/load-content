@@ -81,7 +81,7 @@ def load_data_files():
         time_start = time.time()
         content = urllib.request.urlopen('https://signor.uniroma2.it/getPathwayData.php?list')
 
-        f = open(pathway_list_path, "w")
+        f = open(pathway_list_path, "w", encoding='utf-8')
         content = content.read().decode('utf-8')
         f.write(content)
         f.close()
@@ -89,7 +89,7 @@ def load_data_files():
     else:
         print('Skipping download... pathway id list already exists.')
 
-    with open(pathway_list_path, 'r') as plp:
+    with open(pathway_list_path, 'r', encoding='utf-8') as plp:
         cols = ['pathway_id', 'pathway_name']
         signor_mapping_list_df = pd.read_csv(plp, sep="\t", names=cols)
 
@@ -110,7 +110,7 @@ def load_data_files():
                 content = urllib.request.urlopen(url)
                 content = content.read().decode('utf-8')
 
-                f = open(pathway_file_path, "w")
+                f = open(pathway_file_path, "w", encoding='utf-8')
                 f.write(content)
                 f.close()
             else:
@@ -125,7 +125,7 @@ def load_data_files():
                 content = urllib.request.urlopen(url)
                 content = content.read().decode('utf-8')
 
-                f_desc = open(pathway_file_desc_path, "w")
+                f_desc = open(pathway_file_desc_path, "w", encoding='utf-8')
                 f_desc.write(content)
                 f_desc.close()
             else:
@@ -153,7 +153,7 @@ load_data_files()
 def get_signor_mapping_list_df():
     pathway_list_path = path.join(current_directory, 'local', today, 'pathway_list.txt')
     if path.isfile(pathway_list_path):
-        with open(pathway_list_path, 'r') as plp:
+        with open(pathway_list_path, 'r', encoding='utf-8') as plp:
             cols = ['pathway_id', 'pathway_name']
             signor_mapping_list_df = pd.read_csv(plp, sep="\t", names=cols)
             return signor_mapping_list_df
@@ -165,7 +165,7 @@ def get_signor_pathway_relations_df(pathway_id):
 
     pathway_file_path = path.join(current_directory, 'local', today, pathway_id_clean + '.txt')
     if path.isfile(pathway_file_path):
-        with open(pathway_file_path, 'r') as pfp:
+        with open(pathway_file_path, 'r', encoding='utf-8') as pfp:
             signor_pathway_relations_df = pd.read_csv(pfp, dtype = str, na_filter = False, delimiter = '\t',
             engine = 'python')
 
@@ -179,7 +179,7 @@ def get_signor_pathway_description_df(pathway_id):
 
     pathway_file_path = path.join(current_directory, 'local', today, pathway_id_clean + '_desc.txt')
     if path.isfile(pathway_file_path):
-        with open(pathway_file_path, 'r') as pfp:
+        with open(pathway_file_path, 'r', encoding='utf-8') as pfp:
             signor_pathway_relations_df = pd.read_csv(pfp, dtype = str, na_filter = False, delimiter = '\t',
             engine = 'python')
 
@@ -256,7 +256,7 @@ network_id_dataframe = get_signor_mapping_list_df()
 try:
     path_to_load_plan = 'signor_load_plan.json'
     load_plan = None
-    with open(path_to_load_plan, 'r') as lp:
+    with open(path_to_load_plan, 'r', encoding='utf-8') as lp:
         load_plan = json.load(lp)
 
 except jsonschema.ValidationError as e1:
