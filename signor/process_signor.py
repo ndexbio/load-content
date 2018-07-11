@@ -181,7 +181,7 @@ def get_signor_pathway_description_df(pathway_id):
     if path.isfile(pathway_file_path):
         with open(pathway_file_path, 'r', encoding='utf-8') as pfp:
             signor_pathway_relations_df = pd.read_csv(pfp, dtype = str, na_filter = False, delimiter = '\t',
-            engine = 'python')
+            engine = 'python', error_bad_lines=False, comment='#')
 
             return signor_pathway_relations_df
     else:
