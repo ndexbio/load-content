@@ -139,7 +139,7 @@ def load_data_files():
         if not path.isfile(full_content_path):
             time_start = time.time()
             full_content = urllib.request.urlopen(full_signor_url)
-            f = open(full_content_path, "w")
+            f = open(full_content_path, "w", encoding='utf-8')
             full_content = full_content.read().decode('utf-8')
             f.write(full_content)
             f.close()
@@ -197,7 +197,7 @@ def get_full_signor_pathway_relations_df(species):
 
     pathway_file_path = path.join(current_directory, 'local', today, file_name)
     if path.isfile(pathway_file_path):
-        with open(pathway_file_path, 'r') as pfp:
+        with open(pathway_file_path, 'r', encoding='utf-8', errors='ignore') as pfp:
             usecols = ['entitya', 'typea', 'ida', 'databasea', 'entityb', 'typeb', 'idb', 'databaseb', 'effect',
                        'mechanism', 'residue', 'sequence', 'tax_id', 'cell_data', 'tissue_data', 'modulator_complex',
                        'target_complex', 'modificationa', 'modaseq', 'modificationb', 'modbseq', 'pmid',
