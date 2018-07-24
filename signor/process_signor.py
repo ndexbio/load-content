@@ -540,13 +540,13 @@ def get_full_signor_network(load_plan, species):
     #
     for node_id, node in network.get_nodes():
         database = network.get_node_attribute(node_id, "DATABASE")
-        represents = node.get_node_represents()
+        represents = node.get('r')
         if database == "UNIPROT":
             represents = "uniprot:" + represents
-            node.set_node_represents(represents)
+            node['r'] = represents
         if database == "SIGNOR":
             represents = "signor:" + represents
-            node.set_node_represents(represents)
+            node['r'] = represents
         # in all other cases, the identifier is already prefixed
         network.remove_node_attribute(node_id, "DATABASE")
 
