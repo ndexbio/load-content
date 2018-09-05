@@ -14,7 +14,7 @@ from tutorial_utils import load_tutorial_config
 import ndexutil.tsv.tsv2nicecx2 as t2n
 import argparse
 import time
-from os import listdir, path, makedirs
+from os import listdir, path, makedirs, stat, remove
 import urllib
 
 parser = argparse.ArgumentParser(description='Signor network loader')
@@ -63,6 +63,7 @@ signor_list_url = 'https://signor.uniroma2.it/getPathwayData.php?list'
 
 species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
 species = ['9606', '10090', '10116']
+skip_signor_id = []
 
 current_directory = path.dirname(path.abspath(__file__))
 today = time.strftime('%Y%m%d')
@@ -128,8 +129,31 @@ def load_data_files():
                 f_desc = open(pathway_file_desc_path, "w", encoding='utf-8')
                 f_desc.write(content)
                 f_desc.close()
+                statinfo = stat(pathway_file_desc_path)
+                stat_size = statinfo.st_size
+                if stat_size < 10:
+                    print('***********************************')
+                    print('**  SIGNOR FILE WAS EMPTY ' + pathway_file_desc_path)
+                    print('***********************************')
+                    skip_signor_id.append(str(row['pathway_id']))
             else:
                 print('Skipping download... ' + pathway_id + '_desc already exists.')
+
+            statinfo = stat(pathway_file_path)
+            stat_size = statinfo.st_size
+            if stat_size < 10:
+                print('***********************************')
+                print('**  SIGNOR FILE WAS EMPTY ' + pathway_file_path)
+                print('***********************************')
+                skip_signor_id.append(str(row['pathway_id']))
+
+            statinfo = stat(pathway_file_desc_path)
+            stat_size = statinfo.st_size
+            if stat_size < 10:
+                print('***********************************')
+                print('**  SIGNOR FILE WAS EMPTY ' + pathway_file_desc_path)
+                print('***********************************')
+                skip_signor_id.append(str(row['pathway_id']))
 
     for k, v in species_mapping.items():
         print('getting full_' + v + '.txt from URL')
@@ -315,17 +339,20 @@ def get_signor_network(pathway_id, load_plan):
     # POST PROCESS EDGE ATTRIBUTES
     # Rename citation_ids to citation
     # =================================
-    for edge_id, edge in network.get_edges():
-        cit1 = network.get_edge_attribute_objects(edge_id, "citation_ids")
-        if cit1 is not None:
-            network.add_edge_attribute(property_of=cit1.get_property_of(), name='citation',
-                                       values=cit1.get_values(), type=cit1.get_data_type())
-            network.remove_edge_attribute(edge_id, "citation_ids")
+    #for edge_id, edge in network.get_edges():
+    #    cit1 = network.get_edge_attribute(edge_id, "citation_ids")
+    #    if cit1 is not None:
+    #        network.add_edge_attribute(property_of=edge_id, name='citation',
+    #                                   values=cit1, type=cit1.get_data_type())
+    #        network.remove_edge_attribute(edge_id, "citation_ids")
 
-        cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
+    #    cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
         #print(cd)
 
-    return network
+    if len(network.edges) < 1 or  len(network.nodes) < 1:
+        return None
+    else:
+        return network
 
 # TODO - remove this section
 #signor_network = get_signor_network("SIGNOR-MM", load_plan)
@@ -335,45 +362,47 @@ def get_signor_network(pathway_id, load_plan):
 
 def add_pathway_info(network, network_id):
     dataframe = get_signor_pathway_description_df(network_id)
+    if dataframe is not None:
+        if not pd.isnull(dataframe.iat[0, 1]):
+            network.set_name(dataframe.iat[0, 1])
+        if not pd.isnull(dataframe.iat[0, 0]):
+            network.set_network_attribute("labels", [dataframe.iat[0, 0]], type='list_of_string')
+        if not pd.isnull(dataframe.iat[0, 3]):
+            network.set_network_attribute("author", dataframe.iat[0, 3])
+        if not pd.isnull(dataframe.iat[0, 2]):
+            append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
+            network.set_network_attribute("description", '%s %s' % (dataframe.iat[0, 2], append_desc))
 
-    if not pd.isnull(dataframe.iat[0, 1]):
-        network.set_name(dataframe.iat[0, 1])
-    if not pd.isnull(dataframe.iat[0, 0]):
-        network.set_network_attribute("labels", [dataframe.iat[0, 0]], type='list_of_string')
-    if not pd.isnull(dataframe.iat[0, 3]):
-        network.set_network_attribute("author", dataframe.iat[0, 3])
-    if not pd.isnull(dataframe.iat[0, 2]):
-        append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
-        network.set_network_attribute("description", '%s %s' % (dataframe.iat[0, 2], append_desc))
+        network.set_network_attribute('rightsHolder', 'Prof. Gianni Cesareni')
+        network.set_network_attribute("rights", "Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)")
+        network.set_network_attribute("reference",
+                                      "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
+        network.set_network_attribute('dataSource',
+                                      'https://signor.uniroma2.it/pathway_browser.php?organism=&pathway_list=' + str(
+                                          network_id))
 
-    network.set_network_attribute('rightsHolder', 'Prof. Gianni Cesareni')
-    network.set_network_attribute("rights", "Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)")
-    network.set_network_attribute("reference",
-                                  "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
-    network.set_network_attribute('dataSource',
-                                  'https://signor.uniroma2.it/pathway_browser.php?organism=&pathway_list=' + str(
-                                      network_id))
+        network.set_network_attribute("version", f"{datetime.now():%d-%b-%Y}")
 
-    network.set_network_attribute("version", f"{datetime.now():%d-%b-%Y}")
+        disease_pathways = ['ALZHAIMER DISEASE', 'FSGS', 'NOONAN SYNDROME', 'PARKINSON DISEASE']
 
-    disease_pathways = ['ALZHAIMER DISEASE', 'FSGS', 'NOONAN SYNDROME', 'PARKINSON DISEASE']
+        cancer_pathways = ['ACUTE MYELOID LEUKEMIA', 'COLORECTAL CARCINOMA', 'GLIOBLASTOMA MULTIFORME',
+                           'LUMINAL BREAST CANCER', 'MALIGNANT MELANOMA', 'PROSTATE CANCER',
+                           'RHABDOMYOSARCOMA', 'THYROID CANCER']
 
-    cancer_pathways = ['ACUTE MYELOID LEUKEMIA', 'COLORECTAL CARCINOMA', 'GLIOBLASTOMA MULTIFORME',
-                       'LUMINAL BREAST CANCER', 'MALIGNANT MELANOMA', 'PROSTATE CANCER',
-                       'RHABDOMYOSARCOMA', 'THYROID CANCER']
+        network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
 
-    network.set_network_attribute("organism", "Human, 9606, Homo sapiens")
-
-    if signor_id_name_mapping.get(network_id).upper() in disease_pathways:
-        network.set_network_attribute("networkType", "Disease Pathway")
-    elif signor_id_name_mapping.get(network_id).upper() in cancer_pathways:
-        network.set_network_attribute("networkType", "Cancer Pathway")
+        if signor_id_name_mapping.get(network_id).upper() in disease_pathways:
+            network.set_network_attribute("networkType", "Disease Pathway")
+        elif signor_id_name_mapping.get(network_id).upper() in cancer_pathways:
+            network.set_network_attribute("networkType", "Cancer Pathway")
+        else:
+            network.set_network_attribute("networkType", "Signalling Pathway")
+        # TODO: set “networkType” property depending on network
+        #    a. Signalling Pathway
+        #    b. Disease Pathway
+        #    c. Cancer Pathway
     else:
-        network.set_network_attribute("networkType", "Signalling Pathway")
-    # TODO: set “networkType” property depending on network
-    #    a. Signalling Pathway
-    #    b. Disease Pathway
-    #    c. Cancer Pathway
+        print('skipping ' + network_id)
 
 
 # Use the visual properties of network ... to style each output network
@@ -403,50 +432,55 @@ def upload_signor_network(network, server, username, password, update_uuid=False
 
 def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_plan, server, username, password):
     network = get_signor_network(signor_id, load_plan)
-    # print(network.__str__())
-    add_pathway_info(network, signor_id)
-    # print(network.to_cx())
-    print(server)
-    network.apply_template(username=username, password=password, server=server,
-                           uuid=cytoscape_visual_properties_template_id)
-    apply_spring_layout(network)
-    #network.generate_metadata_aspect()
+    if network is not None:
+        # print(network.__str__())
+        add_pathway_info(network, signor_id)
+        # print(network.to_cx())
+        print(server)
+        network.apply_template(username=username, password=password, server=server,
+                               uuid=cytoscape_visual_properties_template_id)
+        apply_spring_layout(network)
+        #network.generate_metadata_aspect()
 
-    #if network.node_int_id_generator:
-    #    network.node_id_lookup = list(network.node_int_id_generator)
-    #network.generate_aspect('nodes')
-    #network.generate_aspect('edges')
-    print(network.get_name())
-    network_update_key = update_signor_mapping.get(network.get_name().upper())
-    if network_update_key is not None:
-        print("updating")
-        return upload_signor_network(network, server, username, password, update_uuid=network_update_key)
+        #if network.node_int_id_generator:
+        #    network.node_id_lookup = list(network.node_int_id_generator)
+        #network.generate_aspect('nodes')
+        #network.generate_aspect('edges')
+        print(network.get_name())
+        network_update_key = update_signor_mapping.get(network.get_name().upper())
+        if network_update_key is not None:
+            print("updating")
+            return upload_signor_network(network, server, username, password, update_uuid=network_update_key)
+        else:
+            print("new network")
+            return upload_signor_network(network, server, username, password)
     else:
-        print("new network")
-        return upload_signor_network(network, server, username, password)
+        print('SKIPPING ' + signor_id)
 
 count = 0
-limit = 400
+limit = 4000
 signor_uuids = []
 #print(network_id_dataframe)
 total_pathways = len(network_id_dataframe['pathway_id'])
 for pathway_id in network_id_dataframe['pathway_id']:
-    if count >= limit:
-        break
+    if pathway_id not in skip_signor_id:
+        if count >= limit:
+            break
 
-    #print(pathway_id)
-    print('Processing ' + str(count + 1) + '/' + str(total_pathways))
-    upload_message = process_signor_id(pathway_id, cytoscape_visual_properties_template_id,
-        load_plan, my_server, my_username, my_password)
+        #print(pathway_id)
+        print('Processing ' + str(count + 1) + '/' + str(total_pathways))
+        upload_message = process_signor_id(pathway_id, cytoscape_visual_properties_template_id,
+            load_plan, my_server, my_username, my_password)
 
-    network_update_key = update_signor_mapping.get(signor_id_name_mapping.get(pathway_id).upper())
+        if upload_message is not None:
+            network_update_key = update_signor_mapping.get(signor_id_name_mapping.get(pathway_id).upper())
 
-    if network_update_key is None:
-        network_uuid = upload_message.split('/')[-1]
-        signor_uuids.append(network_uuid)
+            if network_update_key is None:
+                 network_uuid = upload_message.split('/')[-1]
+                 signor_uuids.append(network_uuid)
 
-    if limit:
-        count += 1
+            if limit:
+                count += 1
 
 for sig_id in signor_uuids:
     my_ndex = nc.Ndex2(my_server, my_username, my_password)
@@ -554,12 +588,12 @@ def get_full_signor_network(load_plan, species):
     # POST PROCESS EDGE ATTRIBUTES
     # Rename citation_ids to citation
     # =================================
-    for edge_id, edge in network.get_edges():
-        cit1 = network.get_edge_attribute_objects(edge_id, "citation_ids")
-        if cit1 is not None:
-            network.add_edge_attribute(property_of=cit1.get_property_of(), name='citation',
-                                       values=cit1.get_values(), type=cit1.get_data_type())
-            network.remove_edge_attribute(edge_id, "citation_ids")
+    #for edge_id, edge in network.get_edges():
+    #    cit1 = network.get_edge_attribute_objects(edge_id, "citation_ids")
+    #    if cit1 is not None:
+    #        network.add_edge_attribute(property_of=cit1.get_property_of(), name='citation',
+    #                                   values=cit1.get_values(), type=cit1.get_data_type())
+    #        network.remove_edge_attribute(edge_id, "citation_ids")
 
         #cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
         #if cd is not None:
