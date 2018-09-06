@@ -247,5 +247,5 @@ else:
 
     message = network.upload_to(my_server, my_username, my_password)
 
-print(network.get_summary())
+network.print_summary()
 print('Done')
