@@ -458,7 +458,7 @@ def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_p
         print('SKIPPING ' + signor_id)
 
 count = 0
-limit = 4000
+limit = 4
 signor_uuids = []
 #print(network_id_dataframe)
 total_pathways = len(network_id_dataframe['pathway_id'])
@@ -512,7 +512,9 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
             password=password,
             server=server,
             uuid=cytoscape_visual_properties_template_id)
-        apply_spring_layout(network)
+        #print('Applying spring layout')
+        #apply_spring_layout(network)
+        print('Skipping spring layout')
 
         network_update_key = update_signor_mapping.get(network.get_name())
         if network_update_key is not None:

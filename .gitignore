@@ -102,3 +102,8 @@ ENV/
 
 # pycharm
 .idea/*
+
+# temp files
+signor/local
+signor/vpy36
+vpy36
