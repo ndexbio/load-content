@@ -458,7 +458,7 @@ def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_p
         print('SKIPPING ' + signor_id)
 
 count = 0
-limit = 4
+limit = 4000
 signor_uuids = []
 #print(network_id_dataframe)
 total_pathways = len(network_id_dataframe['pathway_id'])
