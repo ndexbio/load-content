@@ -491,10 +491,18 @@ print('Done processing indiviual pathways.')
 
 def process_full_signor(cytoscape_visual_properties_template_id, load_plan, server, username, password):
     processed_uuids = []
-    for species_id in species:
-        network = get_full_signor_network(load_plan, species_id)
+    species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
+    print('')
+    print('')
+    print('***********************************')
+    print('****       FULL NETWORKS       ****')
+    print('***********************************')
 
-        species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
+    for species_id in species:
+        print('')
+        print('Processing %s full network' % species_mapping.get(species_id))
+
+        network = get_full_signor_network(load_plan, species_id)
 
         network.set_name('FULL-' + species_mapping.get(species_id) + ' (' + f"{datetime.now():%d-%b-%Y}" + ')')
 
