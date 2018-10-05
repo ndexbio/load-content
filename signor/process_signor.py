@@ -570,7 +570,7 @@ def get_full_signor_network(load_plan, species):
 
     # Fix values for "DIRECT"
     for edge_id, edge in network.get_edges():
-        direct = network.get_edge_attribute(edge_id, "DIRECT")
+        direct = network.get_edge_attribute_value(edge_id, "DIRECT")
         # print(direct)
         if direct:
             if direct == "t":
@@ -585,7 +585,7 @@ def get_full_signor_network(load_plan, species):
     #   Cases of this type are too variable. Custom code is easier.
     #
     for node_id, node in network.get_nodes():
-        database = network.get_node_attribute(node_id, "DATABASE")
+        database = network.get_node_attribute_value(node_id, "DATABASE")
         represents = node.get('r')
         if database == "UNIPROT":
             represents = "uniprot:" + represents
