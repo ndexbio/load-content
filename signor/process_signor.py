@@ -309,7 +309,7 @@ def get_signor_network(pathway_id, load_plan):
 
     # Fix values for "DIRECT"
     for edge_id, edge in network.get_edges():
-        direct = network.get_edge_attribute(edge_id, "DIRECT")
+        direct = network.get_edge_attribute_value(edge_id, "DIRECT")
         # print(direct)
         if direct:
             if direct == "t":
