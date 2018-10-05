@@ -234,7 +234,7 @@ def get_signor_network(pathway_id, load_plan):
             node.set_node_represents(represents)
         # in all other cases, the identifier is already prefixed
 
-    print(network.get_summary())
+    network.print_summary()
     return network
 
 
