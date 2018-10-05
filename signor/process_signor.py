@@ -324,14 +324,16 @@ def get_signor_network(pathway_id, load_plan):
     #   Cases of this type are too variable. Custom code is easier.
     #
     for node_id, node in network.get_nodes():
-        database = network.get_node_attribute(node_id, "DATABASE")
+        database = network.get_node_attribute_value(node_id, "DATABASE")
         represents = node.get('r')
         if database == "UNIPROT":
-            represents = "uniprot:" + represents
-            node['r'] = represents
-        if database == "SIGNOR":
-            represents = "signor:" + represents
-            node['r'] = represents
+            if 'uniprot:' not in represents:
+                represents = "uniprot:" + represents
+                node['r'] = represents
+        elif database in ["SIGNOR"]:
+            if 'signor:' not in represents:
+                represents = "signor:" + represents
+                node['r'] = represents
         # in all other cases, the identifier is already prefixed
         network.remove_node_attribute(node_id, "DATABASE")
 
