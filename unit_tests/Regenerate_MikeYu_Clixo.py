@@ -19,7 +19,7 @@ class MyTestCase(unittest.TestCase):
                     use_this_uuid = internal_link
 
 
-                print use_this_uuid
+                print(use_this_uuid)
         #print json.dumps(main_map)
 
         self.assertTrue(main_map is not None)
