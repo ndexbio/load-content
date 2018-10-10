@@ -31,7 +31,7 @@ params = {
     'username': 'scratch',
     'password': 'scratch',
     'my_server': 'http://dev.ndexbio.org',
-    'tsv_file': 'nightly-civic-small.txt',
+    'tsv_file': 'nightly-civic.txt',
     'load_plan': 'gene_disease',
     'delimiter': '\t',
     'output_file': 'out.txt',
@@ -127,7 +127,7 @@ params['load_plan'] = get_network_type(args.network_type)
 if args.tsv_file:
     params['tsv_file'] = args.tsv_file
 else:
-    params['tsv_file'] = 'nightly-civic-small.txt'
+    params['tsv_file'] = 'nightly-civic.txt'
 
 def get_network_properties(server, username, password, network_id):
     net_prop_ndex = nc2.Ndex2(server, username, password)
