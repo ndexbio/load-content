@@ -13,20 +13,6 @@ current_directory = path.dirname(path.abspath(__file__))
 #============================
 parser = argparse.ArgumentParser(description='Civic Loader')
 
-#username = 'scratch',
-#password = 'scratch'
-#server = 'dev.ndexbio.org'
-tsv_file = 'nightly-civic-small.txt'
-load_plan = None
-delimiter = None
-output_file = None
-update_uuid = None
-use_cartesian = None
-template_id = None
-net_name = None
-net_description = None
-header = None
-
 params = {
     'username': 'scratch',
     'password': 'scratch',
@@ -153,8 +139,6 @@ def get_update_mapping(my_server, my_username, my_password):
         if nk.get('name') is not None:
             update_mapping[nk.get('name').upper()] = nk.get('externalId')
 
-    print(update_mapping)
-
     return update_mapping
 
 update_mapping = get_update_mapping(params.get('my_server'), params.get('username'), params.get('password'))
@@ -178,8 +162,8 @@ def run_loading(params):
     #==============================
     # LOAD TSV FILE INTO DATAFRAME
     #==============================
-    if tsv_file is not None:
-        with open(tsv_file, 'r', encoding='utf-8', errors='ignore') as tsvfile:
+    if params.get('tsv_file') is not None:
+        with open(params.get('tsv_file'), 'r', encoding='utf-8', errors='ignore') as tsvfile:
             if params.get('header'):
                 header = params.get('header').split(',')
             else:
@@ -198,16 +182,6 @@ def run_loading(params):
         try:
             load_plan_name = params.get('load_plan')
             load_plan = params.get('all_load_plans').get(load_plan_name)
-
-            #path_to_load_plan = 'load_plans.json'
-            #load_plan = None
-            #with open(path_to_load_plan, 'r') as lp:
-            #    load_plan = json.load(lp)
-
-            #with open(path.join(current_directory, 'loading_plan_schema.json')) as json_file:
-            #    plan_schema = json.load(json_file)
-
-            #validate(load_plan, plan_schema)
         except jsonschema.ValidationError as e1:
             print("Failed to parse the loading plan: " + e1.message)
             print('at path: ' + str(e1.absolute_path))
