@@ -13,30 +13,6 @@ current_directory = path.dirname(path.abspath(__file__))
 #============================
 parser = argparse.ArgumentParser(description='Civic Loader')
 
-params = {
-    'username': 'scratch',
-    'password': 'scratch',
-    'my_server': 'http://dev.ndexbio.org',
-    'tsv_file': 'nightly-civic.txt',
-    'load_plan': 'gene_disease',
-    'delimiter': '\t',
-    'output_file': 'out.txt',
-    'update_uuid': None,
-    'use_cartesian': False,
-    'template_id': None,
-    'net_name': 'civic 1',
-    'net_description': None,
-    'header': None
-}
-
-network_name_mapping = {
-    'variant_drug': 'Variant-Drug Associations',
-    'gene_disease': 'Gene-Disease Associations',
-    'gene_variant': 'Gene-Variant Associations',
-    'variant_disease': 'Variant-Disease Associations',
-    'all': 'all'
-}
-
 parser.add_argument('username', action='store', nargs='?', default=None)
 parser.add_argument('password', action='store', nargs='?', default=None)
 parser.add_argument('--server', dest='server', action='store', help='NDEx server')
@@ -56,107 +32,468 @@ if args.username is None:
 if args.password is None:
     raise Exception('Please provide password')
 
-my_username = args.username
-my_password = args.password
-if args.server:
-    if 'http' in args.server:
-        my_server = args.server
-    else:
-        my_server = 'http://' + args.server
+class CivicUploader():
+    def __init__(self, username, password, load_type=None, server=None, template_id=None, file=None):
 
-    params['my_server'] = my_server
-else:
-    params['my_server'] = 'http://dev.ndexbio.org'
+        self.current_directory = path.dirname(path.abspath(__file__))
 
-params['username'] = args.username
-params['password'] = args.password
+        self.params = {
+            'username': username,
+            'password': password,
+            'server': None,
+            'tsv_file': None,
+            'load_plan': None,
+            'delimiter': '\t',
+            'update_uuid': None,
+            'template_id': template_id,
+            'net_name': None,
+            'net_description': None,
+            'header': None
+        }
 
-#======================
-# SET UP TEMPLATE ID
-#======================
-if args.template is not None:
-    params['template_id'] = args.template
+        self.network_name_mapping = {
+            'variant_drug': 'Variant-Drug Associations',
+            'gene_disease': 'Gene-Disease Associations',
+            'gene_variant': 'Gene-Variant Associations',
+            'variant_disease': 'Variant-Disease Associations',
+            'all': 'all'
+        }
 
-#======================
-# SET UP NETWORK NAME
-#======================
-params['net_name'] = network_name_mapping.get(params.get('load_plan'))
-if params.get('net_name') is not None:
-    params['net_name_upper'] = params.get('net_name').upper()
+        self.params['server'] = self._set_server(server)
 
-#======================
-# SET UP NETWORK TYPE
-#======================
-def get_network_type(net_type):
-    return_type = None
-    if net_type:
-        if net_type == '1':
-            return_type = 'variant_drug'
-        elif net_type == '2':
-            return_type = 'variant_disease'
-        elif net_type == '3':
-            return_type = 'gene_disease'
-        elif net_type == '4':
-            return_type = 'gene_variant'
+        if file is not None:
+            self.params['tsv_file'] = file
         else:
-            return_type = args.network_type
-    else:
-        return_type = 'all'
+            self.params['tsv_file'] = 'nightly-civic-small.txt'
 
-    return return_type
+        self.update_mapping = self.get_update_mapping()
 
-params['load_plan'] = get_network_type(args.network_type)
+        self.set_load_plan(load_type)
 
-#=========================
-# SET UP FILE TO PROCESS
-#=========================
-if args.tsv_file:
-    params['tsv_file'] = args.tsv_file
-else:
-    params['tsv_file'] = 'nightly-civic.txt'
+        self.set_load_plan_mapping()
 
-def get_network_properties(server, username, password, network_id):
-    net_prop_ndex = nc2.Ndex2(server, username, password)
+        if self.update_mapping.get(self.params.get('net_name_upper')) is not None:
+            self.params['update_uuid'] = self.update_mapping.get(self.params.get('net_name_upper'))
 
-    network_properties_stream = net_prop_ndex.get_network_aspect_as_cx_stream(network_id, 'networkAttributes')
+    def _set_server(self, server):
+        if server is not None:
+            if 'http' in server:
+                return server
+            else:
+                return 'http://' + server
+        else:
+            return 'http://dev.ndexbio.org'
 
-    network_properties = network_properties_stream.json()
-    return_properties = {}
-    for net_prop in network_properties:
-        return_properties[net_prop.get('n')] = net_prop.get('v')
+    def _get_network_type(self, network_type):
+        if not isinstance(network_type, str):
+            network_type = str(network_type)
 
-    return return_properties
+        return_type = None
+        if network_type:
+            if network_type == '1':
+                return_type = 'variant_drug'
+            elif network_type == '2':
+                return_type = 'variant_disease'
+            elif network_type == '3':
+                return_type = 'gene_disease'
+            elif network_type == '4':
+                return_type = 'gene_variant'
+            else:
+                return_type = network_type
+        else:
+            return_type = 'all'
 
-#======================
-# GET UPDATE MAPPING
-#======================
-def get_update_mapping(my_server, my_username, my_password):
-    my_ndex = nc.Ndex2(my_server, my_username, my_password)
+        return return_type
 
-    networks = my_ndex.get_network_summaries_for_user(my_username)
-    update_mapping = {}
-    for nk in networks:
-        if nk.get('name') is not None:
-            update_mapping[nk.get('name').upper()] = nk.get('externalId')
+    def get_network_properties(self, network_id):
+        net_prop_ndex = nc2.Ndex2(self.params.get('server'), self.params.get('username'), self.params.get('password'))
 
-    return update_mapping
+        network_properties_stream = net_prop_ndex.get_network_aspect_as_cx_stream(network_id, 'networkAttributes')
 
-update_mapping = get_update_mapping(params.get('my_server'), params.get('username'), params.get('password'))
+        network_properties = network_properties_stream.json()
+        return_properties = {}
+        for net_prop in network_properties:
+            return_properties[net_prop.get('n')] = net_prop.get('v')
 
-if update_mapping.get(params.get('net_name_upper')) is not None:
-    params['update_uuid'] = update_mapping.get(params.get('net_name_upper'))
+        return return_properties
 
-#==============
-# APPLY LAYOUT
-#==============
-def cartesian(G, node_id_look_up):
-    #print('POS')
-    #print(G.pos)
+    #======================
+    # GET UPDATE MAPPING
+    #======================
+    def get_update_mapping(self):
+        my_ndex = nc.Ndex2(self.params.get('server'), self.params.get('username'), self.params.get('password'))
 
-    return [
-        {'node': node_id_look_up.get(n), 'x': float(G.pos[n][0]) * 100.0, 'y': float(G.pos[n][1]) * 100.0}
-        for n in G.pos
-    ]
+        networks = my_ndex.get_network_summaries_for_user(self.params.get('username'))
+        update_mapping = {}
+        for nk in networks:
+            if nk.get('name') is not None:
+                update_mapping[nk.get('name').upper()] = nk.get('externalId')
+
+        return update_mapping
+
+    def set_load_plan_mapping(self):
+        all_load_plans = {
+          "variant_drug": {
+                "context": {
+                    "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
+                    , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
+                    , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
+                    , "DOID": "https://identifiers.org/doid/DOID:"
+                    , "PMID": "https://identifiers.org/pubmed/"
+                    , "Ensembl Transcript": "https://identifiers.org/ensembl/"
+                    , "Entrez Gene": "https://identifiers.org/ncbigene/"
+                }
+                , "source_plan": {
+                    "rep_prefix": "CIViC variant"
+                    , "rep_column": "variant_id"
+                    , "node_name_column": "gene-variant"
+                    , "property_columns": [{
+                            "column_name": "variant_origin"
+                            , "attribute_name": "Variant origin"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "variant_summary"
+                            , "attribute_name": "Variant summary"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "entrez_id"
+                            , "attribute_name": "Entrez Gene"
+                            , "value_prefix": "Entrez Gene"
+                        }
+                        , {
+                            "column_name": "gene_id"
+                            , "attribute_name": "CIViC Gene"
+                            , "value_prefix": "CIViC gene"
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "variant"
+                        }]
+                }
+                , "target_plan": {
+                    "rep_prefix": ""
+                    , "rep_column": "drugs"
+                    , "node_name_column": "drugs"
+                    , "property_columns": [{
+                        "attribute_name": "Node Type"
+                        , "default_value": "drug"
+                    }]
+                }
+                , "edge_plan": {
+                    "default_predicate": "is affected by"
+                    , "property_columns": [{
+                            "column_name": "evidence_id"
+                            , "attribute_name": "CIViC evidence ID"
+                            , "value_prefix": "CIViC evidence"
+                        }
+                        , {
+                            "column_name": "representative_transcript"
+                            , "attribute_name": "Representative transcript"
+                            , "value_prefix": "Ensembl Transcript"
+                        }
+                        , {
+                            "column_name": "pubmed_id"
+                            , "attribute_name": "Citation"
+                            , "value_prefix": "PMID"
+                        }
+                                      , "evidence_type"
+                                      , "evidence_direction"
+                                      , "evidence_level"
+                                      , "clinical_significance"
+                                      , "evidence_statement"
+                                      , "rating"
+                                      , "evidence_status"
+                                      , "last_review_date"
+                        , {
+                            "column_name": "doid"
+                            , "attribute_name": "Disease ID"
+                            , "value_prefix": "DOID"
+                        }
+                        , {
+                            "column_name": "disease"
+                            , "attribute_name": "Disease name"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "phenotypes"
+                            , "attribute_name": "Phenotypes"
+                            , "value_prefix": ""
+                        }]
+                }
+            },
+          "variant_disease": {
+                "context": {
+                    "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
+                    , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
+                    , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
+                    , "DOID": "https://identifiers.org/doid/DOID:"
+                    , "PMID": "https://identifiers.org/pubmed/"
+                    , "Ensembl Transcript": "https://identifiers.org/ensembl/"
+                    , "Entrez Gene": "https://identifiers.org/ncbigene/"
+                }
+                , "source_plan": {
+                    "rep_prefix": "CIViC variant"
+                    , "rep_column": "variant_id"
+                    , "node_name_column": "gene-variant"
+                    , "property_columns": [{
+                            "column_name": "variant_origin"
+                            , "attribute_name": "Variant origin"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "variant_summary"
+                            , "attribute_name": "Variant summary"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "entrez_id"
+                            , "attribute_name": "Entrez Gene"
+                            , "value_prefix": "Entrez Gene"
+                        }
+                        , {
+                            "column_name": "gene_id"
+                            , "attribute_name": "CIViC Gene"
+                            , "value_prefix": "CIViC gene"
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "variant"
+                        }]
+                }
+                , "target_plan": {
+                    "rep_prefix": "DOID"
+                    , "rep_column": "doid"
+                    , "node_name_column": "disease"
+                    , "property_columns": [{
+                            "column_name": "phenotypes"
+                            , "attribute_name": "Phenotypes"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "disease"
+                        }]
+                }
+                , "edge_plan": {
+                    "default_predicate": "is related to"
+                    , "property_columns": [{
+                            "column_name": "evidence_id"
+                            , "attribute_name": "CIViC evidence ID"
+                            , "value_prefix": "CIViC evidence"
+                        }
+                        , {
+                            "column_name": "representative_transcript"
+                            , "attribute_name": "Representative transcript"
+                            , "value_prefix": "Ensembl Transcript"
+                        }
+                        , {
+                            "column_name": "pubmed_id"
+                            , "attribute_name": "Citation"
+                            , "value_prefix": "PMID"
+                        }
+                                      , "evidence_type"
+                                      , "evidence_direction"
+                                      , "evidence_level"
+                                      , "drugs"
+                                      , "clinical_significance"
+                                      , "evidence_statement"
+                                      , "rating"
+                                      , "evidence_status"
+                                      , "last_review_date"]
+                }
+            },
+          "gene_variant": {
+                "context": {
+                    "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
+                    , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
+                    , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
+                    , "DOID": "https://identifiers.org/doid/DOID:"
+                    , "PMID": "https://identifiers.org/pubmed/"
+                    , "Ensembl Transcript": "https://identifiers.org/ensembl/"
+                    , "Entrez Gene": "https://identifiers.org/ncbigene/"
+                }
+                , "source_plan": {
+                    "rep_prefix": "CIViC gene"
+                    , "rep_column": "gene_id"
+                    , "node_name_column": "gene"
+                    , "property_columns": [{
+                            "column_name": "entrez_id"
+                            , "attribute_name": "Alias"
+                            , "value_prefix": "Entrez Gene"
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "gene"
+                        }]
+                }
+                , "target_plan": {
+                    "rep_prefix": "CIViC variant"
+                    , "rep_column": "variant_id"
+                    , "node_name_column": "variant"
+                    , "property_columns": [{
+                            "attribute_name": "Node Type"
+                            , "default_value": "variant"
+                        }
+                        , {
+                            "column_name": "variant_origin"
+                            , "attribute_name": "Variant origin"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "variant_summary"
+                            , "attribute_name": "Variant summary"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "phenotypes"
+                            , "attribute_name": "Phenotypes"
+                            , "value_prefix": ""
+                        }]
+                }
+                , "edge_plan": {
+                    "default_predicate": "is related to"
+                    , "property_columns": [{
+                            "column_name": "evidence_id"
+                            , "attribute_name": "CIViC evidence ID"
+                            , "value_prefix": "CIViC evidence"
+                        }
+                        , {
+                            "column_name": "representative_transcript"
+                            , "attribute_name": "Representative transcript"
+                            , "value_prefix": "Ensembl Transcript"
+                        }
+                        , {
+                            "column_name": "pubmed_id"
+                            , "attribute_name": "Citation"
+                            , "value_prefix": "PMID"
+                        }
+                                      , "evidence_type"
+                                      , "evidence_direction"
+                                      , "evidence_level"
+                                      , "drugs"
+                                      , "clinical_significance"
+                                      , "evidence_statement"
+                                      , "rating"
+                                      , "evidence_status"
+                                      , "last_review_date"
+                        , {
+                            "column_name": "doid"
+                            , "attribute_name": "Disease ID"
+                            , "value_prefix": "DOID"
+                        }
+                        , {
+                            "column_name": "disease"
+                            , "attribute_name": "Disease name"
+                            , "value_prefix": ""
+                        }]
+                }
+            },
+          "gene_disease": {
+                "context": {
+                    "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
+                    , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
+                    , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
+                    , "DOID": "https://identifiers.org/doid/DOID:"
+                    , "PMID": "https://identifiers.org/pubmed/"
+                    , "Ensembl Transcript": "https://identifiers.org/ensembl/"
+                    , "Entrez Gene": "https://identifiers.org/ncbigene/"
+                }
+                , "source_plan": {
+                    "rep_prefix": "CIViC gene"
+                    , "rep_column": "gene_id"
+                    , "node_name_column": "gene"
+                    , "property_columns": [{
+                            "column_name": "entrez_id"
+                            , "attribute_name": "Alias"
+                            , "value_prefix": "Entrez Gene"
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "gene"
+                        }]
+                }
+                , "target_plan": {
+                    "rep_prefix": "DOID"
+                    , "rep_column": "doid"
+                    , "node_name_column": "disease"
+                    , "property_columns": [{
+                            "column_name": "phenotypes"
+                            , "attribute_name": "Phenotypes"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "attribute_name": "Node Type"
+                            , "default_value": "disease"
+                        }]
+                }
+                , "edge_plan": {
+                    "default_predicate": "is related to"
+                    , "property_columns": [{
+                            "column_name": "variant"
+                            , "attribute_name": "Variant"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "variant_id"
+                            , "attribute_name": "CIViC variant ID"
+                            , "value_prefix": "CIViC variant"
+                        }
+                        , {
+                            "column_name": "variant_origin"
+                            , "attribute_name": "Variant origin"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "variant_summary"
+                            , "attribute_name": "Variant summary"
+                            , "value_prefix": ""
+                        }
+                        , {
+                            "column_name": "evidence_id"
+                            , "attribute_name": "CIViC evidence ID"
+                            , "value_prefix": "CIViC evidence"
+                        }
+                        , {
+                            "column_name": "representative_transcript"
+                            , "attribute_name": "Representative transcript"
+                            , "value_prefix": "Ensembl Transcript"
+                        }
+                        , {
+                            "column_name": "pubmed_id"
+                            , "attribute_name": "Citation"
+                            , "value_prefix": "PMID"
+                        }
+                                      , "evidence_type"
+                                      , "evidence_direction"
+                                      , "evidence_level"
+                                      , "drugs"
+                                      , "clinical_significance"
+                                      , "evidence_statement"
+                                      , "rating"
+                                      , "evidence_status"
+                                      , "last_review_date"]
+                }
+            }
+        }
+
+        self.params['all_load_plans'] = all_load_plans
+
+    def get_params(self):
+        return self.params
+
+    def get_load_plan(self):
+        return self.params.get('load_plan')
+
+    def set_load_plan(self, load_plan):
+        self.params['load_plan'] = self._get_network_type(load_plan)
+        self.params['net_name'] = self.network_name_mapping.get(self.params.get('load_plan'))
+        if self.params.get('net_name') is not None:
+            self.params['net_name_upper'] = self.params.get('net_name').upper()
+
+        if self.update_mapping.get(self.params.get('net_name_upper')) is not None:
+            self.params['update_uuid'] = self.update_mapping.get(self.params.get('net_name_upper'))
 
 def run_loading(params):
     #==============================
@@ -198,25 +535,18 @@ def run_loading(params):
     for column_name in df.columns:
         rename[column_name] = column_name.upper()
 
-    #df = df.rename(columns=rename)
-
-    #print(df.head())
-
     network = t2n.convert_pandas_to_nice_cx_with_load_plan(df, load_plan)
 
     if params.get('template_id') is not None:
-        network.apply_template(username=my_username, password=my_password, server=params.get('my_server'), uuid=params.get('template_id'))
+        network.apply_template(username=params.get('username'), password=params.get('password'), server=params.get('server'), uuid=params.get('template_id'))
     elif params.get('update_uuid') is not None:
-        network.apply_template(username=my_username, password=my_password, server=params.get('my_server'), uuid=params.get('update_uuid'))
+        network.apply_template(username=params.get('username'), password=params.get('password'), server=params.get('server'), uuid=params.get('update_uuid'))
 
     #===============================
     # UPDATE NETWORK OR CREATE NEW
     #===============================
-    #my_ndex = nc2.Ndex2(params.get('my_server'), params.get('my_username'), params.get('my_password'))
-
     if params.get('update_uuid') is not None:
-        network_properties = get_network_properties(params.get('my_server'), params.get('username'),
-                                                    params.get('password'), params.get('update_uuid'))
+        network_properties = get_network_properties(params)
 
         for k, v in network_properties.items():
             if k.upper() == 'NAME':
@@ -238,18 +568,16 @@ def run_loading(params):
             else:
                 network.set_network_attribute(name=k, values=v)
 
-        #provenance = my_ndex.get_provenance(params.get('update_uuid'))
-
-        message = network.update_to(params.get('update_uuid'), params.get('my_server'), params.get('username'),
+        message = network.update_to(params.get('update_uuid'), params.get('server'), params.get('username'),
                                     params.get('password'))
     else:
         # ===================
         # SET NETWORK NAME
         # ===================
-        if params.get('net_name') is not None and len(params.get('net_name').replace('"', '')) < 1:
+        if params.get('net_name') is not None:
             network.set_name(params.get('net_name'))
-        #else:
-        #    network.set_name(path.splitext(path.basename(tsv_file))[0])
+        else:
+            network.set_name(path.splitext(path.basename(params.get('tsv_file')))[0])
 
         # ==========================
         # SET NETWORK DESCRIPTION
@@ -257,371 +585,39 @@ def run_loading(params):
         if params.get('net_description') is not None and len(params.get('net_description').replace('"', '')) < 1:
             network.set_network_attribute('description', params.get('net_description'))
 
-        message = network.upload_to(params.get('my_server'), params.get('username'), params.get('password'))
+        message = network.upload_to(params.get('server'), params.get('username'), params.get('password'))
 
     network.print_summary()
 
 
-all_load_plans = {
-  "variant_drug": {
-        "context": {
-            "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
-            , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
-            , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
-            , "DOID": "https://identifiers.org/doid/DOID:"
-            , "PMID": "https://identifiers.org/pubmed/"
-            , "Ensembl Transcript": "https://identifiers.org/ensembl/"
-            , "Entrez Gene": "https://identifiers.org/ncbigene/"
-        }
-        , "source_plan": {
-            "rep_prefix": "CIViC variant"
-            , "rep_column": "variant_id"
-            , "node_name_column": "gene-variant"
-            , "property_columns": [{
-                    "column_name": "variant_origin"
-                    , "attribute_name": "Variant origin"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "variant_summary"
-                    , "attribute_name": "Variant summary"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "entrez_id"
-                    , "attribute_name": "Entrez Gene"
-                    , "value_prefix": "Entrez Gene"
-                }
-                , {
-                    "column_name": "gene_id"
-                    , "attribute_name": "CIViC Gene"
-                    , "value_prefix": "CIViC gene"
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "variant"
-                }]
-        }
-        , "target_plan": {
-            "rep_prefix": ""
-            , "rep_column": "drugs"
-            , "node_name_column": "drugs"
-            , "property_columns": [{
-                "attribute_name": "Node Type"
-                , "default_value": "drug"
-            }]
-        }
-        , "edge_plan": {
-            "default_predicate": "is affected by"
-            , "property_columns": [{
-                    "column_name": "evidence_id"
-                    , "attribute_name": "CIViC evidence ID"
-                    , "value_prefix": "CIViC evidence"
-                }
-                , {
-                    "column_name": "representative_transcript"
-                    , "attribute_name": "Representative transcript"
-                    , "value_prefix": "Ensembl Transcript"
-                }
-                , {
-                    "column_name": "pubmed_id"
-                    , "attribute_name": "Citation"
-                    , "value_prefix": "PMID"
-                }
-                              , "evidence_type"
-                              , "evidence_direction"
-                              , "evidence_level"
-                              , "clinical_significance"
-                              , "evidence_statement"
-                              , "rating"
-                              , "evidence_status"
-                              , "last_review_date"
-                , {
-                    "column_name": "doid"
-                    , "attribute_name": "Disease ID"
-                    , "value_prefix": "DOID"
-                }
-                , {
-                    "column_name": "disease"
-                    , "attribute_name": "Disease name"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "phenotypes"
-                    , "attribute_name": "Phenotypes"
-                    , "value_prefix": ""
-                }]
-        }
-    },
-  "variant_disease": {
-        "context": {
-            "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
-            , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
-            , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
-            , "DOID": "https://identifiers.org/doid/DOID:"
-            , "PMID": "https://identifiers.org/pubmed/"
-            , "Ensembl Transcript": "https://identifiers.org/ensembl/"
-            , "Entrez Gene": "https://identifiers.org/ncbigene/"
-        }
-        , "source_plan": {
-            "rep_prefix": "CIViC variant"
-            , "rep_column": "variant_id"
-            , "node_name_column": "gene-variant"
-            , "property_columns": [{
-                    "column_name": "variant_origin"
-                    , "attribute_name": "Variant origin"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "variant_summary"
-                    , "attribute_name": "Variant summary"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "entrez_id"
-                    , "attribute_name": "Entrez Gene"
-                    , "value_prefix": "Entrez Gene"
-                }
-                , {
-                    "column_name": "gene_id"
-                    , "attribute_name": "CIViC Gene"
-                    , "value_prefix": "CIViC gene"
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "variant"
-                }]
-        }
-        , "target_plan": {
-            "rep_prefix": "DOID"
-            , "rep_column": "doid"
-            , "node_name_column": "disease"
-            , "property_columns": [{
-                    "column_name": "phenotypes"
-                    , "attribute_name": "Phenotypes"
-                    , "value_prefix": ""
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "disease"
-                }]
-        }
-        , "edge_plan": {
-            "default_predicate": "is related to"
-            , "property_columns": [{
-                    "column_name": "evidence_id"
-                    , "attribute_name": "CIViC evidence ID"
-                    , "value_prefix": "CIViC evidence"
-                }
-                , {
-                    "column_name": "representative_transcript"
-                    , "attribute_name": "Representative transcript"
-                    , "value_prefix": "Ensembl Transcript"
-                }
-                , {
-                    "column_name": "pubmed_id"
-                    , "attribute_name": "Citation"
-                    , "value_prefix": "PMID"
-                }
-                              , "evidence_type"
-                              , "evidence_direction"
-                              , "evidence_level"
-                              , "drugs"
-                              , "clinical_significance"
-                              , "evidence_statement"
-                              , "rating"
-                              , "evidence_status"
-                              , "last_review_date"]
-        }
-    },
-  "gene_variant": {
-        "context": {
-            "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
-            , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
-            , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
-            , "DOID": "https://identifiers.org/doid/DOID:"
-            , "PMID": "https://identifiers.org/pubmed/"
-            , "Ensembl Transcript": "https://identifiers.org/ensembl/"
-            , "Entrez Gene": "https://identifiers.org/ncbigene/"
-        }
-        , "source_plan": {
-            "rep_prefix": "CIViC gene"
-            , "rep_column": "gene_id"
-            , "node_name_column": "gene"
-            , "property_columns": [{
-                    "column_name": "entrez_id"
-                    , "attribute_name": "Alias"
-                    , "value_prefix": "Entrez Gene"
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "gene"
-                }]
-        }
-        , "target_plan": {
-            "rep_prefix": "CIViC variant"
-            , "rep_column": "variant_id"
-            , "node_name_column": "variant"
-            , "property_columns": [{
-                    "attribute_name": "Node Type"
-                    , "default_value": "variant"
-                }
-                , {
-                    "column_name": "variant_origin"
-                    , "attribute_name": "Variant origin"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "variant_summary"
-                    , "attribute_name": "Variant summary"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "phenotypes"
-                    , "attribute_name": "Phenotypes"
-                    , "value_prefix": ""
-                }]
-        }
-        , "edge_plan": {
-            "default_predicate": "is related to"
-            , "property_columns": [{
-                    "column_name": "evidence_id"
-                    , "attribute_name": "CIViC evidence ID"
-                    , "value_prefix": "CIViC evidence"
-                }
-                , {
-                    "column_name": "representative_transcript"
-                    , "attribute_name": "Representative transcript"
-                    , "value_prefix": "Ensembl Transcript"
-                }
-                , {
-                    "column_name": "pubmed_id"
-                    , "attribute_name": "Citation"
-                    , "value_prefix": "PMID"
-                }
-                              , "evidence_type"
-                              , "evidence_direction"
-                              , "evidence_level"
-                              , "drugs"
-                              , "clinical_significance"
-                              , "evidence_statement"
-                              , "rating"
-                              , "evidence_status"
-                              , "last_review_date"
-                , {
-                    "column_name": "doid"
-                    , "attribute_name": "Disease ID"
-                    , "value_prefix": "DOID"
-                }
-                , {
-                    "column_name": "disease"
-                    , "attribute_name": "Disease name"
-                    , "value_prefix": ""
-                }]
-        }
-    },
-  "gene_disease": {
-        "context": {
-            "CIViC gene": "https://civic.genome.wustl.edu/links/genes/"
-            , "CIViC variant": "https://civic.genome.wustl.edu/links/variants/"
-            , "CIViC evidence": "https://civic.genome.wustl.edu/links/evidence_items/"
-            , "DOID": "https://identifiers.org/doid/DOID:"
-            , "PMID": "https://identifiers.org/pubmed/"
-            , "Ensembl Transcript": "https://identifiers.org/ensembl/"
-            , "Entrez Gene": "https://identifiers.org/ncbigene/"
-        }
-        , "source_plan": {
-            "rep_prefix": "CIViC gene"
-            , "rep_column": "gene_id"
-            , "node_name_column": "gene"
-            , "property_columns": [{
-                    "column_name": "entrez_id"
-                    , "attribute_name": "Alias"
-                    , "value_prefix": "Entrez Gene"
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "gene"
-                }]
-        }
-        , "target_plan": {
-            "rep_prefix": "DOID"
-            , "rep_column": "doid"
-            , "node_name_column": "disease"
-            , "property_columns": [{
-                    "column_name": "phenotypes"
-                    , "attribute_name": "Phenotypes"
-                    , "value_prefix": ""
-                }
-                , {
-                    "attribute_name": "Node Type"
-                    , "default_value": "disease"
-                }]
-        }
-        , "edge_plan": {
-            "default_predicate": "is related to"
-            , "property_columns": [{
-                    "column_name": "variant"
-                    , "attribute_name": "Variant"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "variant_id"
-                    , "attribute_name": "CIViC variant ID"
-                    , "value_prefix": "CIViC variant"
-                }
-                , {
-                    "column_name": "variant_origin"
-                    , "attribute_name": "Variant origin"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "variant_summary"
-                    , "attribute_name": "Variant summary"
-                    , "value_prefix": ""
-                }
-                , {
-                    "column_name": "evidence_id"
-                    , "attribute_name": "CIViC evidence ID"
-                    , "value_prefix": "CIViC evidence"
-                }
-                , {
-                    "column_name": "representative_transcript"
-                    , "attribute_name": "Representative transcript"
-                    , "value_prefix": "Ensembl Transcript"
-                }
-                , {
-                    "column_name": "pubmed_id"
-                    , "attribute_name": "Citation"
-                    , "value_prefix": "PMID"
-                }
-                              , "evidence_type"
-                              , "evidence_direction"
-                              , "evidence_level"
-                              , "drugs"
-                              , "clinical_significance"
-                              , "evidence_statement"
-                              , "rating"
-                              , "evidence_status"
-                              , "last_review_date"]
-        }
-    }
-}
+def get_network_properties(params):
+    net_prop_ndex = nc2.Ndex2(params.get('server'), params.get('username'), params.get('password'))
 
-params['all_load_plans'] = all_load_plans
+    network_properties_stream = net_prop_ndex.get_network_aspect_as_cx_stream(params.get('update_uuid'), 'networkAttributes')
 
-if params.get('load_plan') == 'all':
+    network_properties = network_properties_stream.json()
+    return_properties = {}
+    for net_prop in network_properties:
+        return_properties[net_prop.get('n')] = net_prop.get('v')
+
+    return return_properties
+
+
+process_civic = CivicUploader(args.username, args.password, load_type=args.network_type, server=args.server,
+                              template_id=args.template, file=args.tsv_file)
+
+
+#========================================
+# PROCESS FILES (LOOP FOR ALL LOAD PLAN
+#========================================
+if process_civic.get_load_plan() == 'all':
     for i in range(1, 5):
-        params['load_plan'] = get_network_type(str(i))
+        process_civic.set_load_plan(i)
 
-        params['net_name'] = network_name_mapping.get(params.get('load_plan'))
-        if params.get('net_name') is not None:
-            params['net_name_upper'] = params.get('net_name').upper()
+        process_params = process_civic.get_params()
 
-        if update_mapping.get(params.get('net_name_upper')) is not None:
-            params['update_uuid'] = update_mapping.get(params.get('net_name_upper'))
-
-        run_loading(params)
+        run_loading(process_params)
 else:
-    run_loading(params)
+    run_loading(process_civic.get_params())
 print('Done')
+
