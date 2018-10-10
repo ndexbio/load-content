@@ -85,7 +85,7 @@ class CivicUploader():
             return 'http://dev.ndexbio.org'
 
     def _get_network_type(self, network_type):
-        if not isinstance(network_type, str):
+        if network_type is not None and not isinstance(network_type, str):
             network_type = str(network_type)
 
         return_type = None
