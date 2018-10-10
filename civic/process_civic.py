@@ -1,16 +1,9 @@
 import ndex2.client as nc2
 import pandas as pd
-#import ndexutil.tsv.tsv2nicecx as t2n
 import ndexutil.tsv.tsv2nicecx2 as t2n
-import beta.layouts as layouts
-#from ndex.networkn import NdexGraph
-import networkx as nx
 import argparse
-import json
 import jsonschema
 from os import path
-from jsonschema import validate
-import random
 import ndex2.client as nc
 
 current_directory = path.dirname(path.abspath(__file__))
