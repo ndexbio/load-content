@@ -1,0 +1,43 @@
+{
+    "context":
+        {
+            "ncbigene": "http://identifiers.org/ncbigene/",
+            "CID": "http://identifiers.org/pubchem.compound/",
+            "SID": "http://identifiers.org/pubchem.substance/",
+            "iuphar": "http://identifiers.org/iuphar.ligand/",
+            "pmid": "http://identifiers.org/pubmed/"
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "Node approved ID",
+        "node_name_column": "Node approved symbol",
+        "property_columns": ["Node type"]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "Target approved id",
+        "node_name_column": "Target approved symbol",
+        "property_columns": ["Physiological system",
+                             "Tissue/cell line",
+                             "Species"]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "binds in the vicinity of the trascrption start site for",
+        "predicate_id_column": "",
+        "property_columns": ["Experiment Name",
+                             "Experiment number",
+                             "Binding Score::double",
+                             "Species",
+                             "Physiological system",
+                             "Organ",
+                             "Tissue/cell line",
+                             "Probe",
+                             "Data Type"]
+    }
+}

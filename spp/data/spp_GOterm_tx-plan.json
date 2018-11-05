@@ -1,0 +1,43 @@
+{
+    "context":
+        {
+            "ncbigene": "http://identifiers.org/ncbigene/",
+            "CID": "http://identifiers.org/pubchem.compound/",
+            "SID": "http://identifiers.org/pubchem.substance/",
+            "iuphar": "http://identifiers.org/iuphar.ligand/",
+            "pmid": "http://identifiers.org/pubmed/"
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "Node approved ID",
+        "node_name_column": "Node approved symbol",
+        "property_columns": ["Node type",
+                              "GO Term identifier"]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "ncbigene",
+        "rep_column": "Target approved ID",
+        "node_name_column": "Target approved symbol",
+        "property_columns": [""]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "is an upstream regulator of",
+        "predicate_id_column": "",
+        "property_columns": ["Experiment Name",
+                             "Experiment number",
+                             "Fold Change::double",
+                             "P-value::double",
+                             "Species",
+                             "Physiological system",
+                             "Organ",
+                             "Tissue/cell line",
+                             "Probe",
+                             "Data Type"]
+    }
+}

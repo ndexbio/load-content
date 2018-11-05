@@ -1,0 +1,41 @@
+{
+    "context":
+        {
+            "ncbigene": "http://identifiers.org/ncbigene/",
+            "CID": "http://identifiers.org/pubchem.compound/",
+            "SID": "http://identifiers.org/pubchem.substance/",
+            "iuphar": "http://identifiers.org/iuphar.ligand/",
+            "pmid": "http://identifiers.org/pubmed/"
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "Target approved ID",
+        "node_name_column": "Target approved symbol",
+        "property_columns": ["Species"]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "Node approved ID",
+        "node_name_column": "Node approved symbol",
+        "property_columns": ["Node type"]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "transcription start site is bound by",
+        "predicate_id_column": "",
+        "property_columns": ["Experiment Name",
+                             "Experiment number",
+                             "Binding Score::double",
+                             "Species",
+                             "Physiological system",
+                             "Organ",
+                             "Tissue/cell line",
+                             "Probe",
+                             "Data Type"]
+    }
+}
