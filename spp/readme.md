@@ -8,8 +8,11 @@
 
 ### Argument descriptions
 -s (NDEx server to load network(s) to)
+
 -t (UUID of a graphic template)
 
 --file (Edge list file name.  Default is to run imports from load_list.json)
+
 --plan (Import plan file name)
+
 --update (Update existing network.  Keep metadata.  Default is True)
