@@ -13,8 +13,7 @@
         "rep_prefix": "",
         "rep_column": "Node approved ID",
         "node_name_column": "Node approved symbol",
-        "property_columns": ["Node type",
-                              "GO Term identifier"]
+        "property_columns": ["Node type"]
     },
     
     "target_plan": 
@@ -22,7 +21,7 @@
         "rep_prefix": "ncbigene",
         "rep_column": "Target approved ID",
         "node_name_column": "Target approved symbol",
-        "property_columns": [""]
+        "property_columns": ["GO Term identifier"]
     },
     
     "edge_plan": 

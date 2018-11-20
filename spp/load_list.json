@@ -1,0 +1,50 @@
+[
+    {
+        "load_plan": "spp_single_cx_option1-plan.json",
+        "file_name": "Single Gene Cistromics NNMT_v2.txt",
+        "name": "NNMT_cx_option1",
+        "style": "aa31b564-e169-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_single_cx_option2-plan.json",
+        "file_name": "Single Gene Cistromics NNMT_v2.txt",
+        "name": "NNMT_cx_option2",
+        "style": "aa31b564-e169-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_single_tx_option3-plan.json",
+        "file_name": "Single Gene_Transcriptomics_NNMT_v3.txt",
+        "name": "NNMT_tx_option3",
+        "style": "cbeb2367-e488-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_single_tx_option2-plan.json",
+        "file_name": "Single Gene_Transcriptomics_NNMT_v3.txt",
+        "name": "NNMT_tx_option2",
+        "style": "cbeb2367-e488-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_GOterm_tx-plan.json",
+        "file_name": "GO Term Cell Division Catalytic Receptors Transcriptomics Hs_v2.txt",
+        "name": "SPP_GOterm transcriptomic",
+        "style": "88ac9a01-e48b-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_GOterm_cx-plan.json",
+        "file_name": "GO Term Cell Division E2F_FOX_Cistomics Hs_v2.txt",
+        "name": "SPP_GOterm_cistromic",
+        "style": "4eaca20e-e490-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_consensome_tx-plan.json",
+        "file_name": "spp_Hs_INSR_tx.txt",
+        "name": "Hs-INSR tx Consensome",
+        "style": "819fecca-e168-11e8-aaa6-0ac135e8bacf"
+    },
+    {
+        "load_plan": "spp_consensome_cx-plan.json",
+        "file_name": "spp_Hs_Myc_Max_cx.txt",
+        "name": "Hs - Myc/Max cx Consensome",
+        "style": "819fecca-e168-11e8-aaa6-0ac135e8bacf"
+    }
+]

@@ -1,0 +1,35 @@
+{
+    "context":
+        {
+            "ncbigene": "http://identifiers.org/ncbigene/",
+            "doi": "https://doi.org/"
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "FAMILY",
+        "node_name_column": "FAMILY",
+        "property_columns": ["CAT",
+                             "CLAS"]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "ncbigene",
+        "rep_column": "GENEID",
+        "node_name_column": "TARGET",
+        "property_columns": [""]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "perturbation, regulates expression of",
+        "predicate_id_column": "",
+        "property_columns": ["PERCENTILE::double",
+                             "MCS2::double",
+                             {"column_name":"DOI",
+                             "attribute_name":"DOI",
+                             "value_prefix":"doi"}]
+    }
+}

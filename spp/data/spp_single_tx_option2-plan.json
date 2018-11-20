@@ -23,7 +23,8 @@
         "node_name_column": "Organ",
         "property_columns": ["Physiological system",
                              "Tissue/cell line",
-                             "Species"]
+                             {"attribute_name":"Node type",
+                              "default_value":"Organ"}]
     },
     
     "edge_plan": 

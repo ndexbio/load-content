@@ -11,22 +11,26 @@
     "source_plan": 
     {
         "rep_prefix": "",
-        "rep_column": "Target approved ID",
-        "node_name_column": "Target approved symbol",
-        "property_columns": ["Species"]
+        "rep_column": "Family",
+        "node_name_column": "Family",
+        "property_columns": [{"column_name":"Family type",
+                             "attribute_name":"Node type"}]
     },
     
     "target_plan": 
     {
         "rep_prefix": "",
-        "rep_column": "Node approved ID",
-        "node_name_column": "Node approved symbol",
-        "property_columns": ["Node type"]
+        "rep_column": "Organ",
+        "node_name_column": "Organ",
+        "property_columns": ["Physiological system",
+                             "Tissue/cell line",
+                            {"attribute_name":"Node type",
+                            "default_value":"Organ"}]
     },
     
     "edge_plan": 
     {
-        "default_predicate": "regulated upstream by",
+        "default_predicate": "is an upstream regulator of NNMT in",
         "predicate_id_column": "",
         "property_columns": ["Experiment Name",
                              "Experiment number",
@@ -37,6 +41,9 @@
                              "Organ",
                              "Tissue/cell line",
                              "Probe",
-                             "Data Type"]
+                             "Data Type",
+                             "Perturbant approved symbol",
+                             "Perturbant approved ID",
+                              "Perturbant type"]
     }
 }

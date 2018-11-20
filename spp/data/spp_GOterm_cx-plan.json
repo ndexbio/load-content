@@ -21,9 +21,7 @@
         "rep_prefix": "",
         "rep_column": "Target approved id",
         "node_name_column": "Target approved symbol",
-        "property_columns": ["Physiological system",
-                             "Tissue/cell line",
-                             "Species"]
+        "property_columns": ["GO Term identifier"]
     },
     
     "edge_plan": 
