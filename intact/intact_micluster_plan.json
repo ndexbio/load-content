@@ -6,9 +6,9 @@
             "pubmed": "http://identifiers.org/pubmed/",
             "psi-mi": "http://identifiers.org/psimi/",
             "mint": "http://identifiers.org/mint/",
-            "imex": "htpp://identifiers.org/imex/",
+            "imex": "http://identifiers.org/imex/",
             "doi": "http://doi.org/",
-            "taxid": "htpp://identifiers.org/taxonomy/"
+            "taxid": "http://identifiers.org/taxonomy/"
 
         },
 

@@ -82,6 +82,41 @@ if args.tsv_file:
 else:
     param_set = param_set_default
 
+def remove_braces_from_properties(property, replace_candidate=None, replace_with=None):
+    if property is not None:
+        property_value = property.get('v')
+
+        if isinstance(property_value, list):
+            for prop_value_item in property_value:
+                updated_list = []
+                if '(' in prop_value_item and ':' in prop_value_item:
+                    prop_split = prop_value_item.split('(')
+                    prop_keep_this = prop_split[0].replace('"', '')
+
+                    if replace_candidate is not None and replace_with is not None:
+                        if isinstance(replace_candidate, list):
+                            for rep_can in replace_candidate:
+                                prop_keep_this = prop_keep_this.replace(rep_can, replace_with)
+                        else:
+                            prop_keep_this = prop_keep_this.replace(replace_candidate, replace_with)
+
+                    updated_list.append(prop_keep_this)
+
+            property['v'] = updated_list
+        else:
+            if '(' in property_value and  ':' in property_value:
+                prop_split = property_value.split('(')
+                prop_keep_this = prop_split[0].replace('"', '')
+
+                if replace_candidate is not None and replace_with is not None:
+                    if isinstance(replace_candidate, list):
+                        for rep_can in replace_candidate:
+                            prop_keep_this = prop_keep_this.replace(rep_can, replace_with)
+                    else:
+                        prop_keep_this = prop_keep_this.replace(replace_candidate, replace_with)
+
+                property['v'] = prop_keep_this
+
 process_importer = ContentImporter(my_server, my_username, my_password)
 
 for param in param_set:
@@ -96,6 +131,10 @@ for param in param_set:
         node_name_clean = node_name.replace('uniprotkb:', '')
         node['n'] = node_name_clean.split('(')[0]
         nice_cx.set_node_attribute(node_id, 'aliases', 'uniprotkb:' + node.get('n'))
+
+        taxid_interactor = nice_cx.get_node_attribute(node, 'Taxid Interactor')
+        remove_braces_from_properties(taxid_interactor)
+
 
     edge_merge_map = {}
     for edge_id, edge in nice_cx.get_edges():

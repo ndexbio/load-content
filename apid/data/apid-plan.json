@@ -4,8 +4,8 @@
             "intact": "http://identifiers.org/intact/",
             "uniprotkb": "http://identifiers.org/uniprot/",
             "pubmed": "http://identifiers.org/pubmed/",
-            "biogrid": "http://identifiers.org/biogrid/interaction/"
-            
+            "biogrid": "http://identifiers.org/biogrid/interaction/",
+            "taxid": "http://identifiers.org/taxonomy/"
         },
 
     "source_plan": 
@@ -13,8 +13,16 @@
         "rep_prefix": "",
         "rep_column": "#ID Interactor A",
         "node_name_column": "Aliases Interactor A",
-        "property_columns": ["Alt IDs Interactor A",
-                            "Taxid Interactor A"]
+        "property_columns": [
+          {
+            "column_name":"Alt IDs Interactor A",
+            "attribute_name":"Alt IDs Interactor"
+          },
+          {
+            "column_name":"Taxid Interactor A",
+            "attribute_name":"Taxid Interactor"
+          }
+        ]
     },
     
     "target_plan": 
@@ -22,8 +30,16 @@
         "rep_prefix": "",
         "rep_column": "ID Interactor B",
         "node_name_column": "Aliases Interactor B",
-        "property_columns": ["Alt IDs Interactor B",
-                            "Taxid Interactor B"]
+        "property_columns": [
+           {
+             "column_name":"Alt IDs Interactor B",
+             "attribute_name":"Alt IDs Interactor"
+           },
+           {
+             "column_name":"Taxid Interactor B",
+             "attribute_name":"Taxid Interactor"
+           }
+        ]
     },
     
     "edge_plan": 
