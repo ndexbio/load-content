@@ -1,0 +1,74 @@
+{
+  "context":
+  {
+    "HGNC": "http://identifiers.org/hgnc/",
+    "ensembl": " https://www.ensembl.org/id/",
+    "human orfeome collection": "http://horfdb.dfci.harvard.edu/index.php?page=showdetail&orf=",
+    "taxid": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=",
+    "psi-mi": "https://www.ebi.ac.uk/ols/ontologies/mi/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F"
+  },
+  "source_plan": {
+    "node_name_column": "Interactor A",
+    "property_columns": [
+      {
+          "column_name": "Alternative ID Interactor A",
+          "attribute_name": "Alternative ID",
+          "delimiter": "|"
+      },
+      {
+          "column_name": "Alias Interactor A",
+          "attribute_name": "aliases",
+          "delimiter": "|"
+      },
+      {
+          "column_name": "NCBI Taxonomy identifier for interactor A",
+          "attribute_name": "NCBI Taxonomy identifier",
+          "delimiter": "|"
+      }
+    ]
+  },
+  "target_plan": {
+    "node_name_column": "Interactor B",
+    "property_columns": [
+      {
+          "column_name": "Alternative ID Interactor B",
+          "attribute_name": "Alternative ID",
+          "delimiter": "|"
+      },
+      {
+          "column_name": "Alias Interactor B",
+          "attribute_name": "aliases",
+          "delimiter": "|"
+      },
+      {
+          "column_name": "NCBI Taxonomy identifier for interactor B",
+          "attribute_name": "NCBI Taxonomy identifier",
+          "delimiter": "|"
+      }
+    ]
+  },
+  "edge_plan": {
+    "predicate_id_column": "Interaction types",
+    "property_columns": [
+      {
+          "column_name": "First author",
+          "attribute_name": "First author"
+      },
+      {
+          "column_name": "Confidence score",
+          "attribute_name": "Confidence score",
+          "data_type": "double"
+      },
+      {
+          "column_name": "Interaction types",
+          "attribute_name": "Interaction types"
+      },
+      {
+          "column_name": "Interaction detection methods",
+          "attribute_name": "Interaction detection methods"
+      }
+    ]
+
+  }
+}
+
