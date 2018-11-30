@@ -1,0 +1,58 @@
+{
+    "context":
+        {
+            "intact": "http://identifiers.org/intact/",
+            "uniprotkb": "http://identifiers.org/uniprot/",
+            "pubmed": "http://identifiers.org/pubmed/",
+            "psi-mi": "http://identifiers.org/psimi/",
+            "mint": "http://identifiers.org/mint/",
+            "imex": "htpp://identifiers.org/imex/",
+            "doi": "http://doi.org/"
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "ID(s) interactor A",
+        "node_name_column": "Alias(es) interactor A",
+        "property_columns": [
+            {
+                "column_name": "Alt. ID(s) interactor A",
+                "attribute_name": "Alt. ID(s) interactor",
+                "delimiter": "|"
+            }
+        ]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "ID(s) interactor B",
+        "node_name_column": "Alias(es) interactor B",
+        "property_columns": [
+            {
+                "column_name": "Alt. ID(s) interactor B",
+                "attribute_name": "Alt. ID(s) interactor",
+                "delimiter": "|"
+            }
+          ]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "interacts with",
+        "predicate_id_column": "",
+        "property_columns": ["Interaction type(s)",
+                             "Interaction detection method(s)",
+                             "Interaction identifier(s)",
+                             "Publication 1st author(s)",
+                             {"column_name":"Publication Identifier(s)",
+                             "attribute_name":"citation",
+                             "value_prefix":"",
+                             "delimiter":"|"},
+                             "Taxid interactor A",
+                             "Taxid interactor B",
+                             "Source database(s)",
+                             "Confidence value(s)"]
+    }
+}
