@@ -7,7 +7,9 @@
             "psi-mi": "http://identifiers.org/psimi/",
             "mint": "http://identifiers.org/mint/",
             "imex": "htpp://identifiers.org/imex/",
-            "doi": "http://doi.org/"
+            "doi": "http://doi.org/",
+            "taxid": "htpp://identifiers.org/taxonomy/"
+
         },
 
     "source_plan": 
@@ -16,6 +18,11 @@
         "rep_column": "ID(s) interactor A",
         "node_name_column": "Alias(es) interactor A",
         "property_columns": [
+           {
+             "column_name":"Taxid interactor A",
+             "attribute_name":"Taxid interactor",
+             "delimiter":"|"
+           },
             {
                 "column_name": "Alt. ID(s) interactor A",
                 "attribute_name": "Alt. ID(s) interactor",
@@ -30,6 +37,11 @@
         "rep_column": "ID(s) interactor B",
         "node_name_column": "Alias(es) interactor B",
         "property_columns": [
+           {
+             "column_name":"Taxid interactor B",
+             "attribute_name":"Taxid interactor",
+             "delimiter":"|"
+           },
             {
                 "column_name": "Alt. ID(s) interactor B",
                 "attribute_name": "Alt. ID(s) interactor",
@@ -42,17 +54,23 @@
     {
         "default_predicate": "interacts with",
         "predicate_id_column": "",
-        "property_columns": ["Interaction type(s)",
-                             "Interaction detection method(s)",
-                             "Interaction identifier(s)",
-                             "Publication 1st author(s)",
-                             {"column_name":"Publication Identifier(s)",
-                             "attribute_name":"citation",
-                             "value_prefix":"",
-                             "delimiter":"|"},
-                             "Taxid interactor A",
-                             "Taxid interactor B",
-                             "Source database(s)",
-                             "Confidence value(s)"]
+        "property_columns": [
+          "Interaction type(s)",
+           "Interaction detection method(s)",
+           {
+             "column_name":"Interaction identifier(s)",
+             "attribute_name":"Interaction identifier(s)",
+             "delimiter":"|"
+           },
+           "Publication 1st author(s)",
+           {
+             "column_name":"Publication Identifier(s)",
+             "attribute_name":"citation",
+             "value_prefix":"",
+             "delimiter":"|"
+           },
+           "Source database(s)",
+           "Confidence value(s)"
+        ]
     }
 }

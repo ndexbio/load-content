@@ -136,7 +136,11 @@ for n_id, n in network.get_nodes():
     taxid = network.get_node_attribute(n, 'NCBI Taxonomy identifier')
     remove_braces_from_properties(taxid)
 
+    taxid_interactor = network.get_node_attribute(n, 'Taxid interactor')
+    remove_braces_from_properties(taxid_interactor)
+
 for e_id, e in network.get_edges():
+
     interaction_types = network.get_edge_attribute(e, 'Interaction type(s)')
     remove_braces_from_properties(interaction_types, replace_candidate=':MI:', replace_with=':MI:')
 
