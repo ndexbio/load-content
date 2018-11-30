@@ -1,0 +1,44 @@
+{
+    "context":
+        {
+            "intact": "http://identifiers.org/intact/",
+            "uniprotkb": "http://identifiers.org/uniprot/",
+            "pubmed": "http://identifiers.org/pubmed/",
+            "biogrid": "http://identifiers.org/biogrid/interaction/"
+            
+        },
+
+    "source_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "#ID Interactor A",
+        "node_name_column": "Aliases Interactor A",
+        "property_columns": ["Alt IDs Interactor A",
+                            "Taxid Interactor A"]
+    },
+    
+    "target_plan": 
+    {
+        "rep_prefix": "",
+        "rep_column": "ID Interactor B",
+        "node_name_column": "Aliases Interactor B",
+        "property_columns": ["Alt IDs Interactor B",
+                            "Taxid Interactor B"]
+    },
+    
+    "edge_plan": 
+    {
+        "default_predicate": "interacts with",
+        "predicate_id_column": "",
+        "property_columns": ["Interaction Types",
+                             "Interaction Identifiers",
+                             "Publication 1st Author",
+                             {"column_name":"Publication Identifiers",
+                             "attribute_name":"citation",
+                             "value_prefix":"", "data_type": "list_of_string"},
+                             "Publication Identifiers",
+                             "Interaction Detection Method",
+                             "Source Database",
+                             "Confidence"]
+    }
+}
