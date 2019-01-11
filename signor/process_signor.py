@@ -412,17 +412,16 @@ def add_pathway_info(network, network_id):
 # cytoscape_visual_properties_template_id = 'f54eaef9-013c-11e8-81c8-06832d634f41'
 
 def cartesian(G):
-    return [{'cartesianLayout': [
-        {'node': n, 'x': float(G.pos[n][0]), 'y': float(G.pos[n][1])}
-        for n in G.pos
-        ]}]
+    return [{'node': n,
+             'x': float(G.pos[n][0]),
+             'y': float(G.pos[n][1])} for n in G.pos]
 
 def apply_spring_layout(network):
     my_networkx = network.to_networkx()
     my_networkx.pos = nx.drawing.spring_layout(my_networkx)
     #my_networkx.pos = nx.drawing.circular_layout(my_networkx)
     cartesian_aspect = cartesian(my_networkx)
-    network.set_opaque_aspect("cartesianCoordinates", cartesian_aspect)
+    network.set_opaque_aspect("cartesianLayout", cartesian_aspect)
 
 def upload_signor_network(network, server, username, password, update_uuid=False):
     if update_uuid:
