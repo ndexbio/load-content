@@ -1,10 +1,12 @@
 
+import logging
 import argparse
 from os import path
 import sys
 sys.path.append('..')
 from load_content_importer import ContentImporter
 current_directory = path.dirname(path.abspath(__file__))
+
 
 #============================
 # GET THE SCRIPT PARAMETERS
@@ -20,7 +22,19 @@ parser.add_argument('-u', dest='update_uuid', action='store', help='UUID of the 
 parser.add_argument('--name', dest='net_name', action='store', help='Delimiter to use to parse the text file')
 parser.add_argument('--description', dest='net_description', action='store', help='Delimiter to use to parse '
                                                                                   'the text file')
+parser.add_argument('--style_template', default='48676579-b147-11e8-95f2-525400c25d22',
+                    help='UUID of network on NDEx server to use for styling (' +
+                         'default 48676579-b147-11e8-95f2-525400c25d22)')
+parser.add_argument('-v', action='count', help='Logging verbosity max -vv')
 args = parser.parse_args()
+
+loglevel = logging.WARN
+if args.v is 1:
+    loglevel = logging.INFO
+elif args.v is 2:
+    loglevel = logging.DEBUG
+
+logging.basicConfig(level=loglevel)
 
 print(vars(args))
 
@@ -55,10 +69,13 @@ header = ['ID(s) interactor A', 'ID(s) interactor B', 'Alt. ID(s) interactor A',
           'Col40', 'Col41', 'Col42']
 
 process_importer = ContentImporter(my_server, my_username, my_password)
-process_importer.process_file(args.tsv_file, 'intact_micluster_plan.json', args.tsv_file.replace('.txt', ''),
-                              style_template='48676579-b147-11e8-95f2-525400c25d22', custom_header=header)
+process_importer.process_file(args.tsv_file, 'intact_micluster_plan.json',
+                              args.tsv_file.replace('.txt', ''),
+                              style_template=args.style_template,
+                              custom_header=header)
 
 network = process_importer.network
+
 
 def remove_braces_from_properties(property, replace_candidate=None, replace_with=None):
     if property is not None:
