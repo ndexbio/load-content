@@ -416,9 +416,9 @@ def cartesian(G):
              'x': float(G.pos[n][0]),
              'y': float(G.pos[n][1])} for n in G.pos]
 
-def apply_spring_layout(network):
+def apply_spring_layout(network, scale=1000.0):
     my_networkx = network.to_networkx()
-    my_networkx.pos = nx.drawing.spring_layout(my_networkx)
+    my_networkx.pos = nx.drawing.spring_layout(my_networkx, scale=scale)
     #my_networkx.pos = nx.drawing.circular_layout(my_networkx)
     cartesian_aspect = cartesian(my_networkx)
     network.set_opaque_aspect("cartesianLayout", cartesian_aspect)
