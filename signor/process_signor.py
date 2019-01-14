@@ -416,7 +416,7 @@ def cartesian(G):
              'x': float(G.pos[n][0]),
              'y': float(G.pos[n][1])} for n in G.pos]
 
-def apply_spring_layout(network, scale=1000.0):
+def apply_spring_layout(network, scale=500.0):
     my_networkx = network.to_networkx()
     my_networkx.pos = nx.drawing.spring_layout(my_networkx, scale=scale)
     #my_networkx.pos = nx.drawing.circular_layout(my_networkx)
