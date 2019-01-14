@@ -337,20 +337,6 @@ def get_signor_network(pathway_id, load_plan):
         # in all other cases, the identifier is already prefixed
         network.remove_node_attribute(node_id, "DATABASE")
 
-    # =================================
-    # POST PROCESS EDGE ATTRIBUTES
-    # Rename citation_ids to citation
-    # =================================
-    #for edge_id, edge in network.get_edges():
-    #    cit1 = network.get_edge_attribute(edge_id, "citation_ids")
-    #    if cit1 is not None:
-    #        network.add_edge_attribute(property_of=edge_id, name='citation',
-    #                                   values=cit1, type=cit1.get_data_type())
-    #        network.remove_edge_attribute(edge_id, "citation_ids")
-
-    #    cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
-        #print(cd)
-
     if len(network.edges) < 1 or  len(network.nodes) < 1:
         return None
     else:
@@ -434,19 +420,11 @@ def upload_signor_network(network, server, username, password, update_uuid=False
 def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_plan, server, username, password):
     network = get_signor_network(signor_id, load_plan)
     if network is not None:
-        # print(network.__str__())
         add_pathway_info(network, signor_id)
-        # print(network.to_cx())
         print(server)
         network.apply_template(username=username, password=password, server=server,
                                uuid=cytoscape_visual_properties_template_id)
         apply_spring_layout(network)
-        #network.generate_metadata_aspect()
-
-        #if network.node_int_id_generator:
-        #    network.node_id_lookup = list(network.node_int_id_generator)
-        #network.generate_aspect('nodes')
-        #network.generate_aspect('edges')
         print(network.get_name())
         network_update_key = update_signor_mapping.get(network.get_name().upper())
         if network_update_key is not None:
@@ -595,33 +573,6 @@ def get_full_signor_network(load_plan, species):
         # in all other cases, the identifier is already prefixed
         network.remove_node_attribute(node_id, "DATABASE")
 
-    # =================================
-    # POST PROCESS EDGE ATTRIBUTES
-    # Rename citation_ids to citation
-    # =================================
-    #for edge_id, edge in network.get_edges():
-    #    cit1 = network.get_edge_attribute_objects(edge_id, "citation_ids")
-    #    if cit1 is not None:
-    #        network.add_edge_attribute(property_of=cit1.get_property_of(), name='citation',
-    #                                   values=cit1.get_values(), type=cit1.get_data_type())
-    #        network.remove_edge_attribute(edge_id, "citation_ids")
-
-        #cd = network.get_edge_attribute_objects(edge_id, "CELL_DATA")
-        #if cd is not None:
-        #    cd_value = cd.get_values()
-        #    cd_split = cd_value.split(';')
-        #    cd.set_values(cd_split)
-
-        #    cd.set_data_type('list_of_string')
-
-        #td = network.get_edge_attribute_objects(edge_id, "TISSUE_DATA")
-        #if td is not None:
-        #    td_value = td.get_values()
-        #    td_split = td_value.split(';')
-        #    td.set_values(td_split)
-
-        #    td.set_data_type('list_of_string')
-
     template_network = ndex2.create_nice_cx_from_server(server=my_server,
                                                         uuid=cytoscape_visual_properties_template_id,
                                                         username=my_username, password=my_password)
@@ -640,7 +591,6 @@ def get_full_signor_network(load_plan, species):
     network.set_network_attribute("reference",
                                   "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
 
-    #print(network.get_summary())
     return network
 
 
