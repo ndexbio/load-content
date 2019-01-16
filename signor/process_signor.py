@@ -26,6 +26,7 @@ parser.add_argument('-s', dest='server', action='store', help='NDEx server for t
 
 parser.add_argument('-t', dest='template_id', action='store', help='ID for the network to use as a graphic template')
 
+
 args = parser.parse_args()
 
 print(vars(args))
@@ -348,9 +349,23 @@ def get_signor_network(pathway_id, load_plan):
 # print(signor_network.__str__())
 # TODO - end section
 
-def add_pathway_info(network, network_id):
+
+def add_pathway_info(network, network_id, cytoscape_visual_properties_template_id):
+    """
+    Adds network
+    :param network:
+    :param network_id:
+    :param cytoscape_visual_properties_template_id: UUID of NDEx network to
+           extract various network attributes such as description, rightsHolder,
+           reference, rights
+
+    :return:
+    """
     dataframe = get_signor_pathway_description_df(network_id)
     if dataframe is not None:
+        template_network = ndex2.create_nice_cx_from_server(server=my_server,
+                                                            uuid=cytoscape_visual_properties_template_id,
+                                                            username=my_username, password=my_password)
         if not pd.isnull(dataframe.iat[0, 1]):
             network.set_name(dataframe.iat[0, 1])
         if not pd.isnull(dataframe.iat[0, 0]):
@@ -358,13 +373,14 @@ def add_pathway_info(network, network_id):
         if not pd.isnull(dataframe.iat[0, 3]):
             network.set_network_attribute("author", dataframe.iat[0, 3])
         if not pd.isnull(dataframe.iat[0, 2]):
-            append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
-            network.set_network_attribute("description", '%s %s' % (dataframe.iat[0, 2], append_desc))
+            network.set_network_attribute("description",
+                                          '%s %s' % (dataframe.iat[0, 2],
+                                                     template_network.get_network_attribute('description')['v']))
 
-        network.set_network_attribute('rightsHolder', 'Prof. Gianni Cesareni')
-        network.set_network_attribute("rights", "Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)")
-        network.set_network_attribute("reference",
-                                      "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
+        network.set_network_attribute('rightsHolder',
+                                      template_network.get_network_attribute('rightsHolder')['v'])
+        network.set_network_attribute("rights", template_network.get_network_attribute('rights')['v'])
+        network.set_network_attribute("reference", template_network.get_network_attribute('reference')['v'])
         network.set_network_attribute('dataSource',
                                       'https://signor.uniroma2.it/pathway_browser.php?organism=&pathway_list=' + str(
                                           network_id))
@@ -420,7 +436,7 @@ def upload_signor_network(network, server, username, password, update_uuid=False
 def process_signor_id(signor_id, cytoscape_visual_properties_template_id, load_plan, server, username, password):
     network = get_signor_network(signor_id, load_plan)
     if network is not None:
-        add_pathway_info(network, signor_id)
+        add_pathway_info(network, signor_id, cytoscape_visual_properties_template_id)
         print(server)
         network.apply_template(username=username, password=password, server=server,
                                uuid=cytoscape_visual_properties_template_id)
@@ -463,8 +479,8 @@ for pathway_id in network_id_dataframe['pathway_id']:
 
 for sig_id in signor_uuids:
     my_ndex = nc.Ndex2(my_server, my_username, my_password)
-
-    my_ndex._make_network_public_indexed(sig_id)
+    # disabled for test
+    # my_ndex._make_network_public_indexed(sig_id)
 
 print('Done processing indiviual pathways.')
 
@@ -492,8 +508,6 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         elif species_id == '10116':
             network.set_network_attribute("organism", "Rat, 10116, Rattus norvegicus")
 
-        # add_pathway_info(network, signor_id)
-        # print(network.to_cx())
         network.apply_template(
             username=username,
             password=password,
@@ -519,8 +533,8 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         while True:
             try:
                 my_ndex = nc.Ndex2(my_server, my_username, my_password)
-
-                my_ndex._make_network_public_indexed(sig_id)
+                # disabled for test
+                # my_ndex._make_network_public_indexed(sig_id)
                 break
             except Exception as excp:
                 print('Network not ready to be made PUBLIC.  Sleeping...')
@@ -579,17 +593,20 @@ def get_full_signor_network(load_plan, species):
 
     network.set_network_attribute("labels", template_network.get_network_attribute('labels'))
     network.set_network_attribute("author", template_network.get_network_attribute('author'))
-    append_desc = '<p><br/></p><h6><b>Node Legend:</b><br/>Light green oval &gt; Protein/Protein Family<br/>Dark green round rectangle &gt; Complex<br/>Orange octagon &gt; Chemical<br/>Purple octagon &gt; Small molecule<br/>White rectangles &gt; Phenotype<br/>Light blue diamond &gt; Stimulus</h6><h6><b>Edge Legend:</b><br/>Solid &gt; Direct interaction<br/>Dashed &gt; Indirect or Unknown interaction<br/>Blue &gt; Up-regulation<br/>Red &gt; Down-regulation<br/>Black &gt; Form complex or Unknown</h6>'
 
-    full_desc = 'This network contains all the ' + species_mapping.get(species) + ' interactions currently available in SIGNOR'
+    full_desc = ('This network contains all the ' +
+                 species_mapping.get(species) +
+                 ' interactions currently available in SIGNOR' +
+                 template_network.get_network_attribute('description')['v'])
+
     network.set_network_attribute('description', full_desc)
 
     network.set_network_attribute("version", f"{datetime.now():%d-%b-%Y}")  # "0.0.1")
 
-    network.set_network_attribute('rightsHolder', 'Prof. Gianni Cesareni')
-    network.set_network_attribute("rights", "Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)")
+    network.set_network_attribute('rightsHolder', template_network.get_network_attribute('rightsHolder')['v'])
+    network.set_network_attribute('rights', template_network.get_network_attribute('rights')['v'])
     network.set_network_attribute("reference",
-                                  "<div>Perfetto L., <i>et al.</i></div><div><b>SIGNOR: a database of causal relationships between biological entities</b><i>.</i></div><div>Nucleic Acids Res. 2016 Jan 4;44(D1):D548-54</div><div><span><a href=\"https://doi.org/10.1093/nar/gkv1048\" target=\"\">doi: 10.1093/nar/gkv1048</a></span></div>")
+                                  template_network.get_network_attribute('reference')['v'])
 
     return network
 
