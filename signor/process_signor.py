@@ -479,8 +479,7 @@ for pathway_id in network_id_dataframe['pathway_id']:
 
 for sig_id in signor_uuids:
     my_ndex = nc.Ndex2(my_server, my_username, my_password)
-    # disabled for test
-    # my_ndex._make_network_public_indexed(sig_id)
+    my_ndex._make_network_public_indexed(sig_id)
 
 print('Done processing indiviual pathways.')
 
@@ -533,8 +532,7 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         while True:
             try:
                 my_ndex = nc.Ndex2(my_server, my_username, my_password)
-                # disabled for test
-                # my_ndex._make_network_public_indexed(sig_id)
+                my_ndex._make_network_public_indexed(sig_id)
                 break
             except Exception as excp:
                 print('Network not ready to be made PUBLIC.  Sleeping...')
