@@ -44,10 +44,14 @@
     {
         "default_predicate": "correlation",
         "predicate_id_column": "EFFECT",
-        "citation_id_column": "PMID",
-        "citation_id_prefix": "pubmed",
         "property_columns": [
                {
+                    "column_name": "PMID",
+                    "attribute_name": "citation",
+                    "value_prefix": "pubmed",
+                    "delimiter": "|"
+                },
+            {
                     "column_name": "MECHANISM",
                     "attribute_name": "MECHANISM"
                 },
