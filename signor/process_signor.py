@@ -4,7 +4,7 @@ import requests
 import json
 import pandas as pd
 import io
-
+import logging
 import sys
 import jsonschema
 from datetime import datetime
@@ -26,6 +26,11 @@ parser.add_argument('-s', dest='server', action='store', help='NDEx server for t
 
 parser.add_argument('-t', dest='template_id', action='store', help='ID for the network to use as a graphic template')
 
+loglevel = logging.DEBUG
+LOG_FORMAT = "%(asctime)-15s %(levelname)s %(relativeCreated)dms " \
+             "%(filename)s::%(funcName)s():%(lineno)d %(message)s"
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=logging.DEBUG)
 
 args = parser.parse_args()
 
