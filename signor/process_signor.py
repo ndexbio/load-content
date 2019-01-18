@@ -17,6 +17,8 @@ import time
 from os import listdir, path, makedirs, stat, remove
 import urllib
 
+logger = logging.getLogger('process_signor')
+
 parser = argparse.ArgumentParser(description='Signor network loader')
 
 parser.add_argument('username', action='store', nargs='?', default=None)
@@ -26,14 +28,19 @@ parser.add_argument('-s', dest='server', action='store', help='NDEx server for t
 
 parser.add_argument('-t', dest='template_id', action='store', help='ID for the network to use as a graphic template')
 
+parser.add_argument('--privateonly',
+                    help='If set, code SKIPS call to make network public and' +
+                         ' indexed. NOTE: This only has an effect for new ' +
+                         'networks, updated networks are not touched',
+                    action='store_true')
+
 loglevel = logging.DEBUG
 LOG_FORMAT = "%(asctime)-15s %(levelname)s %(relativeCreated)dms " \
              "%(filename)s::%(funcName)s():%(lineno)d %(message)s"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
-logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=logging.DEBUG)
-
+logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=loglevel)
+logger.setLevel(loglevel)
 args = parser.parse_args()
-
 print(vars(args))
 
 # get the connection parameters from the ndex_tutorial_config.json file in your home directory.
@@ -483,13 +490,18 @@ for pathway_id in network_id_dataframe['pathway_id']:
             if limit:
                 count += 1
 
-for sig_id in signor_uuids:
+if args.privateonly is False:
     my_ndex = nc.Ndex2(my_server, my_username, my_password)
-    my_ndex._make_network_public_indexed(sig_id)
+    for sig_id in signor_uuids:
+        logger.info('Making network ' + sig_id +
+                    ' public, showcased, and searchable')
+        my_ndex._make_network_public_indexed(sig_id)
 
+logger.info('Done processing individual pathways.')
 print('Done processing indiviual pathways.')
 
-def process_full_signor(cytoscape_visual_properties_template_id, load_plan, server, username, password):
+def process_full_signor(cytoscape_visual_properties_template_id, load_plan, server, username, password,
+                        privateonly=False):
     processed_uuids = []
     species_mapping = {'9606': 'Human', '10090': 'Mouse', '10116': 'Rat'}
     print('')
@@ -538,7 +550,10 @@ def process_full_signor(cytoscape_visual_properties_template_id, load_plan, serv
         while True:
             try:
                 my_ndex = nc.Ndex2(my_server, my_username, my_password)
-                my_ndex._make_network_public_indexed(sig_id)
+                if privateonly is False:
+                    logger.info('Making network ' + sig_id +
+                                ' public, showcased, and searchable')
+                    my_ndex._make_network_public_indexed(sig_id)
                 break
             except Exception as excp:
                 print('Network not ready to be made PUBLIC.  Sleeping...')
@@ -616,7 +631,8 @@ def get_full_signor_network(load_plan, species):
 
 
 print('Starting full SIGNOR.')
-process_full_signor(cytoscape_visual_properties_template_id, load_plan, my_server, my_username, my_password)
+process_full_signor(cytoscape_visual_properties_template_id, load_plan, my_server, my_username, my_password,
+                    privateonly=args.privateonly)
 print('Done processing full SIGNOR.')
 
 
