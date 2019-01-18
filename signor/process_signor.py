@@ -55,7 +55,8 @@ if args.template_id is not None:
     cytoscape_visual_properties_template_id = args.template_id
 else:
     if 'dev.ndexbio.org' in my_server:
-        cytoscape_visual_properties_template_id = 'cded1818-1c0d-11e8-801d-06832d634f41' # DEV
+        # cytoscape_visual_properties_template_id = 'cded1818-1c0d-11e8-801d-06832d634f41' # DEV
+        cytoscape_visual_properties_template_id = '86f63bf8-1b48-11e9-a05d-525400c25d22' # new DEV
     else:
         cytoscape_visual_properties_template_id = 'ece36fa0-1e5d-11e8-b939-0ac135e8bacf' # PUBLIC
 
