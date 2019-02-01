@@ -3,15 +3,18 @@ import pandas as pd
 import os
 import argparse
 import sys
-#import nicecxModel
-#from nicecxModel.cx.aspects import ATTRIBUTE_DATA_TYPE
+import logging
+
 from datetime import datetime
 import re
 import ndexutil.tsv.tsv2nicecx2 as t2n
 
+logger = logging.getLogger('load_biogrid_organism')
+
 
 def cvtfield(f):
     return "" if f == '-' else f
+
 
 def main():
 
@@ -25,13 +28,31 @@ def main():
 
     parser.add_argument('-t', dest='template_id', action='store',
                         help='ID for the network to use as a graphic template')
-
-    #parser.add_argument('-target', dest='target_network_id', action='store',
-    #                    help='ID for the network to be updated')
+    parser.add_argument('--organism', help='Path to organism text file',
+                        default='organism_list.txt')
+    parser.add_argument('-v', action='count', help='Sets verbosity, max -vvvvv')
 
     args = parser.parse_args()
 
-    print(vars(args))
+    loglevel = logging.FATAL
+
+    if not args.v is None and args.v > 0:
+        if args.v >= 5:
+            loglevel = logging.DEBUG
+        else:
+            loglevel = 50 - (args.v*10)
+
+    LOG_FORMAT = "%(asctime)-15s %(levelname)s %(relativeCreated)dms " \
+                 "%(filename)s::%(funcName)s():%(lineno)d %(message)s"
+    logging.basicConfig(level=loglevel, format=LOG_FORMAT)
+    logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=loglevel)
+
+
+    logger.setLevel(loglevel)
+
+    sys.stdout.write('Logging level set to ' + str(loglevel) + '\n')
+    sys.stdout.flush()
+    logger.debug(vars(args))
 
     version = args.version
     username = args.username
@@ -41,13 +62,10 @@ def main():
     else:
             server = 'public.ndexbio.org'
 
- #       print ("Usage load_biogrid.py version user_name password [server]\nFor example: 3.4.158 biogrid mypassword test.ndexbio.org\n")
- #       print ("server name is optional, default is public.ndexbio.org\n")
-
     PROTFILE_NAME = "BIOGRID-ORGANISM-" + version + ".tab2"
     prog = re.compile("http:\/\/.*/\#\/network\/(.*)")
 
-    with open('organism_list.txt') as orgsh:
+    with open(args.organism) as orgsh:
         for org_line in orgsh:
             ro = org_line.strip().split("\t")
             organism = ro[0]
@@ -57,17 +75,20 @@ def main():
             if target_uuid:
                 target_uuid = prog.match(target_uuid).group(1) if prog.match(target_uuid) else target_uuid
 
-            print ("Processing " + organism)
-            #unpack the zip file for this organims
-            working_file = 'BIOGRID-ORGANISM-'+ organism + '-' + version +'.tab2.txt'
-            os.system('unzip -o -p ' + PROTFILE_NAME + '.zip ' + working_file + ' >' + working_file)
+            logger.info("Processing " + organism)
 
+            #unpack the zip file for this organims
+
+            working_file = 'BIOGRID-ORGANISM-'+ organism + '-' + version +'.tab2.txt'
+            unzipcmd = 'unzip -o -p ' + PROTFILE_NAME + '.zip ' + working_file + ' >' + working_file
+
+            logger.debug('Running ' + unzipcmd)
+            os.system(unzipcmd)
 
             with open(working_file) as fh:
-
-                outFile = organism + str(os.getpid()) + ".txt"
+                outfile = organism + str(os.getpid()) + ".txt"
                 result = {}
-                fho = open(outFile, "w")
+                fho = open(outfile, "w")
                 line_cnt = 0
                 pubmed_id_idx = 8  # this is the column number in the preprocessed file for pubmed ids.
                 for line in fh:
@@ -104,7 +125,7 @@ def main():
                 fho.write('\t'.join(value) + "\n")
             fho.close()
 
-            print(str(datetime.now()) + " - preprocess finished. newfile has " + str(len(result)) + " lines.\n")
+            logger.info(str(datetime.now()) + " - preprocess finished. newfile has " + str(len(result)) + " lines.\n")
             sys.stdout.flush()
             result = None
             path_to_load_plan = 'human_plan.json'
@@ -112,11 +133,11 @@ def main():
             with open(path_to_load_plan, 'r') as lp:
                 load_plan = json.load(lp)
 
-                dataframe = pd.read_csv(outFile,
-                            dtype=str,
-                            na_filter=False,
-                            delimiter='\t',
-                            engine='python')
+                dataframe = pd.read_csv(outfile,
+                                        dtype=str,
+                                        na_filter=False,
+                                        delimiter='\t',
+                                        engine='python')
 
                 network = t2n.convert_pandas_to_nice_cx_with_load_plan(dataframe, load_plan)
 
@@ -160,7 +181,7 @@ Green line: genetic interaction""")
                 network.upload_to(server, username, password)
 
             print(str(datetime.now()) + " - Cleaning up working files...\n")
-            os.remove(outFile)
+            os.remove(outfile)
             os.remove(working_file)
             print("Finished processing " + organism + "\n")
 
