@@ -42,8 +42,7 @@ python3 load_biogrid_organism.py $VERSION $USER $PASSWD -s $SERVER -t $PROT_TEMP
 
 if [ $? -gt 0 ]
 then
-   echo "failed to update protein-protien network"
-   exit 2
+   echo "failed to update protein-protein network"
 fi
 
 rm BIOGRID-ORGANISM-Homo_sapiens-$VERSION.tab2.txt
@@ -74,8 +73,7 @@ fi
 
 if [ $? -gt 0 ]
 then
-   echo "failed to update chem-protien network"
-   exit 2
+   echo "failed to update chem-protein network"
 fi
 
 rm $CHEMFILE_NAME.zip
