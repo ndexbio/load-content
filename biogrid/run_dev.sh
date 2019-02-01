@@ -21,7 +21,7 @@ SERVER=dev.ndexbio.org
 #Protein-chemical style template network on the server
 CHEM_TEMPLATE=63090182-1fef-11e9-a05d-525400c25d22
 PROT_TEMPLATE=760403c5-1fef-11e9-a05d-525400c25d22
-CHEM_TARGET_NETWORK=b192ccaa-2261-11e8-b939-0ac135e8bacf
+CHEM_TARGET_NETWORK=ab0eeef6-25bd-11e9-a05d-525400c25d22
 
 
 echo "Updating protein-protein networks."
@@ -31,19 +31,18 @@ PROTFILE_NAME=BIOGRID-ORGANISM-$VERSION.tab2
 curl https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-$VERSION/$PROTFILE_NAME.zip -o $PROTFILE_NAME.zip
 
 if [ $? -gt 0 ]
-then
-   echo "failed to download protein-protein zip file."
-   exit 2
+  then
+    echo "failed to download protein-protein zip file."
+    exit 2
 fi
 
 
 
-python3 load_biogrid_organism.py $VERSION $USER $PASSWD -s $SERVER -t $PROT_TEMPLATE
+python3 load_biogrid_organism.py  -s $SERVER -t $PROT_TEMPLATE --organism dev_organism_list.txt $VERSION $USER $PASSWD
 
 if [ $? -gt 0 ]
 then
-   echo "failed to update protein-protien network"
-   exit 2
+   echo "A network failed to load"
 fi
 
 rm BIOGRID-ORGANISM-Homo_sapiens-$VERSION.tab2.txt
@@ -74,8 +73,7 @@ fi
 
 if [ $? -gt 0 ]
 then
-   echo "failed to update chem-protien network"
-   exit 2
+   echo "failed to update chem-protein network"
 fi
 
 rm $CHEMFILE_NAME.zip
