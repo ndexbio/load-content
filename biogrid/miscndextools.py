@@ -38,6 +38,8 @@ def main():
                         help='Source user')
     parser.add_argument('--source_pass', default=None,
                         help='Source pass')
+    parser.add_argument('--source_uuid', default=None,
+                        help='UUID of source network, used by updateandcopynetwork')
 
     parser.add_argument('--dest_server', required=True,
                         help='Source server')
@@ -45,13 +47,19 @@ def main():
                         help='Source user')
     parser.add_argument('--dest_pass',
                         help='Source pass', default=None)
+    parser.add_argument('--dest_uuid', default=None,
+                        help='UUID of dest network, used by updateandcopynetwork')
+
     parser.add_argument('--sourceownerusername', help='Username of owner of source networks to search against')
     parser.add_argument('--destownerusername', help='Username of owner of destination networks to search against')
 
     parser.add_argument('--origorganismfile', help='original organismfile')
     parser.add_argument('--destorganismfile', help='destination organism file')
-    parser.add_argument('mode', choices=['allownedbyuser', 'listsourceuuid', 'updateorganismuuids'])
-
+    parser.add_argument('mode', choices=['allownedbyuser', 'listsourceuuid',
+                                         'updateorganismuuids',
+                                         'updateandcopynetwork'],
+                        help='updateandcopynetwork -- copies --source_uuid network to '
+                             '--dest_uuid network')
 
     loglevel = logging.DEBUG
     LOG_FORMAT = "%(asctime)s %(levelname)s " \
@@ -139,6 +147,22 @@ def main():
             raise
         return
 
+    if args.mode == 'updateandcopynetwork':
+        if args.source_uuid is None or args.dest_uuid is None:
+            logger.fatal('--source_uuid and --dest_uuid must be set for this mode')
+            sys.exit(1)
+        try:
+            logger.debug('Copying ' + args.source_uuid + ' from ' + args.source_server +
+                         ' to ' + args.dest_uuid + ' on ' + args.dest_server)
+            network_cx = ndex2.create_nice_cx_from_server(args.source_server, args.source_user, args.source_pass,
+                                                          args.source_uuid)
+            logger.debug('Uploading network to ' + args.dest_server)
+            network_cx.update_to(args.dest_uuid, args.dest_server, args.dest_user,
+                                 args.dest_pass)
+        except HTTPError as e:
+            logger.exception('ha: ' + str(e.response.json()))
+            raise
+        return
 
 
 if __name__ == "__main__":
