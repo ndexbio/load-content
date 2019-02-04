@@ -31,6 +31,9 @@ def main():
                         help='ID for the network to use as a graphic template')
     parser.add_argument('--organism', help='Path to organism text file',
                         default='organism_list.txt')
+    parser.add_argument('--plan', default='human_plan.json',
+                        help='Load plan json file (default human_plan.json)')
+
     parser.add_argument('-v', action='count', help='Sets verbosity, max -vvvvv')
 
     args = parser.parse_args()
@@ -129,9 +132,8 @@ def main():
             logger.info(str(datetime.now()) + " - preprocess finished. newfile has " + str(len(result)) + " lines.\n")
             sys.stdout.flush()
             result = None
-            path_to_load_plan = 'human_plan.json'
             load_plan = None
-            with open(path_to_load_plan, 'r') as lp:
+            with open(args.plan, 'r') as lp:
                 load_plan = json.load(lp)
 
                 dataframe = pd.read_csv(outfile,
