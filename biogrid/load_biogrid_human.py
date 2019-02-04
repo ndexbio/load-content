@@ -36,6 +36,9 @@ def main():
     parser.add_argument('-target', dest='target_network_id', action='store',
                         help='ID for the network to be updated')
 
+    parser.add_argument('--plan', default='human_plan.json',
+                        help='Load plan json file (default human_plan.json)')
+
     args = parser.parse_args()
 
     print(vars(args))
@@ -94,9 +97,8 @@ def main():
     print (str(datetime.now()) +  " - preprocess finished. newfile has " + str(len(result)) + " lines.\n")
     sys.stdout.flush()
     result = None
-    path_to_load_plan = 'human_plan.json'
     load_plan = None
-    with open(path_to_load_plan, 'r') as lp:
+    with open(args.plan, 'r') as lp:
         load_plan = json.load(lp)
 
     dataframe = pd.read_csv(outFile,
