@@ -32,7 +32,7 @@ def main():
 
     parser.add_argument('-s', dest='server', action='store', help='NDEx server for the target NDEx account')
 
-    parser.add_argument('-t', dest='template_id', action='store',
+    parser.add_argument('-t', dest='template_id', action='store', required=True,
                         help='ID for the network to use as a graphic template')
 
     parser.add_argument('-target', dest='target_network_id', action='store',
@@ -118,33 +118,28 @@ def main():
     # post processing.
 
     network.set_name( "BioGRID: Protein-Chemical Interactions (H. sapiens)")
+    template_network = ndex2.create_nice_cx_from_server(server=server,
+                                                        uuid=args.template_id,
+                                                        username=username,
+                                                        password=password)
     network.set_network_attribute("description",
-    """This network contains human protein-chemical interactions. Proteins are normalized to 
-    official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are 
-    provided in the alias field. Edges with identical properties (except citations) are collapsed 
-    to simplify visualization and citations displayed as a list of PMIDs. This network is updated 
-    periodically with the latest data available on the <a href=\"https://thebiogrid.org/\">BioGRID</a>.<p><p>
-    <b>Node legend</b><br>
-    White oval: protein<br>
-    Yellow diamond: biologic<br>
-    Orange rectangle: small molecule
-    """)
+                                  template_network.get_network_attribute('description')['v'])
 
-    network.set_network_attribute("reference", "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +
-            'Nucleic Acids Res. 2016 Dec 14;2017(1)<br><a href="http://doi.org/10.1093/nar/gkw1102">doi:10.1093/nar/gkw1102</a>' )
-
+    network.set_network_attribute("reference",
+                                  template_network.get_network_attribute('reference')['v'])
     network.set_network_attribute("version", version )
     network.set_network_attribute("organism", "Human, 9606, Homo sapiens" )
     network.set_network_attribute("networkType", "Protein-Chemical Interaction")
     if args.template_id :
         network.apply_template(username=username, password=password, server=server,
-                           uuid=args.template_id)
+                               uuid=args.template_id)
     if args.target_network_id:
         network.update_to(args.target_network_id, server, username, password)
     else:
         network.upload_to(server, username, password)
 
     os.remove(outFile)
+
 
 if __name__ == "__main__":
     main()

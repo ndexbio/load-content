@@ -8,6 +8,7 @@ import logging
 from datetime import datetime
 import re
 import ndexutil.tsv.tsv2nicecx2 as t2n
+import ndex2
 
 logger = logging.getLogger('load_biogrid_organism')
 
@@ -26,7 +27,7 @@ def main():
 
     parser.add_argument('-s', dest='server', action='store', help='NDEx server for the target NDEx account')
 
-    parser.add_argument('-t', dest='template_id', action='store',
+    parser.add_argument('-t', dest='template_id', action='store', required=True,
                         help='ID for the network to use as a graphic template')
     parser.add_argument('--organism', help='Path to organism text file',
                         default='organism_list.txt')
@@ -149,20 +150,17 @@ def main():
             # post processing.
 
             network.set_name("BioGRID: Protein-Protein Interactions ("+common_name+")")
+
+            template_network = ndex2.create_nice_cx_from_server(server=server,
+                                                                uuid=args.template_id,
+                                                                username=username,
+                                                                password=password)
+
             network.set_network_attribute("description",
-"""Proteins are normalized to official gene symbols and NCBI gene identifiers while alternative entity names and identifiers are provided in 
-the alias field. Edges with identical properties (except citations) are collapsed to simplify visualization and citations displayed as a 
-list of PMIDs. This network is updated periodically with the latest data available on the  <a href=\"https://thebiogrid.org/\">BioGRID</a>.<p><p>
- <b>Edge legend</b><br>
-Solid line: High Throughput experiment<br>
-Dashed line: Low Throughput experiment<br>
-Blue line: physical interaction<br>
-Green line: genetic interaction""")
+                                          template_network.get_network_attribute('description')['v'])
 
             network.set_network_attribute("reference",
-                                  "Chatr-Aryamontri A et al. <b>The BioGRID interaction database: 2017 update.</b><br>" +
-                                  'Nucleic Acids Res. 2016 Dec 14;2017(1)<br><a href="http://doi.org/10.1093/nar/gkw1102">doi:10.1093/nar/gkw1102</a>')
-
+                                          template_network.get_network_attribute('reference')['v'])
             network.set_network_attribute("version", version)
             network.set_network_attribute("organism", org_str)
             network.set_network_attribute("networkType", "Protein-Protein Interaction")
@@ -186,6 +184,7 @@ Green line: genetic interaction""")
             print("Finished processing " + organism + "\n")
 
     print("Done.\n")
+
 
 if __name__ == "__main__":
     print (str(datetime.now()))
