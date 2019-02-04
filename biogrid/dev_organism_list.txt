@@ -9,5 +9,5 @@ Human_Immunodeficiency_Virus_1	"HIV-1, 11676, Human immunodeficiency virus 1"	HI
 Drosophila_melanogaster	"Fruit fly, 7227, Drosophila melanogaster"	D. melanogaster	http://dev.ndexbio.org/#/network/3a633e06-25a3-11e9-a05d-525400c25d22
 Danio_rerio	"Zebrafish, 7955, Danio rerio"	D. rerio	http://dev.ndexbio.org/#/network/36dada90-25a3-11e9-a05d-525400c25d22
 Caenorhabditis_elegans	"Roundworm, 6239, Cenorhabditis elegans"	C. elegans	http://dev.ndexbio.org/#/network/366116ae-25a3-11e9-a05d-525400c25d22
-Homo_sapiens	"Human, 9606, Homo sapiens"	H. sapiens	http://dev.ndexbio.org/#/network/318d206a-25a3-11e9-a05d-525400c25d22
 Arabidopsis_thaliana_Columbia	"Thale cress, 3702, Arabidopsis thaliana"	A. thaliana	http://dev.ndexbio.org/#/network/355d895c-25a3-11e9-a05d-525400c25d22
+Homo_sapiens    "Human, 9606, Homo sapiens"     H. sapiens      http://dev.ndexbio.org/#/network/318d206a-25a3-11e9-a05d-525400c25d22
