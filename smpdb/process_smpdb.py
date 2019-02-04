@@ -3,25 +3,25 @@ import requests
 import json
 import csv
 import datetime
+import argparse
+import sys
 
 from requests.auth import HTTPBasicAuth
 
-
-
-user_name = 'vrynkov'
-password = 'aaa'
-network_set_uuid = '00289894-2025-11e9-bb6a-0ac135e8bacf'
-ndex_server = 'http://www.ndexbio.org/'
 property_key = 'smpdb'
-smpdb_pathways = '/Users/vrynkov/Downloads/smpdb_pathways.csv'
-smpdb_pathways_processed = '/Users/vrynkov/Downloads/smpdb_pathways_processed.csv'
+smpdb_pathways_processed = './smpdb_pathways_processed.csv'
 prepend_property_key_value_with = 'http://smpdb.ca/view/'
 
+# maps columns from CSV file to Network Summary object
 update_map_from_cvs = {
     'Name': 'name',
     'Description': 'description',
     'Subject':  {'properties': 'networkType'}
 }
+
+# config for updating network properties:
+#   value of property 'smpdb' becomes an html reference
+#   reference is just added at this point
 update_map = {
     'properties': {
         'smpdb': 'http://smpdb.ca/view/',
@@ -29,8 +29,40 @@ update_map = {
     }
 }
 
+parser = argparse.ArgumentParser(description='Post-process SMPDB Pathways')
+
+parser.add_argument('username', action='store',  help='user name')
+parser.add_argument('password', action='store',  help='password')
+parser.add_argument('server', action='store', help='NDEx server, for example ndexbio.org')
+parser.add_argument('network_set_UUID', action='store',  help='UUID of non-empty network set to be updated')
+parser.add_argument('smpdb_pathways_csv', action='store', help='SMPDB file in CSV format')
+
+cli_args = parser.parse_args()
+
+#print (json.dumps(vars(args), sort_keys=True, indent=4))
+
+
+user_name = cli_args.username
+password = cli_args.password
+ndex_server = cli_args.server
+network_set_uuid = cli_args.network_set_UUID
+smpdb_pathways = cli_args.smpdb_pathways_csv
+
+if 'http' not in ndex_server:
+    ndex_server =  'http://' + ndex_server
+
+if not ndex_server.endswith('/'):
+    ndex_server += '/';
+
+
 ndex = ndex2.client.Ndex2(ndex_server, user_name, password)
-ns = ndex.get_network_set(network_set_uuid)
+
+try:
+    ns = ndex.get_network_set(network_set_uuid)
+except requests.exceptions.HTTPError as err:
+    httperr = json.loads(err.response.text)
+    print('Unable to get networks from network set %s: %s' % (network_set_uuid, httperr['message']))
+    sys.exit(1)
 
 
 networkUUIDs = ns['networks']
@@ -38,6 +70,10 @@ headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
 network_summaries = requests.post(ndex_server+'v2/batch/network/summary/', auth=HTTPBasicAuth(user_name, password), data=json.dumps(networkUUIDs), headers=headers)
 
 network_summaries_json = network_summaries.json()
+
+if not network_summaries_json:
+    print ('Network set %s is empty.' % network_set_uuid)
+    sys.exit(1)
 
 
 # before modifying, print networks we got from server to original_networks.json
@@ -48,7 +84,7 @@ network_summaries_map = {}
 
 
 # print is for debugging
-#print(json.dumps(network_summaries_json, sort_keys=True, indent=4))
+#vprint(json.dumps(network_summaries_json, sort_keys=True, indent=4))
 # print is for debugging
 
 
@@ -62,9 +98,7 @@ for i in range(len(network_summaries_json)):
                 network_summaries_map[property['value']] = i
                 #print(json.dumps(property, sort_keys=True, indent=4))
 
-#print network_summaries_map
-#print(json.dumps(network_summaries_json, sort_keys=True, indent=4))
-
+#print(json.dumps(network_summaries_map, sort_keys=True, indent=4))
 
 
 
@@ -114,12 +148,6 @@ with open(smpdb_pathways, mode='r') as f, open(smpdb_pathways_processed, mode='w
                                 new_property['value'] = row[key]
                                 network_summary[network_summary_property_to_update].append(new_property)
 
-                        #else:
-                        #    network_summary[network_summary_property_to_update] = []
-                        #    list_of_properties = network_summary[network_summary_property_to_update]
-
-                        #print row[key_column], network_summaries_map[row[key_column]], update_map_from_cvs[key], ' is a dict'
-                        #print key, '=', update_map_from_cvs[key], '=', row[key]
                     else:
                         # network_summaries_map[row[key_column]] - is index
                         index = network_summaries_map[row[key_column]]
@@ -166,18 +194,12 @@ with open('processed_networks.json', 'w') as outfile:
     json.dump(network_summaries_json, outfile, sort_keys=True, indent=3)
 
 
+# finally, update networks on the server
 for network_summary in network_summaries_json:
     network_id = network_summary['externalId']
-
-    #headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-
 
     ret_code = requests.put(ndex_server + 'v2/network/' + network_id + '/summary',
                                       auth=HTTPBasicAuth(user_name, password), data=json.dumps(network_summary),
                                       headers=headers)
-    pass
 
-
-# finally, update networks on the server
-
-
+print ('Done. Processesd %d networks.' %  len(network_summaries_json))
