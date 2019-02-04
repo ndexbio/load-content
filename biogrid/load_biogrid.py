@@ -37,6 +37,8 @@ def main():
 
     parser.add_argument('-target', dest='target_network_id', action='store',
                         help='ID for the network to be updated')
+    parser.add_argument('--plan', default='chem_plan.json',
+                        help='Load plan json file (default chem_plan.json)')
 
     args = parser.parse_args()
 
@@ -101,10 +103,8 @@ def main():
             value[5] = '|'.join(value[5])
             fho.write('\t'.join(value) + "\n")
         fho.close()
-
-    path_to_load_plan = 'chem_plan.json'
     load_plan = None
-    with open(path_to_load_plan, 'r') as lp:
+    with open(args.plan, 'r') as lp:
         load_plan = json.load(lp)
 
     dataframe = pd.read_csv(outFile,
