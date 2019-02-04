@@ -11,4 +11,3 @@ Danio_rerio	"Zebrafish, 7955, Danio rerio"	D. rerio	http://www.ndexbio.org/#/net
 Caenorhabditis_elegans	"Roundworm, 6239, Cenorhabditis elegans"	C. elegans	http://www.ndexbio.org/#/network/eead7d32-23da-11e8-b939-0ac135e8bacf
 Arabidopsis_thaliana_Columbia	"Thale cress, 3702, Arabidopsis thaliana"	A. thaliana	http://www.ndexbio.org/#/network/eb4d151f-23da-11e8-b939-0ac135e8bacf
 Homo_sapiens	"Human, 9606, Homo sapiens"	H. sapiens	http://www.ndexbio.org/#/network/36f7d8fd-23dc-11e8-b939-0ac135e8bacf
-Anopheles_gambiae_PEST	"African mosquito, 180454, Anopheles gambiae"	A. gambiae	http://www.ndexbio.org/#/network/d72a5bbc-23da-11e8-b939-0ac135e8bacf
