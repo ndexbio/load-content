@@ -1,7 +1,6 @@
 # Post-process SMPDB pathways
 
-Script that updates a set of SMPDB pathways networks on http://www.ndexbio.org/#/networkset/00289894-2025-11e9-bb6a-0ac135e8bacf
-(or any other place as specified by command line arguments).
+Script that updates a set of SMPDB pathways networks in networks set on http://www.ndexbio.org/#/networkset/00289894-2025-11e9-bb6a-0ac135e8bacf (or other network set as specified by command line arguments).
 
 Specifications are given here: https://ndexbio.atlassian.net/browse/NSU-78
 
