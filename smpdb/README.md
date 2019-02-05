@@ -19,14 +19,10 @@ After finishing, script gives a brief message with a number of network processed
 
 <pre>Done. Processed 3 networks.</pre>
 
-## Checking server response
+## Verification
 
-Sc
+For verification purpose, script creates 3 additional files in the folder where it runs:
 
-## Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+1) original_networks.json - networks in json format that were received from NDEx server before processing;
+2) processed_networks.json - networks in json format after processing by the script; these networks are then sent to the  server replacing original networks
+3)  smpdb_pathways_processed.csv - data from smpdb_pathways.csv that was used for transforming the networks.
