@@ -1,6 +1,7 @@
-# Project Title
+# Post-process SMPDB pathways
 
-One Paragraph of project description goes here
+Script that updates a set of SMPDB pathways networks on http://www.ndexbio.org/#/networkset/00289894-2025-11e9-bb6a-0ac135e8bacf
+(or any other place as specified by command line arguments).
 
 ## Getting Started
 
