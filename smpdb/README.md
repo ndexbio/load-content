@@ -10,7 +10,7 @@ Specifications are given here: https://ndexbio.atlassian.net/browse/NSU-78
 
 for example:
 
-<pre>python process_smpdb.py ccc1 ccc2 dev.ndexbio.org 832e7ee6-24df-11e9-a05d-525400c25d22 smpdb_pathways.csv</pre>
+<pre>python process_smpdb.py <ccc1> ccc2 dev.ndexbio.org 832e7ee6-24df-11e9-a05d-525400c25d22 smpdb_pathways.csv</pre>
 
 After finishing, script gives a brief message with a number of network processed, for example:
 
