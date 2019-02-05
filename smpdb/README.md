@@ -6,7 +6,7 @@ Specifications are given here: https://ndexbio.atlassian.net/browse/NSU-78
 
 ## Running the script
 
-python process_smpdb.py <username> <password> <ndex server> <network set uuid> <smpdb_pathways.csv file>
+<pre>python process_smpdb.py <username> <password> <ndex server> <network set uuid> <smpdb_pathways.csv file></pre>
 
 for example:
 
