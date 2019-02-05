@@ -6,11 +6,11 @@ Specifications are given here: https://ndexbio.atlassian.net/browse/NSU-78
 
 ## Running the script
 
-<pre>python process_smpdb.py <username> <password> <ndex server> <network set uuid> <smpdb_pathways.csv file></pre>
+<pre>python process_smpdb.py username password ndex_server network_set_uuid smpdb_pathways_csv_file</pre>
 
 for example:
 
-python process_smpdb.py ccc1 ccc2 dev.ndexbio.org 832e7ee6-24df-11e9-a05d-525400c25d22 smpdb_pathways.csv
+<pre>python process_smpdb.py ccc1 ccc2 dev.ndexbio.org 832e7ee6-24df-11e9-a05d-525400c25d22 smpdb_pathways.csv<pre>
 
 After finishing, script gives a brief message with a number of network processed, for example:
 
