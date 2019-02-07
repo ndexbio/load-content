@@ -29,18 +29,21 @@ parser.add_argument('-s', dest='server', action='store',
 
 parser.add_argument('-t', dest='template_id', action='store',
                     help='ID for the network to use as a graphic template')
+parser.add_argument('--singlefile', default=None,
+                    help='Process a single file passed into this argument')
                     
-loglevel = logging.INFO
+loglevel = logging.DEBUG
 LOG_FORMAT = "%(asctime)-15s %(levelname)s %(relativeCreated)dms " \
              "%(filename)s::%(funcName)s():%(lineno)d %(message)s"
-logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+logging.basicConfig(level=loglevel, format=LOG_FORMAT)
 logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=loglevel)
 logger.setLevel(loglevel)
 args = parser.parse_args()
 
 
 if 'dev.ndexbio' in args.server:
-    cytoscape_visual_properties_template_id = '61ebccf5-312e-11e8-a456-525400c25d22' # DEV
+    # cytoscape_visual_properties_template_id = '61ebccf5-312e-11e8-a456-525400c25d22' # DEV
+    cytoscape_visual_properties_template_id = '47ef9f7d-2b13-11e9-a05d-525400c25d22'
 else:
     cytoscape_visual_properties_template_id = '04a4c898-30b2-11e8-b939-0ac135e8bacf' # PROD
     #cytoscape_visual_properties_template_id = 'db1c607e-3c45-11e8-9da1-0660b7976219' # TEST
@@ -150,21 +153,24 @@ def get_uniprot_gene_symbol_mapping(network):
 
     for k, v in network.get_nodes():
         participant_name = v['n']
-        participant_bool = gene_symbol_mapping.get(participant_name)
+        logger.debug('node names: ' + participant_name)
         if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is None:
             id_list.append(participant_name)
-
+    logger.info('Lookup: ' + str(id_list))
     # =================================
     # LOOKUP UNIPROT ID -> GENE SYMBOL
     # =================================
     url = 'https://biodbnet-abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&input=uniprot ' \
           'entry name&inputValues=' + ','.join(id_list) + '&outputs=genesymbol&taxonId=9606&format=row'
+    logger.debug('look up query: ' + url)
     look_up_req = requests.get(url)
     look_up_json = look_up_req.json()
     if look_up_json is not None:
         for bio_db_item in look_up_json:
             gene_symbol_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
             node_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
+    logger.debug('node_mapping: ' + str(node_mapping))
+    logger.debug('gene_symbol_mapping: ' + str(gene_symbol_mapping))
 
 
 def merge_node_attributes(network, source_attribute1, source_attribute2, target_attribute):
@@ -375,7 +381,7 @@ def ebs_to_df(file_name):
                 participant_name = participant_name.lstrip('[').rstrip(']')
             if node_to_update['n'].startswith("CHEBI") and participant_name:
                 if participant_name is not None:
-                    node_to_update['n']  = participant_name
+                    node_to_update['n'] = participant_name
 
             #=======================
             # SET REPRESENTS
@@ -417,43 +423,23 @@ def ebs_to_df(file_name):
             #=====================================
             if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is None:
                 id_list.append(participant_name)
-            elif  participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
+            elif participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
                 gene_symbol_mapped_name = gene_symbol_mapping.get(participant_name)
                 if len(gene_symbol_mapped_name) > 25:
                     node_to_update['n'] = gene_symbol_mapped_name.split('/')[0]
                 else:
                     node_to_update['n'] = gene_symbol_mapping.get(participant_name)
-
+            logger.debug('Node to update after lookup section: ' + str(node_to_update))
             network.set_node_attribute(node_to_update['@id'], 'type', participant_type_map.get(node_info.get('PARTICIPANT_TYPE')),
                                        type='string',
                                        overwrite=True)
 
-        # =================================
-        # LOOKUP UNIPROT ID -> GENE SYMBOL
-        # =================================
-        url = 'https://biodbnet-abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&input=uniprot entry name&inputValues=' \
-              + ','.join(id_list) + '&outputs=genesymbol&taxonId=9606&format=row'
-        look_up_req = requests.get(url)
-        look_up_json = look_up_req.json()
-        if look_up_json is not None:
-            for bio_db_item in look_up_json:
-                gene_symbol_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
-                node_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
+        # ebs_network = NdexGraph(cx=network.to_cx())
 
-        for k, v in network.get_nodes():
-            # =============================
-            # POST-PROCESS NODES
-            # =============================
-            participant_name = v['n']
-            if '_HUMAN' in participant_name and node_mapping.get(participant_name) is not None:
-                v['n'] = node_mapping.get(participant_name)
+        # layouts.apply_directed_flow_layout(ebs_network, node_width=25, use_degree_edge_weights=True, iterations=200)
 
-        ebs_network = NdexGraph(cx=network.to_cx())
-
-        layouts.apply_directed_flow_layout(ebs_network, node_width=25, use_degree_edge_weights=True, iterations=200)
-
-        ebs_network.subnetwork_id = 1
-        ebs_network.view_id = 1
+        # ebs_network.subnetwork_id = 1
+        # ebs_network.view_id = 1
 
         network_update_key = update_ncipid_mapping.get(network.get_name().upper())
 
@@ -461,9 +447,8 @@ def ebs_to_df(file_name):
         # APPLY LAYOUT
         # ==========================
         # newnetwork = ndex2.create_nice_cx_from_raw_cx(ebs_network.to_cx())
-        newnetwork = network
-        newnetwork.apply_template(args.server, cytoscape_visual_properties_template_id,
-                                  username=args.username, password=args.password)
+        network.apply_template(args.server, cytoscape_visual_properties_template_id,
+                               username=args.username, password=args.password)
 
         if network_update_key is not None:
             print("updating")
@@ -472,14 +457,15 @@ def ebs_to_df(file_name):
 
             for k, v in network_properties.items():
                 if k.upper() == 'VERSION':
-                    newnetwork.set_network_attribute('version', 'APR-2018')
+                    network.set_network_attribute('version', 'APR-2018')
                 else:
-                    newnetwork.set_network_attribute(k, v)
+                    network.set_network_attribute(k, v)
 
-            return my_ndex.update_cx_network(newnetwork.to_cx_stream(), network_update_key)
+            return network.update_to(network_update_key, args.server, args.username, args.password)
         else:
             print("new network")
-            upload_message = my_ndex.save_cx_stream_as_new_network(newnetwork.to_cx_stream())
+            upload_message = network.upload_to(args.server, args.username, args.password)
+            # upload_message = my_ndex.save_cx_stream_as_new_network(newnetwork.to_cx_stream())
             network_uuid = upload_message.split('/')[-1]
 
             #===========================
@@ -490,7 +476,7 @@ def ebs_to_df(file_name):
 
             return upload_message
 
-    return ebs
+    return 'uhhhhh'
 
 
 print('starting...')
@@ -502,9 +488,16 @@ count = 0
 limit = 400
 
 file_reverse = sorted(listdir(path_to_sif_files), key=lambda s: s.lower(), reverse=True)
+
 for file in file_reverse: #listdir(path_to_sif_files):
     #if 'PathwayCommons.8.NCI_PID.BIOPAX.sif' in file:
+    # if not file.startswith('Visual signal transduction Rods.sif'):
+    #    continue
+    if args.singlefile is not None:
+        if args.singlefile != os.path.basename(file):
+            continue
     print(file)
+
     if file.endswith(".sif"):
         ebs = ebs_to_df(file)
 
