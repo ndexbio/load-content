@@ -1,30 +1,45 @@
 import ndex2.client as nc2
+import ndex2
 import json
 import pandas as pd
 import sys
 import jsonschema
-import ndex2
-from tutorial_utils import load_tutorial_config
-import ndexutil.tsv.tsv2nicecx as t2n
-import argparse
+import ndexutil.tsv.tsv2nicecx2 as t2n
 import csv
-import random
-import networkx as nx
-import ndex.client as nc
+import os
 from os import listdir, path
-#from os.path import isfile, isdir, join, abspath, dirname, exists, basename, splitext
-import ndex.beta.layouts as layouts
 from ndex.networkn import NdexGraph
+import ndex.beta.layouts as layouts
 import mygene
 import requests
 import time
+import argparse
+import logging
+
+logger = logging.getLogger('process_ncipid')
+
+parser = argparse.ArgumentParser(description='NCIPID network loader')
+
+parser.add_argument('username', action='store', nargs='?', default=None)
+parser.add_argument('password', action='store', nargs='?', default=None)
+
+parser.add_argument('-s', dest='server', action='store',
+                    help='NDEx server for the target NDEx account',
+                    required=True)
+
+parser.add_argument('-t', dest='template_id', action='store',
+                    help='ID for the network to use as a graphic template')
+                    
+loglevel = logging.INFO
+LOG_FORMAT = "%(asctime)-15s %(levelname)s %(relativeCreated)dms " \
+             "%(filename)s::%(funcName)s():%(lineno)d %(message)s"
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+logging.getLogger('ndexutil.tsv.tsv2nicecx2').setLevel(level=loglevel)
+logger.setLevel(loglevel)
+args = parser.parse_args()
 
 
-my_server = 'dev.ndexbio.org'
-my_username = 'username'
-my_password = 'password'
-
-if 'dev.ndexbio' in my_server:
+if 'dev.ndexbio' in args.server:
     cytoscape_visual_properties_template_id = '61ebccf5-312e-11e8-a456-525400c25d22' # DEV
 else:
     cytoscape_visual_properties_template_id = '04a4c898-30b2-11e8-b939-0ac135e8bacf' # PROD
@@ -35,8 +50,7 @@ node_mapping = {}
 
 current_directory = path.dirname(path.abspath(__file__))
 
-my_ndex = nc2.Ndex2(my_server, my_username, my_password)
-
+my_ndex = nc2.Ndex2(args.server, args.username, args.password)
 
 #================================
 # GET CACHED GENE SYMBOL MAPPING
@@ -56,7 +70,7 @@ gene_symbol_mapping = get_json_from_file(path.join(current_directory, 'gene_symb
 # GET NETWORK SUMMARIES FROM SERVER
 #====================================
 def get_ncipid_update_mapping():
-    network_summaries = my_ndex.get_network_summaries_for_user(my_username)
+    network_summaries = my_ndex.get_network_summaries_for_user(args.username)
 
     update_mapping = {}
     for nk in network_summaries:
@@ -133,13 +147,9 @@ def get_network_properties(server, username, password, network_id):
 
 def get_uniprot_gene_symbol_mapping(network):
     id_list = []
-    if sys.version_info.major == 3:
-        node_items = network.nodes.items()
-    else:
-        node_items = network.nodes.iteritems()
 
-    for k, v in node_items:
-        participant_name = v.get_name()
+    for k, v in network.get_nodes():
+        participant_name = v['n']
         participant_bool = gene_symbol_mapping.get(participant_name)
         if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is None:
             id_list.append(participant_name)
@@ -157,6 +167,29 @@ def get_uniprot_gene_symbol_mapping(network):
             node_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
 
 
+def merge_node_attributes(network, source_attribute1, source_attribute2, target_attribute):
+    """
+
+    :param network:
+    :param source_attribute1:
+    :param source_attribute2:
+    :param target_attribute:
+    :return:
+    """
+    for node_id, node in network.get_nodes():
+        value1 = network.get_node_attribute(node, source_attribute1)
+        value2 = network.get_node_attribute(node, source_attribute2)
+        merged_value = value1 or value2
+        if merged_value:
+            logger.debug('Merged value is: ' + str(merged_value['v']))
+            logger.debug('Node is: ' + str(node))
+            network.set_node_attribute(node['@id'], target_attribute, merged_value['v'],
+                                       type=merged_value['d'],
+                                       overwrite=True)
+            network.remove_node_attribute(node, source_attribute1)
+            network.remove_node_attribute(node, source_attribute2)
+
+
 def ebs_to_df(file_name):
     node_table = []
     id_list = []
@@ -166,6 +199,10 @@ def ebs_to_df(file_name):
     # path_to_sif = path.join('sif', 'pid_EXTENDED_BINARY_SIF_2016-09-24T14:04:47.203937', file_name)
 
     path_to_sif = path.join('biopax', 'sif', file_name)
+    if os.path.getsize(path_to_sif) is 0:
+        logger.error('File is empty: ' + path_to_sif)
+        return
+
     with open(path_to_sif, 'rU') as f:
         lines = f.readlines()
         mode = "edge"
@@ -208,72 +245,63 @@ def ebs_to_df(file_name):
 
         network.set_name(file_name.replace('.sif', ''))
 
-        # ==========================
-        # APPLY LAYOUT
-        # ==========================
-        network.apply_template(username=my_username, password=my_password, server=my_server,
-                               uuid=cytoscape_visual_properties_template_id)
-
-        network.merge_node_attributes('alias_a', 'alias_b', 'alias')
-        network.merge_node_attributes('PARTICIPANT_TYPE_A', 'PARTICIPANT_TYPE_B', 'type')
+        # merge node attributes, logic was removed ndex2 python client so call a local implementation
+        merge_node_attributes(network, 'alias_a', 'alias_b', 'alias')
+        merge_node_attributes(network, 'PARTICIPANT_TYPE_A', 'PARTICIPANT_TYPE_B', 'type')
 
         get_uniprot_gene_symbol_mapping(network)
 
-        if sys.version_info.major == 3:
-            node_items = network.nodes.items()
-        else:
-            node_items = network.nodes.iteritems()
-
-        for k, v in node_items:
+        for k, v in network.get_nodes():
             # ==============================================
             # CONVERT NODE NAME FROM UNIPROT TO GENE SYMBOL
             # ==============================================
-            participant_name = v.get_name()
+            logger.debug('Node: ' + str(v))
+            participant_name = v['n']
             if '_HUMAN' in participant_name and node_mapping.get(participant_name) is not None:
-                v.set_node_name(node_mapping.get(participant_name))
+                v['r'] = node_mapping.get(participant_name)
             elif len(participant_name) > 25:
-                v.set_node_name(participant_name.split('/')[0])
+                v['r'] = (participant_name.split('/')[0])
 
             # =============================
             # SET REPRESENTS
             # =============================
             aliases = network.get_node_attribute(v, 'alias')
-            if aliases is not None and aliases != 'null' and len(aliases) > 0:
-                v.set_node_represents(aliases[0])
+            if aliases is not None and aliases['v'] != 'null' and len(aliases) > 0:
+                logger.debug('Aliases is: ' + str(aliases))
+                v['r'] = (aliases['v'][0])
             else:
-                v.set_node_represents(v.get_name())
+                v['r'] = v['n']
                 if aliases == 'null':
-                    network.remove_node_attribute(v, 'alias')
+                    network.remove_node_attribute(k, 'alias')
 
             if aliases is not None and len(aliases) > 1:
-                replace_alias = network.get_node_attribute_objects(k, 'alias')
-                replace_alias.set_values(aliases[1:])
-                network.set_node_attribute(v, 'alias', aliases[1:])
+                replace_alias = network.get_node_attribute(k, 'alias')
+                logger.debug('replace_alias is: ' + str(replace_alias))
+                network.set_node_attribute(k, 'alias', aliases['v'][1:], type=replace_alias['d'],
+                                           overwrite=True)
             else:
-                network.remove_node_attribute(v, 'alias')
+                network.remove_node_attribute(k, 'alias')
 
-            node_type = network.get_node_attribute(v, 'type')
-            network.set_node_attribute(k, 'type', participant_type_map.get(node_type))
+            node_type = network.get_node_attribute(k, 'type')
+            logger.debug('node_type: ' + str(node_type))
+            network.set_node_attribute(k, 'type', participant_type_map.get(node_type['v']),
+                                       overwrite=True)
 
         # =============================
         # POST-PROCESS EDGE ATTRIBUTES
         # =============================
-        if sys.version_info.major == 3:
-            edge_items = network.edges.items()
-        else:
-            edge_items = network.edges.iteritems()
 
         neighbor_of_map = {}
         controls_state_change_map = {}
         other_edge_exists = {}
-        for k, v in edge_items:
-            s = v.get_source()
-            t = v.get_target()
-            i = v.get_interaction()
+        for k, v in network.get_edges():
+            s = v['s']
+            t = v['t']
+            i = v['i']
             if i == 'neighbor-of':
-                if not neighbor_of_map.has_key(s):
+                if not s in neighbor_of_map:
                     neighbor_of_map[s] = {}
-                if not neighbor_of_map.has_key(t):
+                if not t in neighbor_of_map:
                     neighbor_of_map[t] = {}
                 neighbor_of_map[s][t] = k
                 neighbor_of_map[t][s] = k
@@ -285,24 +313,24 @@ def ebs_to_df(file_name):
                 controls_state_change_map[s][t] = k
                 controls_state_change_map[t][s] = k
             else:
-                if not other_edge_exists.has_key(s):
+                if not s in other_edge_exists:
                     other_edge_exists[s] = {}
-                if not other_edge_exists.has_key(t):
+                if not t in other_edge_exists:
                     other_edge_exists[t] = {}
                 other_edge_exists[s][t] = True
                 other_edge_exists[t][s] = True
 
             if i in DIRECTED_INTERACTIONS:
-                network.set_edge_attribute(v, 'directed', True)
+                network.set_edge_attribute(k, 'directed', True)
             else:
-                network.set_edge_attribute(v, 'directed', False)
+                network.set_edge_attribute(k, 'directed', False)
 
         # =============================
         # REMOVE neighbor-of EDGES
         # =============================
-        n_edges = neighbor_of_map.iteritems()
+        n_edges = neighbor_of_map.items()
         for s, ti in n_edges:
-            inner_neighbor = ti.iteritems()
+            inner_neighbor = ti.items()
             for t, i in inner_neighbor:
                 found_other_edges = False
                 if other_edge_exists.get(s) is not None:
@@ -314,11 +342,11 @@ def ebs_to_df(file_name):
                         #=========================================
                         net_attrs = network.get_edge_attributes(i)
                         for net_attr in net_attrs:
-                            network.remove_edge_attribute(i, net_attr.get_name())
+                            network.remove_edge_attribute(i, net_attr['n'])
 
-        n_edges = controls_state_change_map.iteritems()
+        n_edges = controls_state_change_map.items()
         for s, ti in n_edges:
-            inner_neighbor = ti.iteritems()
+            inner_neighbor = ti.items()
             for t, i in inner_neighbor:
                 found_other_edges = False
                 if other_edge_exists.get(s) is not None:
@@ -330,9 +358,7 @@ def ebs_to_df(file_name):
                         #=========================================
                         net_attrs = network.get_edge_attributes(i)
                         for net_attr in net_attrs:
-                            network.remove_edge_attribute(i, net_attr.get_name())
-
-        #network.upload_to('dev.ndexbio.org', 'scratch', 'scratch')
+                            network.remove_edge_attribute(i, net_attr['n'])
 
         node_reader = csv.DictReader(node_lines, fieldnames=node_fields, dialect='excel-tab')
         for dict in node_reader:
@@ -342,15 +368,14 @@ def ebs_to_df(file_name):
         # PROCESS NODES
         #=======================
         for node_info in node_table:
-            node_to_update = network.get_node(node_info.get('PARTICIPANT').lstrip('[').rstrip(']'))
+            node_to_update = network.get_node_by_name(node_info.get('PARTICIPANT').lstrip('[').rstrip(']'))
 
             participant_name = node_info.get('PARTICIPANT_NAME')
             if participant_name is not None:
                 participant_name = participant_name.lstrip('[').rstrip(']')
-
-            if node_to_update.get_name().startswith("CHEBI") and participant_name:
+            if node_to_update['n'].startswith("CHEBI") and participant_name:
                 if participant_name is not None:
-                    node_to_update.set_node_name(participant_name)
+                    node_to_update['n']  = participant_name
 
             #=======================
             # SET REPRESENTS
@@ -364,26 +389,28 @@ def ebs_to_df(file_name):
                     if uxr.upper().count('CHEBI') > 1:
                         unification_xref_array.append(uxr.replace('chebi:', '', 1))
 
-                #network.set_node_attribute(node_to_update, 'UNIFICATION_XREF', unification_xref_array, type='list_of_string')
                 if len(unification_xref_array) < 1:
                     if len(unification_xref_array_tmp) > 1:
                         unification_xref_array_tmp = unification_xref_array_tmp[1:]
-                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array_tmp, type='list_of_string')
+                        network.set_node_attribute(node_to_update['@id'], 'alias', unification_xref_array_tmp, type='list_of_string',
+                                                   overwrite=True)
                     elif len(unification_xref_array_tmp) == 1:
-                        network.remove_node_attribute(v, 'alias')
+                        network.remove_node_attribute(v['@id'], 'alias')
                     else:
-                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array_tmp, type='list_of_string')
+                        network.set_node_attribute(node_to_update['@id'], 'alias', unification_xref_array_tmp, type='list_of_string',
+                                                   overwrite=True)
                 else:
                     if len(unification_xref_array) > 1:
                         unification_xref_array = unification_xref_array[1:]
-                        network.set_node_attribute(node_to_update, 'alias', unification_xref_array, type='list_of_string')
+                        network.set_node_attribute(node_to_update['@id'], 'alias', unification_xref_array, type='list_of_string',
+                                                   overwrite=True)
                     else:
-                        network.remove_node_attribute(v, 'alias')
+                        network.remove_node_attribute(v['@id'], 'alias')
 
             else:
                 unification = node_info.get('PARTICIPANT').lstrip('[').rstrip(']')
-
-            node_to_update.set_node_represents(unification.replace('chebi:', '', 1))
+            logger.debug('node_to_update ' + str(node_to_update))
+            node_to_update['r'] = unification.replace('chebi:', '', 1)
 
             #=====================================
             # PREP UNIPROT TO GENE SYMBOL LOOKUP
@@ -393,14 +420,13 @@ def ebs_to_df(file_name):
             elif  participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
                 gene_symbol_mapped_name = gene_symbol_mapping.get(participant_name)
                 if len(gene_symbol_mapped_name) > 25:
-                    node_to_update.set_node_name(gene_symbol_mapped_name.split('/')[0])
+                    node_to_update['n'] = gene_symbol_mapped_name.split('/')[0]
                 else:
-                    node_to_update.set_node_name(gene_symbol_mapping.get(participant_name))
+                    node_to_update['n'] = gene_symbol_mapping.get(participant_name)
 
-                #node_to_update.set_node_name(gene_symbol_mapping.get(participant_name))
-
-            network.set_node_attribute(node_to_update, 'type', participant_type_map.get(node_info.get('PARTICIPANT_TYPE')),
-                                       type='string')
+            network.set_node_attribute(node_to_update['@id'], 'type', participant_type_map.get(node_info.get('PARTICIPANT_TYPE')),
+                                       type='string',
+                                       overwrite=True)
 
         # =================================
         # LOOKUP UNIPROT ID -> GENE SYMBOL
@@ -414,19 +440,13 @@ def ebs_to_df(file_name):
                 gene_symbol_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
                 node_mapping[bio_db_item.get('InputValue')] = bio_db_item.get('Gene Symbol')
 
-        node_items = None
-        if sys.version_info.major == 3:
-            node_items = network.nodes.items()
-        else:
-            node_items = network.nodes.iteritems()
-
-        for k, v in node_items:
+        for k, v in network.get_nodes():
             # =============================
             # POST-PROCESS NODES
             # =============================
-            participant_name = v.get_name()
+            participant_name = v['n']
             if '_HUMAN' in participant_name and node_mapping.get(participant_name) is not None:
-                v.set_node_name(node_mapping.get(participant_name))
+                v['n'] = node_mapping.get(participant_name)
 
         ebs_network = NdexGraph(cx=network.to_cx())
 
@@ -437,28 +457,36 @@ def ebs_to_df(file_name):
 
         network_update_key = update_ncipid_mapping.get(network.get_name().upper())
 
+        # ==========================
+        # APPLY LAYOUT
+        # ==========================
+        # newnetwork = ndex2.create_nice_cx_from_raw_cx(ebs_network.to_cx())
+        newnetwork = network
+        newnetwork.apply_template(args.server, cytoscape_visual_properties_template_id,
+                                  username=args.username, password=args.password)
+
         if network_update_key is not None:
             print("updating")
 
-            network_properties = get_network_properties(my_server, my_username, my_password, network_update_key)
+            network_properties = get_network_properties(args.server, args.username, args.password, network_update_key)
 
             for k, v in network_properties.items():
                 if k.upper() == 'VERSION':
-                    ebs_network.set_network_attribute('version', 'APR-2018')
+                    newnetwork.set_network_attribute('version', 'APR-2018')
                 else:
-                    ebs_network.set_network_attribute(k, v)
+                    newnetwork.set_network_attribute(k, v)
 
-            return my_ndex.update_cx_network(ebs_network.to_cx_stream(), network_update_key)
+            return my_ndex.update_cx_network(newnetwork.to_cx_stream(), network_update_key)
         else:
             print("new network")
-            upload_message = my_ndex.save_cx_stream_as_new_network(ebs_network.to_cx_stream())
+            upload_message = my_ndex.save_cx_stream_as_new_network(newnetwork.to_cx_stream())
             network_uuid = upload_message.split('/')[-1]
 
             #===========================
             # MAKE NETWORK PUBLIC
             #===========================
             time.sleep(1)
-            my_ndex._make_network_public_indexed(network_uuid)
+            # my_ndex._make_network_public_indexed(network_uuid)
 
             return upload_message
 
