@@ -3,6 +3,7 @@ import ndex2
 import json
 import pandas as pd
 import sys
+import requests
 import jsonschema
 import ndexutil.tsv.tsv2nicecx2 as t2n
 import csv
@@ -10,11 +11,12 @@ import os
 from os import listdir, path
 from ndex.networkn import NdexGraph
 import ndex.beta.layouts as layouts
-import mygene
 import requests
 import time
 import argparse
 import logging
+import re
+from biothings_client import get_client
 
 logger = logging.getLogger('process_ncipid')
 
@@ -48,12 +50,66 @@ else:
     cytoscape_visual_properties_template_id = '04a4c898-30b2-11e8-b939-0ac135e8bacf' # PROD
     #cytoscape_visual_properties_template_id = 'db1c607e-3c45-11e8-9da1-0660b7976219' # TEST
 
-mg = mygene.MyGeneInfo()
 node_mapping = {}
 
 current_directory = path.dirname(path.abspath(__file__))
 
 my_ndex = nc2.Ndex2(args.server, args.username, args.password)
+
+GENE_CLIENT = get_client('gene')
+
+
+def query_mygene_for_genesymbol(gene_client, node, alias_values):
+    """
+    Given a NiceCXNetwork() node and node_attribute for node
+    this function gets a list of uniprot ids from the 'r' aka
+    represents field of node and from the 'alias' attribute in
+    the node attribute. mygene.querymany(scope='uniprot' is used
+    to get gene symbols. If multiple then there is a check for
+    identical values, if a descrepancy is found a message is
+    logged to error and the first entry is used.
+    :param node:
+    :param node_attributes:
+    :return:
+    """
+    idlist = []
+    if node is not None:
+        if 'r' in node:
+            if 'uniprot' in node['r']:
+                idlist.append(re.sub('^.*:','',node['r']))
+    for entry in alias_values:
+        if 'uniprot' in entry:
+            idlist.append(re.sub('^.*:','',entry))
+    res = gene_client.querymany(idlist, scopes='uniprot', fields='symbol', returnall=True)
+
+    symbolset = set()
+    logger.debug('res: ' + str(res))
+    for entry in res:
+        if not 'symbol' in entry:
+            continue
+        symbolset.add(entry['symbol'])
+    if len(symbolset) > 1:
+        logger.error('Query ' + str(idlist) + ' returned multiple symbols: ' + str(symbolset) + ' using 1st')
+    if len(symbolset) == 0:
+        # need to query uniprot then
+        for id in idlist:
+            resp = requests.get('https://www.uniprot.org/uniprot/' + id + '.txt')
+            if resp.status_code is 200:
+                logger.debug('In response')
+                for entry in resp.text.split('\n'):
+
+                    if not entry.startswith('GN'):
+                        continue
+                    logger.debug('Found matching line: '+ entry)
+                    if 'Name=' in entry:
+                        subent = re.sub('^.*Name=', '', entry)
+                        logger.debug('name in entry' + subent)
+                        genesym = re.sub(' +.*', '', subent)
+                        logger.debug('genesym: ' + genesym)
+                        symbolset.add(genesym)
+
+    logger.debug('All symbols found: ' + str(symbolset))
+    return symbolset.pop()
 
 #================================
 # GET CACHED GENE SYMBOL MAPPING
@@ -415,20 +471,24 @@ def ebs_to_df(file_name):
 
             else:
                 unification = node_info.get('PARTICIPANT').lstrip('[').rstrip(']')
-            logger.debug('node_to_update ' + str(node_to_update))
             node_to_update['r'] = unification.replace('chebi:', '', 1)
 
             #=====================================
             # PREP UNIPROT TO GENE SYMBOL LOOKUP
             #=====================================
-            if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is None:
-                id_list.append(participant_name)
-            elif participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
+            if participant_name is not None and '_HUMAN' in participant_name and gene_symbol_mapping.get(participant_name) is not None:
                 gene_symbol_mapped_name = gene_symbol_mapping.get(participant_name)
                 if len(gene_symbol_mapped_name) > 25:
-                    node_to_update['n'] = gene_symbol_mapped_name.split('/')[0]
+                    clean_symbol = gene_symbol_mapped_name.split('/')[0]
                 else:
-                    node_to_update['n'] = gene_symbol_mapping.get(participant_name)
+                    clean_symbol = gene_symbol_mapping.get(participant_name)
+                if len(clean_symbol) == 0 or clean_symbol == '-':
+                    # node_to_update['n'] = query_mygene_for_genesymbol(GENE_CLIENT, node_to_update, network.get_node_attribute_value(node_to_update['@id'], 'alias'))
+                    logger.debug('Mapping came back with -. Going with old name: ' + node_to_update['n'])
+                else:
+                    logger.debug('Updating node from name: ' + node_to_update['n'] + ' to ' + clean_symbol)
+                    node_to_update['n'] = clean_symbol
+
             logger.debug('Node to update after lookup section: ' + str(node_to_update))
             network.set_node_attribute(node_to_update['@id'], 'type', participant_type_map.get(node_info.get('PARTICIPANT_TYPE')),
                                        type='string',
