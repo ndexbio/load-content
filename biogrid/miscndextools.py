@@ -57,7 +57,8 @@ def main():
     parser.add_argument('--destorganismfile', help='destination organism file')
     parser.add_argument('mode', choices=['allownedbyuser', 'listsourceuuid',
                                          'updateorganismuuids',
-                                         'updateandcopynetwork'],
+                                         'updateandcopynetwork',
+                                         'copynetwork'],
                         help='updateandcopynetwork -- copies --source_uuid network to '
                              '--dest_uuid network')
 
@@ -158,6 +159,23 @@ def main():
                                                           args.source_uuid)
             logger.debug('Uploading network to ' + args.dest_server)
             network_cx.update_to(args.dest_uuid, args.dest_server, args.dest_user,
+                                 args.dest_pass)
+        except HTTPError as e:
+            logger.exception('ha: ' + str(e.response.json()))
+            raise
+        return
+
+    if args.mode == 'copynetwork':
+        if args.source_uuid is None:
+            logger.fatal('--source_uuid and --dest_uuid must be set for this mode')
+            sys.exit(1)
+        try:
+            logger.debug('Copying ' + args.source_uuid + ' from ' + args.source_server +
+                         ' to ' + args.dest_server)
+            network_cx = ndex2.create_nice_cx_from_server(args.source_server, args.source_user, args.source_pass,
+                                                          args.source_uuid)
+            logger.debug('Uploading network to ' + args.dest_server)
+            network_cx.upload_to(args.dest_server, args.dest_user,
                                  args.dest_pass)
         except HTTPError as e:
             logger.exception('ha: ' + str(e.response.json()))
