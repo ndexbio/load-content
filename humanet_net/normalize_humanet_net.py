@@ -35,8 +35,8 @@ def get_list_of_gene_ids():
     # get column 1 of the original tsv file, sort it, remove all duplicate gene ids, and
     # then add the result to gene_ids map for lookup;  repeat the same for column 2.
     # After the function ends, we will have a complete list (hash) of all unique Gene Ids from our original
-    # tsv file. We then can either lookup them up in the dictionary.js, or retrieve them from server and
-    # add to the dictionary.js.
+    # tsv file. We then can either lookup them up in the dictionary.json, or retrieve them from server and
+    # add to the dictionary.json.
 
     for i in range(2):
         df = pd.read_csv(file_name, sep='\s+', skipinitialspace=True, usecols=[headers[i]])
