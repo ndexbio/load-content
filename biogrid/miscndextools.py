@@ -57,7 +57,8 @@ def main():
     parser.add_argument('--destorganismfile', help='destination organism file')
     parser.add_argument('mode', choices=['allownedbyuser', 'listsourceuuid',
                                          'updateorganismuuids',
-                                         'updateandcopynetwork'],
+                                         'updateandcopynetwork',
+                                         'printnetattribs'],
                         help='updateandcopynetwork -- copies --source_uuid network to '
                              '--dest_uuid network')
 
@@ -71,6 +72,35 @@ def main():
     args = parser.parse_args(sys.argv[1:])
 
     logger.debug('Args: ' + str(args) + '\n')
+
+    if args.mode == 'printnetattribs':
+        source_ndex = ndex2.Ndex2(args.source_server, username=args.source_user,
+                                  password=args.source_pass)
+        res = source_ndex.search_networks(account_name=args.sourceownerusername)
+        sys.stdout.write('Name, UUID\n')
+        for entry in res['networks']:
+            cx_name = entry['name']
+            cx_uuid = entry['externalId']
+            network_cx = ndex2.create_nice_cx_from_server(args.source_server, args.source_user, args.source_pass,
+                                                          cx_uuid)
+            keylist = []
+            for entry in network_cx.networkAttributes:
+                keylist.append(str(entry['n']))
+                if entry['n'] == 'version' and entry['v'] != 'FEB-2019':
+                    sys.stdout.write('\t invalid version\n')
+
+            errors = ''
+            if 'organism' not in keylist:
+                errors += ('\torganism not in list\n')
+            if 'author' not in keylist:
+                errors += ('\tauthor not in list\n')
+            if 'labels' not in keylist:
+                errors += ('\tlabels not in list\n')
+
+            if errors != '':
+                sys.stdout.write(cx_name + '\n' + errors)
+
+        return
 
     if args.mode == 'updateorganismuuids':
         source_ndex = ndex2.Ndex2(args.source_server, username=args.source_user,
