@@ -23,7 +23,8 @@ After all ids are retrieved from the server, we create the output file.
 
 When running, script provides info on what it is doing.  If there are any unresolved gene ids, they will be printed in the end.  Below is example of running the script with HumanNet-XN.tsv:
 ```sh
-python normalize_humanet_net.py  HumanNet-XN.tsv 
+> python normalize_humanet_net.py  HumanNet-XN.tsv 
+
 Found 17929 unique Gene Ids in HumanNet-XN.tsv
 Dictionary is empty, need to populate it with 17929 symbols
 Updating dictionary ...
