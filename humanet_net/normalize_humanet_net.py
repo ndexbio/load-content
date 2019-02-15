@@ -16,7 +16,7 @@ file_name = None
 headers = []
 gene_ids = {}
 dictionary = {}
-unresolved_genes = []
+unresolved_genes = {}
 dictionary_file = 'dictionary.json'
 get_request_chunk = 200  # this is how many ids we will request from server at one time
 
@@ -74,10 +74,6 @@ def add_new_entries_to_dictionary(look_up_json):
         key1 = element['InputValue']
         value1 = element['Gene Symbol']
         dictionary[key1] = value1
-
-        if ('-' == value1):
-            # this means that Gene Id  key1 is not resolved
-            unresolved_genes.append(key1)
 
 
 def send_request_to_server(id_list):
@@ -160,6 +156,13 @@ def create_normalized_tsv():
 
             w.write(row_to_write)
 
+            if ('-' == value1):
+                # this means that Gene Id  key1 is not resolved
+                unresolved_genes[key1] = value1
+            if ('-' == value2):
+                # this means that Gene Id  key2 is not resolved
+                unresolved_genes[key2] = value2
+
             count_rows_normalized = count_rows_normalized + 1
 
             if count_rows_normalized % 10000 == 0:
@@ -170,7 +173,10 @@ def create_normalized_tsv():
 def check_for_unresolved_gene_is():
     if unresolved_genes:
         print('\nthe following {} gene id(s) unresolved: '.format(len(unresolved_genes)))
-        print(' '.join(unresolved_genes))
+        unresolved_genes_list = []
+        for key, value in unresolved_genes.iteritems():
+            unresolved_genes_list.append(key)
+        print(' '.join(unresolved_genes_list))
 
 
 def main():
