@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 import argparse
+import sys
 
 import os.path
 
@@ -24,6 +25,10 @@ get_request_chunk = 200  # this is how many ids we will request from server at o
 
 
 def get_tsv_file_headers():
+    if not os.path.isfile(file_name):
+        print('\n {} not found\n'.format(file_name))
+        sys.exit(0)
+
     with open(file_name, 'r') as f:
         d_reader = csv.DictReader(f)
         headers = (d_reader.fieldnames)[0]
@@ -63,7 +68,6 @@ def load_dictionary_from_file():
                 dict_from_file = {}
             finally:
                 pass
-
 
     return dict_from_file
 
@@ -176,7 +180,7 @@ def check_for_unresolved_gene_is():
         unresolved_genes_list = []
         for key, value in unresolved_genes.iteritems():
             unresolved_genes_list.append(key)
-        print(' '.join(unresolved_genes_list))
+        print(' '.join(unresolved_genes_list)+'\n')
 
 
 def main():
