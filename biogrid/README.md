@@ -5,7 +5,7 @@ To run the script:
 ```
 ./run_dev.sh <version> <user> <password>
 ```
-1) using <strong>version</strong> argument, <strong>run_dev.sh</strong> constructs a link and downloads <strong>BIOGRID-ORGANISM-<pre><version></pre>.tab2.zip</strong> file from 
+1) using <strong>version</strong> argument, <strong>run_dev.sh</strong> constructs a link and downloads <pre><strong>BIOGRID-ORGANISM-<version>.tab2.zip</strong></pre> file from 
   <italic>https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive</italic>. Then it starts <strong>load_biogrid_orgainism.py</strong> python script.
 
 2) For every network listed in <strong>dev_organism_list.txt</strong>, <strong>load_biogrid_orgainism.py</strong> constructs a corresponding file name found in the downloaded archive (i.e., <strong>BIOGRID-ORGANISM-Zea_mays-3.5.170.tab2.txt</strong>), extracts this file from the downloaded archive, parses it, and creates a new <strong>tsv</strong> file.
